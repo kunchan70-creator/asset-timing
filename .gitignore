@@ -1,0 +1,5 @@
+_*.py
+data/*.pkl
+__pycache__/
+logs/update.txt
+site/

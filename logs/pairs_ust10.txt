@@ -1,0 +1,40 @@
+d_ff12>=80% & real_ff<=30%  | A n 23 ep 3 hit 100.0(base 53.5) ex  -8.1 | B n 16 ep 2 hit  93.8(base 26.2) ex  -2.5
+d_y2_12>=80% & real_ff<=30%  | A n 24 ep 3 hit  95.8(base 53.5) ex  -6.5 | B n 20 ep 2 hit  75.0(base 26.2) ex  -1.0
+d_ff12>=80% & d_y2_12>=80%  | A n 79 ep 7 hit  81.0(base 53.5) ex  -3.7 | B n 24 ep 2 hit  75.0(base 26.2) ex  -0.8
+cfnai3>=70% & comm_real>=90%  | A n 25 ep 5 hit  80.0(base 53.5) ex  -3.5 | B n 13 ep 2 hit  69.2(base 26.2) ex  -0.8
+d_y2_12>=70% & cfnai3>=80%  | A n 25 ep 7 hit  68.0(base 53.5) ex  -0.2 | B n 12 ep 2 hit  66.7(base 26.2) ex   1.0
+cfnai3>=80% & comm12>=80%  | A n 15 ep 5 hit  86.7(base 53.5) ex  -1.7 | B n 12 ep 2 hit  66.7(base 26.2) ex   1.0
+cfnai3>=80% & oil12>=70%  | A n 20 ep 6 hit  70.0(base 53.5) ex  -0.3 | B n 12 ep 2 hit  66.7(base 26.2) ex   1.0
+d_y2_12>=80% & real10<=19%  | A n 35 ep 4 hit 100.0(base 53.5) ex  -8.9 | B n 27 ep 2 hit  66.7(base 26.2) ex  -0.2
+d_ff12>=80% & oil_real>=70%  | A n 55 ep 3 hit  92.7(base 53.5) ex  -6.4 | B n 28 ep 2 hit  64.3(base 26.2) ex  -0.4
+d_ff12>=70% & cfnai3>=70%  | A n 32 ep 6 hit  62.5(base 53.5) ex   1.1 | B n 14 ep 2 hit  64.3(base 26.2) ex   0.8
+d_ff12>=80% & comm12>=80%  | A n 56 ep 5 hit  82.1(base 53.5) ex  -4.2 | B n 29 ep 2 hit  62.1(base 26.2) ex   0.8
+d_ff12>=80% & oil12>=70%  | A n 71 ep 6 hit  85.9(base 53.5) ex  -4.9 | B n 29 ep 2 hit  62.1(base 26.2) ex   0.8
+real10<=30% & cfnai3>=80%  | A n 15 ep 6 hit  86.7(base 53.5) ex  -4.3 | B n 13 ep 2 hit  61.5(base 26.2) ex   0.6
+cfnai3>=80% & oil_real>=80%  | A n 20 ep 8 hit  80.0(base 53.5) ex  -4.1 | B n 13 ep 2 hit  61.5(base 26.2) ex   0.6
+d_y2_12>=70% & d_y2_12>=80%  | A n117 ep12 hit  62.4(base 53.5) ex  -0.4 | B n 30 ep 2 hit  60.0(base 26.2) ex   0.9
+d_y2_12>=80% & oil12>=70%  | A n 67 ep 9 hit  74.6(base 53.5) ex  -3.1 | B n 30 ep 2 hit  60.0(base 26.2) ex   0.9
+d_y2_12>=80% & comm12>=80%  | A n 57 ep10 hit  75.4(base 53.5) ex  -3.3 | B n 30 ep 2 hit  60.0(base 26.2) ex   0.9
+comm12<=19% & gold_real>=70%  | A n 29 ep 3 hit  62.1(base 53.5) ex   3.0 | B n 15 ep 3 hit  60.0(base 26.2) ex  -0.2
+d_y2_12>=80% & d_cpi12>=70%  | A n 65 ep 8 hit  83.1(base 53.5) ex  -4.9 | B n 20 ep 2 hit  60.0(base 26.2) ex   2.0
+d_real10_12>=70% & permit_yoy>=90%  | A n 22 ep 4 hit  59.1(base 53.5) ex  -0.4 | B n 14 ep 2 hit  78.6(base 26.2) ex  -3.0
+d_y2_12>=80% & curve<=30%  | A n 69 ep 9 hit  72.5(base 53.5) ex  -3.6 | B n 17 ep 2 hit  58.8(base 26.2) ex   0.8
+core6<=19% & d_sent12<=30%  | A n 12 ep 5 hit  58.3(base 53.5) ex   2.7 | B n 23 ep 5 hit  60.9(base 26.2) ex  -0.5
+real_ff<=30% & cfnai3>=80%  | A n 13 ep 4 hit  69.2(base 53.5) ex  -1.0 | B n 12 ep 3 hit  58.3(base 26.2) ex   0.9
+d_ff12>=80% & real10<=19%  | A n 47 ep 4 hit  97.9(base 53.5) ex  -8.5 | B n 31 ep 2 hit  58.1(base 26.2) ex   0.7
+cpi_yoy<=19% & d_spr12>=80%  | A n 16 ep 3 hit  93.8(base 53.5) ex  -6.6 | B n 14 ep 5 hit  57.1(base 26.2) ex  -0.1
+baa_spr>=70% & permit_yoy>=90%  | A n 30 ep 5 hit  63.3(base 53.5) ex  -1.4 | B n 21 ep 2 hit  57.1(base 26.2) ex  -1.7
+oil12<=30% & gold_real>=70%  | A n 33 ep 3 hit  66.7(base 53.5) ex   0.9 | B n 21 ep 3 hit  57.1(base 26.2) ex  -0.1
+cfnai3>=80% & cfnai3>=80%  | A n 52 ep11 hit  61.5(base 53.5) ex   0.3 | B n 14 ep 3 hit  57.1(base 26.2) ex   1.4
+d_spr12<=30% & m2_yoy>=70%  | A n 57 ep 5 hit  68.4(base 53.5) ex  -1.6 | B n 14 ep 3 hit  57.1(base 26.2) ex   0.4
+d_cpi12>=70% & nfci<=30%  | A n 12 ep 4 hit  75.0(base 53.5) ex  -2.4 | B n 14 ep 2 hit  57.1(base 26.2) ex   0.5
+curve<=30% & d_sent12<=30%  | A n 27 ep 5 hit  96.3(base 53.5) ex  -8.9 | B n 16 ep 2 hit  56.2(base 26.2) ex  -0.4
+kr_exp_yoy<=19% & comm_real>=70%  | A n 49 ep 4 hit  61.2(base 53.5) ex  -1.2 | B n 18 ep 2 hit  55.6(base 26.2) ex   0.6
+kr_exp_yoy<=19% & oil_real>=70%  | A n 57 ep 5 hit  61.4(base 53.5) ex  -1.3 | B n 18 ep 2 hit  55.6(base 26.2) ex   0.6
+d_ff12>=70% & d_ff12>=80%  | A n 97 ep 8 hit  79.4(base 53.5) ex  -3.9 | B n 33 ep 2 hit  54.5(base 26.2) ex   0.9
+d_y10_12<=19% & m2_real>=70%  | A n 41 ep 6 hit  75.6(base 53.5) ex  -1.8 | B n 13 ep 4 hit  53.8(base 26.2) ex  -1.8
+d_y10_12<=30% & cpi_yoy<=30%  | A n 79 ep 6 hit  55.7(base 53.5) ex   3.0 | B n 13 ep 5 hit  53.8(base 26.2) ex  -0.2
+d_ff12>=80% & d_real10_12<=30%  | A n 51 ep 6 hit  98.0(base 53.5) ex  -8.6 | B n 13 ep 2 hit  53.8(base 26.2) ex   2.2
+d_ff12>=70% & d_spr12<=30%  | A n 56 ep 8 hit  53.6(base 53.5) ex   2.2 | B n 17 ep 3 hit  64.7(base 26.2) ex   0.3
+nfci<=30% & m2_real>=70%  | A n 47 ep 4 hit  53.2(base 53.5) ex   1.0 | B n 13 ep 3 hit  53.8(base 26.2) ex   0.8
+cpi_yoy<=19% & oil12<=30%  | A n 57 ep 5 hit  59.6(base 53.5) ex  -0.8 | B n 19 ep 4 hit  52.6(base 26.2) ex   1.8

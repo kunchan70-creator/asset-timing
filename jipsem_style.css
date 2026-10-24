@@ -1,0 +1,42 @@
+/* 집셈 스타일 덮어쓰기 (10-21 사용자: 'UI 스타일을 집셈 스타일 따라') — 부동산시세/theme_ref.py 의 토큰·부품 그대로 */
+:root{
+ --bg:#F5F7FA; --card:#FFFFFF; --line:#E3E9F2; --fg:#131A2B; --sub:#454D5C; --mute:#636C7E;
+ --blue:#2B6BF3; --hold:#2B6BF3; --hold-bg:#EAF1FF; --ok-bg:#EAF1FF; --line-main:#2B6BF3;
+ --buy:#0F8048; --buy-bg:#E6F6EC; --sell:#F08C00; --sell-bg:#FFF4E5; --red:#CC3338;
+ --gray-bg:#EEF2F7; --track:#EDF1F7; --grid:#EDF1F7; --badband:rgba(83,98,115,.13);
+ --tip-bg:#131A2B; --tip-fg:#FFFFFF; --shadow:0 2px 12px rgba(30,64,140,.06);
+ --sans:Pretendard,"Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+ --bg:#0E131D; --card:#171D29; --line:#283142; --fg:#EAF0F8; --sub:#A9B4C6; --mute:#7A8699;
+ --blue:#5B8CFF; --hold:#5B8CFF; --hold-bg:#1B2A4A; --ok-bg:#1B2A4A; --line-main:#5B8CFF;
+ --buy:#3CC77A; --buy-bg:#123222; --sell:#F2A13A; --sell-bg:#3A2A14; --red:#F06A60;
+ --gray-bg:#1F2633; --track:#202837; --grid:#202837; --badband:rgba(169,180,198,.12);
+ --tip-bg:#EAF0F8; --tip-fg:#0E131D; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#0E131D; --card:#171D29; --line:#283142; --fg:#EAF0F8; --sub:#A9B4C6; --mute:#7A8699;
+ --blue:#5B8CFF; --hold:#5B8CFF; --hold-bg:#1B2A4A; --ok-bg:#1B2A4A; --line-main:#5B8CFF;
+ --buy:#3CC77A; --buy-bg:#123222; --sell:#F2A13A; --sell-bg:#3A2A14; --red:#F06A60;
+ --gray-bg:#1F2633; --track:#202837; --grid:#202837; --badband:rgba(169,180,198,.12);
+ --tip-bg:#EAF0F8; --tip-fg:#0E131D; --shadow:none; color-scheme:dark}
+body{word-break:keep-all;overflow-wrap:break-word;letter-spacing:-.01em}
+h1,header h1{font-weight:800!important;letter-spacing:-.03em}
+h1,h2,h3{text-wrap:balance}
+.card,.row{border-radius:18px!important;border:1px solid var(--line)!important;box-shadow:var(--shadow)}
+/* 칩·탭 = 파랑 채움 흰 글씨 */
+.chips button,.zoom button{border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--sub);font-weight:600}
+.chips button.sel,.zoom button.sel{background:var(--blue)!important;border-color:var(--blue)!important;color:#fff!important;box-shadow:0 3px 10px rgba(43,107,243,.25)}
+.tabs{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px!important;box-shadow:var(--shadow)}
+.tabs button{border:0!important;background:transparent!important;color:var(--mute)!important;font-weight:700!important;flex:0 0 auto}
+.tabs button.sel{background:var(--blue)!important;color:#fff!important;box-shadow:0 3px 10px rgba(43,107,243,.25)}
+.pill{font-weight:700!important;border-radius:999px}
+button.more{color:var(--blue)!important;font-weight:700!important}
+/* 파란 배너(집셈 홈 .hero) */
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:20px 20px 18px;background:linear-gradient(135deg,#3D82FF 0%,#1E58E8 100%);color:#fff;box-shadow:0 10px 24px rgba(30,88,232,.25);display:grid;gap:12px}
+.hero small{font-size:.8rem;font-weight:600;opacity:.85}
+.hero b{display:block;font-size:1.32rem;font-weight:800;line-height:1.42;letter-spacing:-.02em}
+.hero .hrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hero .hrow div{background:rgba(255,255,255,.16);border-radius:14px;padding:10px 10px 9px;display:grid;gap:2px;min-width:0}
+.hero .hrow span{font-size:.74rem;font-weight:600;opacity:.9}
+.hero .hrow strong{font-size:1.35rem;font-weight:800;line-height:1.1}
+.hero .hrow em{font-style:normal;font-size:.74rem;opacity:.92;line-height:1.35}

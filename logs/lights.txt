@@ -1,0 +1,102 @@
+
+=== spx (equity) 경고등 10개
+  1개+ | A n264/324 ep 6 hit  24.6 (base 28.4) ex    8.5 | B n129/168 ep 2 hit  36.4 (base 31.0) ex    1.2 
+  2개+ | A n155/324 ep10 hit  27.7 (base 28.4) ex    7.4 | B n100/168 ep 4 hit  45.0 (base 31.0) ex   -1.8 
+  3개+ | A n100/324 ep 7 hit  33.0 (base 28.4) ex    5.9 | B n 69/168 ep 4 hit  56.5 (base 31.0) ex   -5.9 
+  4개+ | A n 68/324 ep 7 hit  29.4 (base 28.4) ex    6.4 | B n 40/168 ep 3 hit  80.0 (base 31.0) ex  -13.0 
+  5개+ | A n 41/324 ep 4 hit  34.1 (base 28.4) ex    4.6 | B n 23/168 ep 2 hit  73.9 (base 31.0) ex  -11.2 
+  6개+ | A n 16/324 ep 3 hit  43.8 (base 28.4) ex   -2.2 | B n  5/168 ep 1 hit 100.0 (base 31.0) ex  -34.4 
+  7개+ | A n  9/324 ep 2 hit  55.6 (base 28.4) ex   -5.2 | B n  0/168 ep 0 hit   0.0 (base 31.0) ex    0.0 
+  8개+ | A n  2/324 ep 2 hit  50.0 (base 28.4) ex   -0.3 | B n  0/168 ep 0 hit   0.0 (base 31.0) ex    0.0 
+  9개+ | A n  0/324 ep 0 hit   0.0 (base 28.4) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 31.0) ex    0.0 
+  10개+ | A n  0/324 ep 0 hit   0.0 (base 28.4) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 31.0) ex    0.0 
+
+=== nasdaq (equity) 경고등 10개
+  1개+ | A n264/324 ep 6 hit  25.0 (base 26.2) ex   12.4 | B n129/168 ep 2 hit  40.3 (base 34.5) ex    0.6 
+  2개+ | A n155/324 ep10 hit  29.7 (base 26.2) ex   12.7 | B n100/168 ep 4 hit  48.0 (base 34.5) ex   -3.9 
+  3개+ | A n100/324 ep 7 hit  34.0 (base 26.2) ex   10.5 | B n 69/168 ep 4 hit  56.5 (base 34.5) ex  -10.1 
+  4개+ | A n 68/324 ep 7 hit  30.9 (base 26.2) ex    9.4 | B n 40/168 ep 3 hit  77.5 (base 34.5) ex  -18.4 
+  5개+ | A n 41/324 ep 4 hit  34.1 (base 26.2) ex    5.6 | B n 23/168 ep 2 hit  73.9 (base 34.5) ex  -12.6 
+  6개+ | A n 16/324 ep 3 hit  50.0 (base 26.2) ex   -2.2 | B n  5/168 ep 1 hit 100.0 (base 34.5) ex  -29.2 
+  7개+ | A n  9/324 ep 2 hit  66.7 (base 26.2) ex   -4.7 | B n  0/168 ep 0 hit   0.0 (base 34.5) ex    0.0 
+  8개+ | A n  2/324 ep 2 hit  50.0 (base 26.2) ex    7.2 | B n  0/168 ep 0 hit   0.0 (base 34.5) ex    0.0 
+  9개+ | A n  0/324 ep 0 hit   0.0 (base 26.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 34.5) ex    0.0 
+  10개+ | A n  0/324 ep 0 hit   0.0 (base 26.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 34.5) ex    0.0 
+
+=== kospi (equity) 경고등 12개
+  1개+ | A n 37/37 ep 1 hit  62.2 (base 62.2) ex   13.2 | B n141/168 ep 2 hit  34.0 (base 35.7) ex    8.6 
+  2개+ | A n 37/37 ep 1 hit  62.2 (base 62.2) ex   13.2 | B n105/168 ep 4 hit  30.5 (base 35.7) ex   10.4 
+  3개+ | A n 24/37 ep 2 hit  62.5 (base 62.2) ex   12.9 | B n 72/168 ep 4 hit  33.3 (base 35.7) ex    8.8 
+  4개+ | A n  9/37 ep 3 hit  33.3 (base 62.2) ex   66.9 | B n 47/168 ep 3 hit  42.6 (base 35.7) ex    3.4 
+  5개+ | A n  4/37 ep 1 hit   0.0 (base 62.2) ex  118.4 | B n 37/168 ep 2 hit  32.4 (base 35.7) ex   10.7 
+  6개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 20/168 ep 2 hit  30.0 (base 35.7) ex   17.7 
+  7개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n  4/168 ep 2 hit  50.0 (base 35.7) ex   14.2 
+  8개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 35.7) ex    0.0 
+  9개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 35.7) ex    0.0 
+  10개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 35.7) ex    0.0 
+  11개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 35.7) ex    0.0 
+  12개+ | A n  0/37 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 35.7) ex    0.0 
+
+=== gold (gold) 경고등 7개
+  1개+ | A n166/282 ep 7 hit  62.0 (base 65.6) ex    2.8 | B n147/168 ep 2 hit  28.6 (base 25.6) ex   10.8 
+  2개+ | A n 95/282 ep 6 hit  58.9 (base 65.6) ex    6.9 | B n 83/168 ep 7 hit  25.3 (base 25.6) ex   12.8 
+  3개+ | A n 64/282 ep 4 hit  57.8 (base 65.6) ex   10.4 | B n 37/168 ep 5 hit  32.4 (base 25.6) ex   12.4 
+  4개+ | A n 16/282 ep 3 hit  93.8 (base 65.6) ex  -27.6 | B n 16/168 ep 3 hit  25.0 (base 25.6) ex   13.9 
+  5개+ | A n 12/282 ep 1 hit 100.0 (base 65.6) ex  -36.6 | B n  2/168 ep 1 hit   0.0 (base 25.6) ex   29.9 
+  6개+ | A n  6/282 ep 1 hit 100.0 (base 65.6) ex  -33.7 | B n  0/168 ep 0 hit   0.0 (base 25.6) ex    0.0 
+  7개+ | A n  0/282 ep 0 hit   0.0 (base 65.6) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 25.6) ex    0.0 
+
+=== comm (comm) 경고등 8개
+  1개+ | A n198/324 ep11 hit  62.1 (base 63.3) ex    0.8 | B n153/168 ep 2 hit  40.5 (base 38.1) ex    7.5 
+  2개+ | A n117/324 ep 8 hit  68.4 (base 63.3) ex    3.3 | B n112/168 ep 4 hit  42.9 (base 38.1) ex    6.1 
+  3개+ | A n 84/324 ep 4 hit  81.0 (base 63.3) ex   -6.2 | B n 55/168 ep 6 hit  56.4 (base 38.1) ex   -4.6 
+  4개+ | A n 55/324 ep 3 hit  90.9 (base 63.3) ex  -12.0 | B n 36/168 ep 3 hit  55.6 (base 38.1) ex   -7.2 
+  5개+ | A n 35/324 ep 3 hit  91.4 (base 63.3) ex  -13.2 | B n 23/168 ep 2 hit  65.2 (base 38.1) ex   -9.8 
+  6개+ | A n 19/324 ep 4 hit 100.0 (base 63.3) ex  -16.3 | B n  5/168 ep 2 hit  40.0 (base 38.1) ex   17.1 
+  7개+ | A n  1/324 ep 1 hit 100.0 (base 63.3) ex  -22.2 | B n  0/168 ep 0 hit   0.0 (base 38.1) ex    0.0 
+  8개+ | A n  0/324 ep 0 hit   0.0 (base 63.3) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 38.1) ex    0.0 
+
+=== oil (comm) 경고등 8개
+  1개+ | A n198/324 ep11 hit  60.6 (base 60.2) ex   23.2 | B n153/168 ep 2 hit  37.3 (base 36.3) ex   10.9 
+  2개+ | A n117/324 ep 8 hit  65.0 (base 60.2) ex   39.0 | B n112/168 ep 4 hit  39.3 (base 36.3) ex   10.0 
+  3개+ | A n 84/324 ep 4 hit  77.4 (base 60.2) ex   12.0 | B n 55/168 ep 6 hit  54.5 (base 36.3) ex   -2.4 
+  4개+ | A n 55/324 ep 3 hit  83.6 (base 60.2) ex   -2.9 | B n 36/168 ep 3 hit  55.6 (base 36.3) ex   -3.0 
+  5개+ | A n 35/324 ep 3 hit  80.0 (base 60.2) ex   -7.4 | B n 23/168 ep 2 hit  60.9 (base 36.3) ex   -4.8 
+  6개+ | A n 19/324 ep 4 hit  84.2 (base 60.2) ex  -14.0 | B n  5/168 ep 2 hit  20.0 (base 36.3) ex   36.0 
+  7개+ | A n  1/324 ep 1 hit 100.0 (base 60.2) ex  -23.0 | B n  0/168 ep 0 hit   0.0 (base 36.3) ex    0.0 
+  8개+ | A n  0/324 ep 0 hit   0.0 (base 60.2) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 36.3) ex    0.0 
+
+=== copper (comm) 경고등 8개
+  1개+ | A n198/324 ep11 hit  67.7 (base 63.9) ex   -7.1 | B n153/168 ep 2 hit  47.1 (base 44.6) ex   13.0 
+  2개+ | A n117/324 ep 8 hit  68.4 (base 63.9) ex   -6.6 | B n112/168 ep 4 hit  49.1 (base 44.6) ex   11.8 
+  3개+ | A n 84/324 ep 4 hit  81.0 (base 63.9) ex  -17.3 | B n 55/168 ep 6 hit  56.4 (base 44.6) ex    4.5 
+  4개+ | A n 55/324 ep 3 hit  81.8 (base 63.9) ex  -21.2 | B n 36/168 ep 3 hit  52.8 (base 44.6) ex    8.7 
+  5개+ | A n 35/324 ep 3 hit  82.9 (base 63.9) ex  -20.8 | B n 23/168 ep 2 hit  56.5 (base 44.6) ex    7.1 
+  6개+ | A n 19/324 ep 4 hit  89.5 (base 63.9) ex  -20.5 | B n  5/168 ep 2 hit  20.0 (base 44.6) ex   60.3 
+  7개+ | A n  1/324 ep 1 hit 100.0 (base 63.9) ex  -13.2 | B n  0/168 ep 0 hit   0.0 (base 44.6) ex    0.0 
+  8개+ | A n  0/324 ep 0 hit   0.0 (base 63.9) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 44.6) ex    0.0 
+
+=== ust10 (bond) 경고등 7개
+  1개+ | A n255/409 ep 8 hit  60.4 (base 52.8) ex   -0.5 | B n143/168 ep 2 hit  27.3 (base 26.2) ex    4.1 
+  2개+ | A n173/409 ep 6 hit  69.9 (base 52.8) ex   -2.6 | B n124/168 ep 4 hit  29.8 (base 26.2) ex    3.2 
+  3개+ | A n123/409 ep 6 hit  78.0 (base 52.8) ex   -4.4 | B n 78/168 ep 5 hit  26.9 (base 26.2) ex    4.0 
+  4개+ | A n 72/409 ep 7 hit  90.3 (base 52.8) ex   -6.8 | B n 43/168 ep 6 hit  32.6 (base 26.2) ex    4.1 
+  5개+ | A n 41/409 ep 4 hit  97.6 (base 52.8) ex   -8.2 | B n  8/168 ep 1 hit  87.5 (base 26.2) ex   -1.0 
+  6개+ | A n 11/409 ep 2 hit 100.0 (base 52.8) ex   -8.9 | B n  3/168 ep 1 hit 100.0 (base 26.2) ex   -1.1 
+  7개+ | A n  0/409 ep 0 hit   0.0 (base 52.8) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 26.2) ex    0.0 
+
+=== btc (crypto) 경고등 7개
+  1개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+  2개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+  3개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+  4개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+  5개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+  6개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+  7개+ | A n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 | B n  0/0 ep 0 hit   0.0 (base  0.0) ex    0.0 
+
+=== usd (usd) 경고등 5개
+  1개+ | A n 75/108 ep 4 hit  73.3 (base 75.0) ex   -0.1 | B n 98/168 ep 4 hit  76.5 (base 75.6) ex   -3.3 
+  2개+ | A n 11/108 ep 1 hit 100.0 (base 75.0) ex   -9.2 | B n 50/168 ep 5 hit  88.0 (base 75.6) ex   -7.4 
+  3개+ | A n  3/108 ep 2 hit 100.0 (base 75.0) ex   -7.8 | B n 19/168 ep 4 hit  78.9 (base 75.6) ex   -3.7 
+  4개+ | A n  0/108 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n  2/168 ep 1 hit 100.0 (base 75.6) ex  -17.1 
+  5개+ | A n  0/108 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n  0/168 ep 0 hit   0.0 (base 75.6) ex    0.0 

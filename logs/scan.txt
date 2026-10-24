@@ -1,0 +1,245 @@
+
+=== spx ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+kr_exp_yoy   hi q0.9 | A n 15 ep 2 hit  86.7 (base 29.8) ex  -20.1 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+cfnai3       hi q0.9 | A n 27 ep 6 hit  85.2 (base 29.8) ex   -7.5 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+cfnai3       hi q0.8 | A n 46 ep10 hit  73.9 (base 29.8) ex   -3.6 | B n  5 ep 3 hit  20.0 (base 31.0) ex    4.9
+kr_exp_yoy   hi q0.8 | A n 38 ep 4 hit  65.8 (base 29.8) ex   -9.3 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+d_ff12       hi q0.9 | A n 64 ep 6 hit  62.5 (base 29.8) ex   -8.1 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+pay3         hi q0.9 | A n 31 ep 8 hit  61.3 (base 29.8) ex   -2.0 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+ip_yoy       hi q0.8 | A n 50 ep 8 hit  60.0 (base 29.8) ex   -0.7 | B n  3 ep 1 hit   0.0 (base 31.0) ex   22.7
+curve        lo q0.8 | A n109 ep 7 hit  55.0 (base 29.8) ex   -4.1 | B n 25 ep 2 hit  60.0 (base 31.0) ex   -6.4
+m2_yoy       hi q0.9 | A n 51 ep 5 hit  54.9 (base 29.8) ex   -0.1 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+d_y2_12      hi q0.9 | A n 80 ep11 hit  53.8 (base 29.8) ex   -1.2 | B n  1 ep 1 hit   0.0 (base 31.0) ex    7.9
+pay3         hi q0.8 | A n 73 ep 8 hit  53.4 (base 29.8) ex    0.2 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+curve        lo q0.9 | A n 85 ep 6 hit  52.9 (base 29.8) ex   -4.4 | B n 14 ep 2 hit  64.3 (base 31.0) ex   -8.3
+ip_yoy       hi q0.9 | A n 14 ep 3 hit  50.0 (base 29.8) ex    2.1 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+real_ff      hi q0.9 | A n 92 ep10 hit  47.8 (base 29.8) ex    2.0 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+oil12        hi q0.9 | A n106 ep10 hit  46.2 (base 29.8) ex   -1.2 | B n 27 ep 5 hit  55.6 (base 31.0) ex   -6.7
+ff           hi q0.9 | A n150 ep 7 hit  44.0 (base 29.8) ex    0.7 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+comm12       hi q0.9 | A n 57 ep 6 hit  50.9 (base 29.8) ex   -3.0 | B n 40 ep 6 hit  42.5 (base 31.0) ex   -3.2
+d_un12       lo q0.9 | A n 26 ep 5 hit  42.3 (base 29.8) ex    6.3 | B n  3 ep 2 hit   0.0 (base 31.0) ex   24.2
+cpi_yoy      hi q0.9 | A n112 ep 4 hit  42.0 (base 29.8) ex    0.7 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+cpi_yoy      hi q0.8 | A n168 ep 3 hit  41.7 (base 29.8) ex    1.1 | B n  1 ep 1 hit 100.0 (base 31.0) ex  -18.3
+core6        hi q0.8 | A n156 ep 3 hit  41.7 (base 29.8) ex    1.6 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+tb3          hi q0.9 | A n171 ep 6 hit  40.9 (base 29.8) ex    1.5 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+d_y10_12     hi q0.9 | A n 87 ep11 hit  40.2 (base 29.8) ex    3.7 | B n  5 ep 4 hit  40.0 (base 31.0) ex    3.7
+real10       hi q0.9 | A n 65 ep 4 hit  40.0 (base 29.8) ex    9.7 | B n  1 ep 1 hit   0.0 (base 31.0) ex    4.8
+oil_real     lo q0.8 | A n 73 ep 1 hit  39.7 (base 29.8) ex    0.7 | B n  0 ep 0 hit   0.0 (base 31.0) ex    0.0
+
+=== nasdaq ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+kr_exp_yoy   hi q0.9 | A n 13 ep 1 hit 100.0 (base 27.7) ex  -34.9 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+kr_exp_yoy   hi q0.8 | A n 29 ep 2 hit  69.0 (base 27.7) ex  -19.3 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+cfnai3       hi q0.9 | A n 27 ep 6 hit  66.7 (base 27.7) ex  -15.0 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+d_ff12       hi q0.9 | A n 42 ep 4 hit  61.9 (base 27.7) ex   -8.9 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+curve        lo q0.8 | A n 53 ep 4 hit  56.6 (base 27.7) ex   -4.6 | B n 25 ep 2 hit  64.0 (base 34.5) ex  -13.3
+curve        lo q0.9 | A n 39 ep 3 hit  56.4 (base 27.7) ex   -7.7 | B n 14 ep 2 hit  64.3 (base 34.5) ex  -14.3
+real_ff      hi q0.9 | A n 67 ep 5 hit  53.7 (base 27.7) ex    0.2 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+cfnai3       hi q0.8 | A n 46 ep10 hit  52.2 (base 27.7) ex   -6.8 | B n  5 ep 3 hit  20.0 (base 34.5) ex   -1.1
+d_y2_12      hi q0.9 | A n 56 ep 7 hit  48.2 (base 27.7) ex   -1.2 | B n  1 ep 1 hit   0.0 (base 34.5) ex   14.5
+curve_min12  lo q0.9 | A n 63 ep 2 hit  46.0 (base 27.7) ex   -0.2 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+ff           hi q0.9 | A n 70 ep 3 hit  45.7 (base 27.7) ex    1.1 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+oil12        hi q0.9 | A n 69 ep 8 hit  44.9 (base 27.7) ex   -0.3 | B n 27 ep 5 hit  55.6 (base 34.5) ex   -9.8
+ip_yoy       hi q0.8 | A n 27 ep 5 hit  44.4 (base 27.7) ex   -2.1 | B n  3 ep 1 hit   0.0 (base 34.5) ex   26.4
+real_ff      hi q0.8 | A n121 ep 5 hit  43.8 (base 27.7) ex    4.9 | B n  2 ep 1 hit   0.0 (base 34.5) ex    6.2
+curve_min12  lo q0.8 | A n 69 ep 2 hit  43.5 (base 27.7) ex    3.1 | B n 35 ep 2 hit  88.6 (base 34.5) ex  -22.5
+oil12        hi q0.8 | A n113 ep 8 hit  43.4 (base 27.7) ex    2.8 | B n 62 ep 6 hit  43.5 (base 34.5) ex   -5.3
+comm12       hi q0.9 | A n 43 ep 4 hit  53.5 (base 27.7) ex   -7.4 | B n 40 ep 6 hit  42.5 (base 34.5) ex   -5.4
+tb3          hi q0.9 | A n 81 ep 4 hit  42.0 (base 27.7) ex    1.7 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+ff           hi q0.8 | A n122 ep 5 hit  41.8 (base 27.7) ex    2.1 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+d_y2_12      hi q0.8 | A n 88 ep 8 hit  43.2 (base 27.7) ex   -0.8 | B n 17 ep 3 hit  41.2 (base 34.5) ex   -8.9
+cpi_yoy      hi q0.9 | A n 71 ep 2 hit  40.8 (base 27.7) ex    0.1 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+tb3          hi q0.8 | A n136 ep 4 hit  40.4 (base 27.7) ex    2.5 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+dxy12        hi q0.8 | A n 62 ep 7 hit  40.3 (base 27.7) ex    9.2 | B n 28 ep 6 hit  39.3 (base 34.5) ex   -0.2
+pay3         hi q0.8 | A n 39 ep 5 hit  38.5 (base 27.7) ex   -2.2 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+pay3         hi q0.9 | A n 16 ep 4 hit  37.5 (base 27.7) ex   -4.7 | B n  0 ep 0 hit   0.0 (base 34.5) ex    0.0
+
+=== kospi ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+comm_real    hi q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 43 ep 2 hit  76.7 (base 35.7) ex  -10.1
+sent         hi q0.9 | A n 35 ep 1 hit  62.9 (base 62.2) ex   11.5 | B n 13 ep 2 hit  69.2 (base 35.7) ex  -16.5
+tips         lo q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 48 ep 2 hit  62.5 (base 35.7) ex   -0.6
+real10       lo q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 26 ep 3 hit  61.5 (base 35.7) ex   -4.6
+tips         lo q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 56 ep 2 hit  58.9 (base 35.7) ex    0.3
+d_un12       lo q0.8 | A n  1 ep 1 hit   0.0 (base 62.2) ex   35.4 | B n 19 ep 3 hit  57.9 (base 35.7) ex   -0.8
+comm_real    hi q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 74 ep 3 hit  56.8 (base 35.7) ex   -0.7
+sent         hi q0.8 | A n 37 ep 1 hit  62.2 (base 62.2) ex   13.2 | B n 16 ep 4 hit  56.2 (base 35.7) ex   -8.2
+oil_real     hi q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 79 ep 3 hit  54.4 (base 35.7) ex   -0.3
+d_nfci6      hi q0.8 | A n  3 ep 1 hit   0.0 (base 62.2) ex  131.7 | B n 21 ep 2 hit  52.4 (base 35.7) ex   -2.1
+oil12        hi q0.9 | A n  6 ep 1 hit 100.0 (base 62.2) ex  -42.8 | B n 27 ep 5 hit  51.9 (base 35.7) ex   -1.8
+gold_real    hi q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 74 ep 1 hit  51.4 (base 35.7) ex    2.2
+d_real10_12  hi q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 42 ep 5 hit  50.0 (base 35.7) ex    4.0
+comm12       hi q0.9 | A n  4 ep 1 hit 100.0 (base 62.2) ex  -47.6 | B n 40 ep 6 hit  50.0 (base 35.7) ex    0.5
+cape         hi q0.9 | A n 37 ep 1 hit  62.2 (base 62.2) ex   13.2 | B n 28 ep 1 hit  50.0 (base 35.7) ex   -1.3
+gold_real    hi q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 60 ep 2 hit  50.0 (base 35.7) ex    3.6
+permit_yoy   hi q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 27 ep 3 hit  48.1 (base 35.7) ex    5.6
+d_kr3_12     hi q0.8 | A n 12 ep 2 hit  50.0 (base 62.2) ex   28.9 | B n 21 ep 3 hit  47.6 (base 35.7) ex    0.5
+comm_real    lo q0.8 | A n 32 ep 1 hit  56.2 (base 62.2) ex   22.6 | B n 21 ep 2 hit  47.6 (base 35.7) ex    2.3
+gold_real    lo q0.8 | A n 37 ep 1 hit  62.2 (base 62.2) ex   13.2 | B n 36 ep 1 hit  47.2 (base 35.7) ex   -0.2
+d_cpi12      hi q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 43 ep 7 hit  46.5 (base 35.7) ex    5.7
+d_tips12     lo q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 24 ep 1 hit  45.8 (base 35.7) ex    5.1
+d_real10_12  lo q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 35 ep 5 hit  45.7 (base 35.7) ex    5.1
+d_ff12       lo q0.9 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 22 ep 2 hit  45.5 (base 35.7) ex    3.4
+real10       lo q0.8 | A n  0 ep 0 hit   0.0 (base 62.2) ex    0.0 | B n 65 ep 5 hit  44.6 (base 35.7) ex    7.3
+
+=== gold ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+sent         hi q0.9 | A n 41 ep 4 hit  85.4 (base 61.0) ex  -10.4 | B n 13 ep 2 hit  84.6 (base 25.6) ex   -6.9
+d_un12       lo q0.9 | A n 21 ep 4 hit  71.4 (base 61.0) ex   -7.8 | B n  3 ep 2 hit  66.7 (base 25.6) ex  -16.0
+d_y10_12     hi q0.9 | A n 60 ep 7 hit  70.0 (base 61.0) ex    2.4 | B n  5 ep 4 hit  60.0 (base 25.6) ex   -0.8
+sent         hi q0.8 | A n 67 ep 6 hit  83.6 (base 61.0) ex  -10.2 | B n 16 ep 4 hit  68.8 (base 25.6) ex   -1.6
+real_ff      hi q0.9 | A n 67 ep 5 hit  67.2 (base 61.0) ex   -8.2 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+real10       hi q0.8 | A n118 ep 4 hit  64.4 (base 61.0) ex   -3.2 | B n  5 ep 1 hit   0.0 (base 25.6) ex   28.4
+permit_yoy   hi q0.9 | A n 22 ep 4 hit  63.6 (base 61.0) ex   -3.8 | B n 11 ep 1 hit 100.0 (base 25.6) ex  -19.7
+curve_min12  lo q0.9 | A n 63 ep 2 hit  63.5 (base 61.0) ex    1.1 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+real10       hi q0.9 | A n 57 ep 2 hit  63.2 (base 61.0) ex   -7.2 | B n  1 ep 1 hit   0.0 (base 25.6) ex   28.0
+real_ff      hi q0.8 | A n121 ep 5 hit  62.8 (base 61.0) ex   -4.4 | B n  2 ep 1 hit   0.0 (base 25.6) ex   23.4
+m2_real      lo q0.9 | A n 39 ep 2 hit  61.5 (base 61.0) ex    8.3 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+d_un12       lo q0.8 | A n 60 ep 8 hit  58.3 (base 61.0) ex    8.2 | B n 19 ep 3 hit  68.4 (base 25.6) ex   -6.9
+m2_real      lo q0.8 | A n100 ep 7 hit  58.0 (base 61.0) ex    8.5 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+core6        hi q0.9 | A n 64 ep 4 hit  57.8 (base 61.0) ex   11.7 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+tb3          hi q0.8 | A n134 ep 4 hit  56.7 (base 61.0) ex    8.6 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+cpi_yoy      hi q0.9 | A n 71 ep 2 hit  56.3 (base 61.0) ex   13.5 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+ip_yoy       hi q0.8 | A n 27 ep 5 hit  55.6 (base 61.0) ex   15.1 | B n  3 ep 1 hit   0.0 (base 25.6) ex   33.4
+d_y10_12     hi q0.8 | A n 91 ep 9 hit  68.1 (base 61.0) ex    3.5 | B n 20 ep 5 hit  55.0 (base 25.6) ex    3.0
+ff           hi q0.8 | A n121 ep 5 hit  52.9 (base 61.0) ex   12.2 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+cape         lo q0.8 | A n131 ep 2 hit  51.9 (base 61.0) ex    7.3 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+tb3          hi q0.9 | A n 81 ep 4 hit  50.6 (base 61.0) ex   16.2 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+d_y2_12      hi q0.9 | A n 56 ep 7 hit  50.0 (base 61.0) ex   24.7 | B n  1 ep 1 hit   0.0 (base 25.6) ex   24.7
+core6        hi q0.8 | A n 96 ep 1 hit  47.9 (base 61.0) ex   11.9 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+cfnai3       hi q0.8 | A n 46 ep10 hit  47.8 (base 61.0) ex   18.3 | B n  5 ep 3 hit  20.0 (base 25.6) ex   12.6
+cape         lo q0.9 | A n107 ep 2 hit  47.7 (base 61.0) ex   10.3 | B n  0 ep 0 hit   0.0 (base 25.6) ex    0.0
+
+=== comm ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+real10       hi q0.9 | A n 59 ep 3 hit  94.9 (base 64.4) ex  -14.0 | B n  1 ep 1 hit   0.0 (base 38.1) ex    9.8
+curve_min12  lo q0.9 | A n 96 ep 4 hit  86.5 (base 64.4) ex   -7.7 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+m2_real      lo q0.9 | A n 63 ep 4 hit  85.7 (base 64.4) ex   -6.3 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+baa_spr      lo q0.9 | A n 20 ep 2 hit  85.0 (base 64.4) ex   -3.6 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+baa_spr      lo q0.8 | A n 31 ep 2 hit  83.9 (base 64.4) ex   -3.1 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+real_ff      hi q0.9 | A n 87 ep10 hit  82.8 (base 64.4) ex   -6.4 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+d_y10_12     hi q0.9 | A n 81 ep10 hit  77.8 (base 64.4) ex   -0.0 | B n  5 ep 4 hit  40.0 (base 38.1) ex    5.6
+real_ff      hi q0.8 | A n157 ep 9 hit  77.1 (base 64.4) ex   -5.1 | B n  2 ep 1 hit   0.0 (base 38.1) ex   31.9
+d_kr3_12     hi q0.8 | A n 12 ep 2 hit  91.7 (base 64.4) ex  -16.6 | B n 21 ep 3 hit  76.2 (base 38.1) ex   -6.9
+real10       hi q0.8 | A n128 ep 8 hit  75.8 (base 64.4) ex   -4.4 | B n  5 ep 1 hit   0.0 (base 38.1) ex   13.8
+real10       lo q0.9 | A n 44 ep 4 hit  75.0 (base 64.4) ex   -4.4 | B n 26 ep 3 hit  88.5 (base 38.1) ex  -18.7
+oil_real     lo q0.8 | A n 73 ep 1 hit  74.0 (base 64.4) ex   -3.5 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+oil_real     lo q0.9 | A n 73 ep 1 hit  74.0 (base 64.4) ex   -3.5 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+tb3          hi q0.9 | A n164 ep 6 hit  73.8 (base 64.4) ex    0.2 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+ff           hi q0.9 | A n143 ep 7 hit  73.4 (base 64.4) ex    0.1 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+tb3          hi q0.8 | A n230 ep 5 hit  73.0 (base 64.4) ex    0.3 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+permit_yoy   hi q0.9 | A n 40 ep 5 hit  72.5 (base 64.4) ex   -4.0 | B n 11 ep 1 hit  90.9 (base 38.1) ex   -4.0
+m2_real      lo q0.8 | A n137 ep 9 hit  71.5 (base 64.4) ex   -2.0 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+ff           hi q0.8 | A n214 ep 7 hit  71.0 (base 64.4) ex    1.0 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+core6        hi q0.9 | A n115 ep 6 hit  68.7 (base 64.4) ex   -1.1 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+d_spr12      hi q0.9 | A n 56 ep 9 hit  73.2 (base 64.4) ex   -5.0 | B n 22 ep 2 hit  68.2 (base 38.1) ex  -12.8
+d_un12       lo q0.9 | A n 21 ep 4 hit  66.7 (base 64.4) ex   -4.7 | B n  3 ep 2 hit  66.7 (base 38.1) ex   -2.2
+cape         lo q0.8 | A n139 ep 3 hit  66.2 (base 64.4) ex   -0.7 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+ip_yoy       hi q0.8 | A n 43 ep 7 hit  65.1 (base 64.4) ex    8.8 | B n  3 ep 1 hit   0.0 (base 38.1) ex   40.0
+cape         lo q0.9 | A n108 ep 3 hit  64.8 (base 64.4) ex   -0.2 | B n  0 ep 0 hit   0.0 (base 38.1) ex    0.0
+
+=== oil ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+baa_spr      lo q0.8 | A n 31 ep 2 hit 100.0 (base 65.6) ex   -7.6 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+baa_spr      lo q0.9 | A n 20 ep 2 hit 100.0 (base 65.6) ex   -7.9 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+real10       hi q0.9 | A n 59 ep 3 hit  94.9 (base 65.6) ex  -18.5 | B n  1 ep 1 hit   0.0 (base 36.3) ex    5.8
+real_ff      hi q0.9 | A n 87 ep10 hit  86.2 (base 65.6) ex   12.7 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+oil_real     lo q0.8 | A n 73 ep 1 hit  83.6 (base 65.6) ex   -1.8 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+oil_real     lo q0.9 | A n 73 ep 1 hit  83.6 (base 65.6) ex   -1.8 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+curve_min12  lo q0.9 | A n 96 ep 4 hit  82.3 (base 65.6) ex    3.7 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+ff           hi q0.9 | A n143 ep 7 hit  81.1 (base 65.6) ex   21.9 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+tb3          hi q0.9 | A n164 ep 6 hit  81.1 (base 65.6) ex   21.0 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+d_y10_12     hi q0.9 | A n 81 ep10 hit  75.3 (base 65.6) ex   16.1 | B n  5 ep 4 hit  60.0 (base 36.3) ex    3.6
+tb3          hi q0.8 | A n230 ep 5 hit  74.8 (base 65.6) ex   19.0 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+ff           hi q0.8 | A n214 ep 7 hit  74.8 (base 65.6) ex   21.0 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+ip_yoy       hi q0.8 | A n 43 ep 7 hit  74.4 (base 65.6) ex   43.0 | B n  3 ep 1 hit   0.0 (base 36.3) ex   39.5
+real_ff      hi q0.8 | A n157 ep 9 hit  73.9 (base 65.6) ex   13.1 | B n  2 ep 1 hit   0.0 (base 36.3) ex   47.4
+real10       hi q0.8 | A n128 ep 8 hit  73.4 (base 65.6) ex    0.9 | B n  5 ep 1 hit   0.0 (base 36.3) ex   10.1
+m2_real      lo q0.8 | A n137 ep 9 hit  70.1 (base 65.6) ex    8.4 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+m2_real      lo q0.9 | A n 63 ep 4 hit  69.8 (base 65.6) ex    4.9 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+core6        hi q0.9 | A n115 ep 6 hit  68.7 (base 65.6) ex    9.3 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+d_ff12       hi q0.9 | A n 64 ep 6 hit  67.2 (base 65.6) ex   63.8 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+pay3         hi q0.8 | A n 64 ep 8 hit  67.2 (base 65.6) ex   41.5 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+d_un12       lo q0.9 | A n 21 ep 4 hit  66.7 (base 65.6) ex    3.3 | B n  3 ep 2 hit  33.3 (base 36.3) ex    0.1
+d_kr3_12     hi q0.8 | A n 12 ep 2 hit  66.7 (base 65.6) ex  -11.9 | B n 21 ep 3 hit  76.2 (base 36.3) ex  -10.4
+d_y10_12     hi q0.8 | A n126 ep13 hit  70.6 (base 65.6) ex   20.6 | B n 20 ep 5 hit  65.0 (base 36.3) ex    3.4
+cape         hi q0.9 | A n107 ep 3 hit  72.0 (base 65.6) ex    3.9 | B n 28 ep 1 hit  64.3 (base 36.3) ex   -1.1
+core6        hi q0.8 | A n156 ep 3 hit  64.1 (base 65.6) ex   10.1 | B n  0 ep 0 hit   0.0 (base 36.3) ex    0.0
+
+=== copper ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+m2_real      lo q0.9 | A n 63 ep 4 hit  85.7 (base 61.3) ex  -24.1 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+permit_yoy   hi q0.9 | A n 40 ep 5 hit  82.5 (base 61.3) ex  -11.9 | B n 11 ep 1 hit 100.0 (base 44.6) ex   -9.6
+curve_min12  lo q0.9 | A n 96 ep 4 hit  82.3 (base 61.3) ex  -21.2 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+real10       hi q0.9 | A n 59 ep 3 hit  81.4 (base 61.3) ex   -6.4 | B n  1 ep 1 hit   0.0 (base 44.6) ex   18.0
+real10       lo q0.9 | A n 44 ep 4 hit  81.8 (base 61.3) ex  -23.0 | B n 26 ep 3 hit  76.9 (base 44.6) ex  -12.8
+d_un12       lo q0.9 | A n 21 ep 4 hit  76.2 (base 61.3) ex   -3.5 | B n  3 ep 2 hit  66.7 (base 44.6) ex   -4.6
+real_ff      hi q0.9 | A n 87 ep10 hit  74.7 (base 61.3) ex   -7.4 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+comm_real    hi q0.9 | A n 89 ep 5 hit  71.9 (base 61.3) ex  -10.2 | B n 43 ep 2 hit  90.7 (base 44.6) ex  -18.6
+permit_yoy   hi q0.8 | A n 78 ep 7 hit  71.8 (base 61.3) ex   -6.3 | B n 27 ep 3 hit  74.1 (base 44.6) ex    0.2
+real_ff      hi q0.8 | A n157 ep 9 hit  71.3 (base 61.3) ex   -4.2 | B n  2 ep 1 hit 100.0 (base 44.6) ex   -5.6
+tips         lo q0.9 | A n  0 ep 0 hit   0.0 (base 61.3) ex    0.0 | B n 48 ep 2 hit  70.8 (base 44.6) ex   -3.6
+m2_real      lo q0.8 | A n137 ep 9 hit  70.8 (base 61.3) ex  -11.3 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+d_y10_12     hi q0.9 | A n 81 ep10 hit  69.1 (base 61.3) ex  -10.7 | B n  5 ep 4 hit  60.0 (base 44.6) ex    6.1
+cape         lo q0.8 | A n139 ep 3 hit  69.1 (base 61.3) ex   -9.8 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+oil_real     hi q0.9 | A n 87 ep 2 hit  77.0 (base 61.3) ex  -14.9 | B n 79 ep 3 hit  68.4 (base 44.6) ex   -3.6
+tips         lo q0.8 | A n  0 ep 0 hit   0.0 (base 61.3) ex    0.0 | B n 56 ep 2 hit  67.9 (base 44.6) ex   -3.3
+sent         hi q0.8 | A n 67 ep 6 hit  67.2 (base 61.3) ex   -8.7 | B n 16 ep 4 hit  81.2 (base 44.6) ex   -8.3
+d_kr3_12     hi q0.8 | A n 12 ep 2 hit 100.0 (base 61.3) ex  -23.2 | B n 21 ep 3 hit  66.7 (base 44.6) ex   -7.2
+core6        hi q0.9 | A n115 ep 6 hit  66.1 (base 61.3) ex  -10.0 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+kr_exp_yoy   hi q0.8 | A n 38 ep 4 hit  65.8 (base 61.3) ex   -0.5 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+core6        hi q0.8 | A n156 ep 3 hit  65.4 (base 61.3) ex   -8.9 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+ff           hi q0.9 | A n143 ep 7 hit  64.3 (base 61.3) ex   -6.1 | B n  0 ep 0 hit   0.0 (base 44.6) ex    0.0
+d_y10_12     lo q0.9 | A n 75 ep11 hit  72.0 (base 61.3) ex   -2.7 | B n 14 ep 4 hit  64.3 (base 44.6) ex   17.9
+curve        lo q0.9 | A n 83 ep 6 hit  68.7 (base 61.3) ex  -13.1 | B n 14 ep 2 hit  64.3 (base 44.6) ex   -4.8
+cpi_yoy      hi q0.8 | A n168 ep 3 hit  63.7 (base 61.3) ex   -7.0 | B n  1 ep 1 hit 100.0 (base 44.6) ex  -19.5
+
+=== ust10 ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+kr_exp_yoy   hi q0.9 | A n 15 ep 2 hit  93.3 (base 53.5) ex   -4.7 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+d_ff12       hi q0.9 | A n 64 ep 6 hit  84.4 (base 53.5) ex   -5.6 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+kr_exp_yoy   hi q0.8 | A n 38 ep 4 hit  81.6 (base 53.5) ex   -2.2 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+m2_real      lo q0.9 | A n 63 ep 4 hit  74.6 (base 53.5) ex   -4.2 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+m2_yoy       hi q0.9 | A n 51 ep 5 hit  74.5 (base 53.5) ex   -1.2 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+oil_real     lo q0.8 | A n 73 ep 1 hit  74.0 (base 53.5) ex   -1.8 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+oil_real     lo q0.9 | A n 73 ep 1 hit  74.0 (base 53.5) ex   -1.8 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+cpi_yoy      hi q0.9 | A n112 ep 4 hit  73.2 (base 53.5) ex   -3.5 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+curve_min12  lo q0.9 | A n 96 ep 4 hit  71.9 (base 53.5) ex   -1.9 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+core6        hi q0.9 | A n115 ep 6 hit  70.4 (base 53.5) ex   -2.4 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+cfnai3       hi q0.9 | A n 27 ep 6 hit  70.4 (base 53.5) ex   -1.4 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+pay3         hi q0.8 | A n 73 ep 8 hit  69.9 (base 53.5) ex   -1.1 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+cpi_yoy      hi q0.8 | A n168 ep 3 hit  69.0 (base 53.5) ex   -2.0 | B n  1 ep 1 hit   0.0 (base 26.2) ex    5.3
+d_ff12       hi q0.8 | A n104 ep 8 hit  76.0 (base 53.5) ex   -3.1 | B n 19 ep 2 hit  68.4 (base 26.2) ex   -1.5
+core6        hi q0.8 | A n156 ep 3 hit  67.9 (base 53.5) ex   -1.9 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+pay3         hi q0.9 | A n 31 ep 8 hit  67.7 (base 53.5) ex   -1.4 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+cfnai3       hi q0.8 | A n 46 ep10 hit  67.4 (base 53.5) ex   -0.5 | B n  5 ep 3 hit  80.0 (base 26.2) ex    1.4
+ff           hi q0.9 | A n150 ep 7 hit  67.3 (base 53.5) ex   -0.7 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+tb3          hi q0.9 | A n171 ep 6 hit  66.7 (base 53.5) ex   -0.7 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+permit_yoy   hi q0.9 | A n 40 ep 5 hit  65.0 (base 53.5) ex   -1.4 | B n 11 ep 1 hit  81.8 (base 26.2) ex   -4.5
+nfci         hi q0.9 | A n 14 ep 2 hit  64.3 (base 53.5) ex   -2.2 | B n  6 ep 1 hit  66.7 (base 26.2) ex   -1.9
+cape         lo q0.9 | A n108 ep 3 hit  63.9 (base 53.5) ex   -0.8 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+credit_yoy   hi q0.9 | A n 55 ep 4 hit  63.6 (base 53.5) ex    3.2 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+ff           hi q0.8 | A n221 ep 7 hit  63.3 (base 53.5) ex   -0.5 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+m2_real      lo q0.8 | A n137 ep 9 hit  62.8 (base 53.5) ex   -1.3 | B n  0 ep 0 hit   0.0 (base 26.2) ex    0.0
+
+=== btc ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+
+=== usd ===  (hit=관망 적중, base=평소, ex=켜진 달 뒤 12개월 평균 초과수익)
+core6        lo q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 25 ep 4 hit 100.0 (base 75.6) ex   -8.9
+d_cpi12      lo q0.9 | A n  5 ep 1 hit 100.0 (base 75.0) ex  -10.1 | B n 17 ep 3 hit 100.0 (base 75.6) ex  -11.0
+real10       hi q0.8 | A n 15 ep 2 hit 100.0 (base 75.0) ex  -13.1 | B n  5 ep 1 hit 100.0 (base 75.6) ex   -6.9
+d_nfci6      lo q0.8 | A n  3 ep 2 hit 100.0 (base 75.0) ex   -7.6 | B n 21 ep 5 hit 100.0 (base 75.6) ex   -6.0
+vix          lo q0.9 | A n  2 ep 2 hit  50.0 (base 75.0) ex   -4.5 | B n 15 ep 1 hit 100.0 (base 75.6) ex   -4.3
+sahm         hi q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 16 ep 1 hit 100.0 (base 75.6) ex  -11.5
+d_un12       hi q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 18 ep 2 hit 100.0 (base 75.6) ex  -11.6
+d_ip_yoy6    hi q0.8 | A n  5 ep 3 hit  80.0 (base 75.0) ex   -8.8 | B n 20 ep 2 hit 100.0 (base 75.6) ex   -7.1
+d_ip_yoy6    hi q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 12 ep 2 hit 100.0 (base 75.6) ex   -7.6
+permit_yoy   hi q0.8 | A n  8 ep 2 hit 100.0 (base 75.0) ex  -12.9 | B n 27 ep 3 hit 100.0 (base 75.6) ex   -7.4
+m2_yoy       hi q0.8 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 23 ep 3 hit 100.0 (base 75.6) ex  -10.1
+m2_yoy       lo q0.9 | A n 55 ep 1 hit 100.0 (base 75.0) ex   -9.8 | B n  8 ep 1 hit 100.0 (base 75.6) ex   -9.1
+m2_real      hi q0.8 | A n  4 ep 1 hit 100.0 (base 75.0) ex   -8.6 | B n 27 ep 3 hit 100.0 (base 75.6) ex  -10.0
+m2_real      hi q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 18 ep 3 hit 100.0 (base 75.6) ex  -11.2
+m2_real      lo q0.8 | A n 34 ep 3 hit 100.0 (base 75.0) ex   -9.7 | B n  0 ep 0 hit   0.0 (base 75.6) ex    0.0
+credit_yoy   lo q0.9 | A n 26 ep 1 hit 100.0 (base 75.0) ex   -8.6 | B n 25 ep 1 hit 100.0 (base 75.6) ex   -9.6
+d_kr3_12     lo q0.8 | A n 10 ep 1 hit 100.0 (base 75.0) ex   -9.4 | B n 11 ep 1 hit 100.0 (base 75.6) ex  -12.1
+comm12       lo q0.9 | A n 22 ep 2 hit 100.0 (base 75.0) ex  -16.0 | B n 19 ep 3 hit 100.0 (base 75.6) ex  -12.2
+curve        hi q0.9 | A n 26 ep 2 hit 100.0 (base 75.0) ex  -10.4 | B n 41 ep 3 hit  97.6 (base 75.6) ex   -8.2
+d_spr12      lo q0.9 | A n  2 ep 2 hit  50.0 (base 75.0) ex   -5.1 | B n 23 ep 4 hit  95.7 (base 75.6) ex   -8.2
+ip_yoy       lo q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 21 ep 2 hit  95.2 (base 75.6) ex  -11.2
+d_ff12       hi q0.8 | A n  8 ep 1 hit 100.0 (base 75.0) ex  -10.2 | B n 19 ep 2 hit  94.7 (base 75.6) ex   -4.3
+cpi_yoy      lo q0.9 | A n  0 ep 0 hit   0.0 (base 75.0) ex    0.0 | B n 19 ep 4 hit  94.7 (base 75.6) ex   -9.8
+cpi_yoy      lo q0.8 | A n  6 ep 1 hit 100.0 (base 75.0) ex  -16.5 | B n 36 ep 6 hit  94.4 (base 75.6) ex   -8.6
+d_real10_12  hi q0.9 | A n  2 ep 1 hit 100.0 (base 75.0) ex  -10.1 | B n 16 ep 4 hit  93.8 (base 75.6) ex  -10.2

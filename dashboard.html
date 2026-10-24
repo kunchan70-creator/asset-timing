@@ -1,0 +1,100 @@
+<title>자산 시황판</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* 레이아웃: 한 줄 요약 → 자산 카드 격자(상태 알약·경고등 점·기간별 적중 막대·비슷한 과거) */
+:root{
+ --bg:#F5F7FA; --card:#FFFFFF; --line:#E3E9F2; --fg:#16202E; --sub:#5B6676; --mute:#8D97A6;
+ --blue:#2B6BF3; --warn:#E8770B; --warn-bg:#FFF1E3; --up:#12A150; --down:#E0453A; --ok-bg:#EAF1FF; --gray-bg:#EEF1F5;
+ --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+ --bg:#0F141B; --card:#171E28; --line:#263142; --fg:#E8EDF4; --sub:#A3AEBE; --mute:#748094;
+ --blue:#5B8DF7; --warn:#F2994A; --warn-bg:#3A2716; --up:#3CC77A; --down:#F06A60; --ok-bg:#1A2742; --gray-bg:#222B37; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#0F141B; --card:#171E28; --line:#263142; --fg:#E8EDF4; --sub:#A3AEBE; --mute:#748094;
+ --blue:#5B8DF7; --warn:#F2994A; --warn-bg:#3A2716; --up:#3CC77A; --down:#F06A60; --ok-bg:#1A2742; --gray-bg:#222B37; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.55;
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 40px}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+h1{font-size:22px;font-weight:700;margin:0;text-wrap:balance}
+.asof{color:var(--mute);font-size:13px;font-variant-numeric:tabular-nums}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:grid;gap:4px}
+.sum .q{color:var(--sub);font-size:14px}
+.sum .a{font-size:24px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0;align-content:start}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.nm{font-size:17px;font-weight:700}
+.pill{font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill.hold{background:var(--warn-bg);color:var(--warn)}
+.pill.ok{background:var(--ok-bg);color:var(--blue)}
+.pill.none,.pill.nodata{background:var(--gray-bg);color:var(--sub)}
+.lights{display:flex;align-items:center;gap:10px}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--gray-bg);border:1px solid var(--line)}
+.dot.on{background:var(--warn);border-color:var(--warn)}
+.cnt{font-family:var(--mono);font-size:14px;color:var(--sub);font-variant-numeric:tabular-nums}
+.litnames{font-size:13px;color:var(--fg);display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:2px 8px;font-size:12.5px}
+.chip.quiet{background:var(--gray-bg);color:var(--sub)}
+.sec{display:grid;gap:6px}
+.lab{font-size:12px;color:var(--mute);letter-spacing:.02em}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:5px 8px;align-items:center;font-size:12.5px;font-variant-numeric:tabular-nums}
+.bars .p{color:var(--sub)}
+.track{position:relative;height:10px;background:var(--gray-bg);border-radius:5px;overflow:visible}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--warn)}
+.fill.weak{background:var(--mute)}
+.goal{position:absolute;top:-3px;bottom:-3px;width:0;border-left:1.5px dashed var(--fg);opacity:.45;left:80%}
+.base{position:absolute;top:2px;bottom:2px;width:2px;background:var(--fg);opacity:.35}
+.v{font-family:var(--mono);min-width:3.2em;text-align:right}
+.picks{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;font-variant-numeric:tabular-nums}
+.picks .m{color:var(--sub)}
+.up{color:var(--up)} .down{color:var(--down)}
+.note{font-size:12.5px;color:var(--mute)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--sub);align-items:center}
+.legend i{display:inline-block;vertical-align:-1px;margin-right:5px}
+</style>
+<div class="wrap">
+ <header><h1>자산 시황판</h1><span class="asof">2026.10.20 기준 · 월 자료</span></header>
+ <section class="sum" aria-live="polite"><span class="q">지금 관망 신호가 켜진 자산</span><span class="a" id="sumA"></span><span class="note" id="sumN"></span></section>
+ <div class="legend">
+  <span><i class="dot on" style="display:inline-block"></i>경고등 켜짐</span>
+  <span><i style="width:16px;height:8px;background:var(--warn);border-radius:4px"></i>관망 때 1년 뒤 현금이 나았던 비율(적중)</span>
+  <span><i style="width:0;height:12px;border-left:1.5px dashed var(--fg);opacity:.5"></i>목표 80%</span>
+  <span><i style="width:2px;height:10px;background:var(--fg);opacity:.4"></i>평소</span>
+ </div>
+ <div class="grid" id="grid"></div>
+ <p class="note">적중 = 관망 신호가 켜진 달 가운데 1년 뒤 그 자산 수익이 단기금리(현금)보다 낮았던 비율. 경고등 문턱은 최근 20년 자기 역사 상·하위 20%. 2014년 이후는 규칙을 정할 때 보지 않은 기간. 비슷한 과거는 예측력 검증을 통과하지 못해 참고용.</p>
+</div>
+<script>
+const D=[{"id": "nasdaq", "name": "나스닥", "count": 3, "full": 10, "st": "none", "k": 5, "per": [{"lab": "~1999", "hit": 34, "base": 26, "ep": 4}, {"lab": "2000~13", "hit": 74, "base": 35, "ep": 2}, {"lab": "2014~", "hit": 20, "base": 16, "ep": 3}], "lit": ["금리 급등(2년물 1년 변화)", "고평가(CAPE)", "유가 급등"], "off": ["긴축(기준금리 1년 인상폭)", "장단기 역전(1년 안)", "신용 악화(회사채 가산금리 6개월 확대)", "고용 꺾임(실업수당 청구 바닥 대비)", "금융 여건 긴축(NFCI 6개월 변화)", "생산 둔화(산업생산 증가율 6개월 변화)", "주택 인허가 감소"], "picks": [{"m": "2021.10", "ex": -30}, {"m": "1996.09", "ex": 34}, {"m": "1999.07", "ex": 39}, {"m": "1987.08", "ex": -23}], "base_bad": 27, "from": "1971"}, {"id": "spx", "name": "S&P500", "count": 3, "full": 10, "st": "none", "k": 5, "per": [{"lab": "~1999", "hit": 34, "base": 28, "ep": 4}, {"lab": "2000~13", "hit": 74, "base": 31, "ep": 2}, {"lab": "2014~", "hit": 27, "base": 15, "ep": 3}], "lit": ["금리 급등(2년물 1년 변화)", "고평가(CAPE)", "유가 급등"], "off": ["긴축(기준금리 1년 인상폭)", "장단기 역전(1년 안)", "신용 악화(회사채 가산금리 6개월 확대)", "고용 꺾임(실업수당 청구 바닥 대비)", "금융 여건 긴축(NFCI 6개월 변화)", "생산 둔화(산업생산 증가율 6개월 변화)", "주택 인허가 감소"], "picks": [{"m": "2021.10", "ex": -16}, {"m": "1996.09", "ex": 35}, {"m": "1999.07", "ex": 3}, {"m": "1963.10", "ex": 15}], "base_bad": 28, "from": "1953"}, {"id": "kospi", "name": "코스피", "count": 3, "full": 12, "st": "none", "k": 4, "per": [{"lab": "~1999", "hit": 33, "base": 62, "ep": 3}, {"lab": "2000~13", "hit": 43, "base": 36, "ep": 3}, {"lab": "2014~", "hit": 34, "base": 43, "ep": 5}], "lit": ["금리 급등(2년물 1년 변화)", "고평가(CAPE)", "유가 급등"], "off": ["긴축(기준금리 1년 인상폭)", "장단기 역전(1년 안)", "신용 악화(회사채 가산금리 6개월 확대)", "고용 꺾임(실업수당 청구 바닥 대비)", "금융 여건 긴축(NFCI 6개월 변화)", "생산 둔화(산업생산 증가율 6개월 변화)", "주택 인허가 감소", "한국 수출 둔화", "원화 약세"], "picks": [{"m": "2004.04", "ex": 4}, {"m": "2000.03", "ex": -45}, {"m": "2021.10", "ex": -24}], "base_bad": 41, "from": "1996"}, {"id": "gold", "name": "금", "count": 1, "full": 7, "st": "none", "k": 4, "per": [{"lab": "~1999", "hit": 94, "base": 66, "ep": 3}, {"lab": "2000~13", "hit": 25, "base": 26, "ep": 3}, {"lab": "2014~", "hit": 0, "base": 34, "ep": 1}], "lit": ["금 실질가격 높음"], "off": ["실질금리 상승", "달러 강세", "물가 둔화", "긴축(기준금리 1년 인상폭)", "위험 선호(신용 가산금리 축소)", "실질 통화량 감소"], "picks": [{"m": "2025.02", "ex": 69}, {"m": "1980.10", "ex": -49}, {"m": "2013.08", "ex": -4}], "base_bad": 46, "from": "1971"}, {"id": "comm", "name": "원자재", "count": 0, "full": 8, "st": "none", "k": 6, "per": [{"lab": "~1999", "hit": 100, "base": 63, "ep": 4}, {"lab": "2000~13", "hit": null, "base": 38, "ep": 2}, {"lab": "2014~", "hit": null, "base": 58, "ep": 0}], "lit": [], "off": ["달러 강세", "고용 꺾임(실업수당 청구)", "생산 둔화", "경기 지수 약함(CFNAI)", "긴축(기준금리 1년 인상폭)", "원자재 실질가격 높음", "장단기 역전(1년 안)", "신용 악화"], "picks": [{"m": "2021.10", "ex": 10}, {"m": "2013.11", "ex": -20}, {"m": "1975.12", "ex": 13}, {"m": "1983.09", "ex": -18}], "base_bad": 58, "from": "1960"}, {"id": "ust10", "name": "미 국채10년", "count": 1, "full": 7, "st": "ok", "k": 5, "per": [{"lab": "~1999", "hit": 98, "base": 53, "ep": 4}, {"lab": "2000~13", "hit": 88, "base": 26, "ep": 1}, {"lab": "2014~", "hit": 100, "base": 56, "ep": 1}], "lit": ["유가 급등"], "off": ["물가 상승 가속", "근원물가 6개월 높음", "긴축(기준금리 1년 인상폭)", "실질 기준금리 낮음(연준 뒤처짐)", "경기 과열(CFNAI)", "실질 10년 금리 낮음(완충 없음)"], "picks": [{"m": "1964.03", "ex": 1}, {"m": "1966.01", "ex": 0}, {"m": "1972.10", "ex": -2}, {"m": "1990.08", "ex": 9}], "base_bad": 49, "from": "1953"}, {"id": "btc", "name": "비트코인", "count": 1, "full": 7, "st": "nodata", "k": null, "per": [], "lit": ["금리 급등(2년물)"], "off": ["긴축(기준금리 1년 인상폭)", "연준 자산 축소", "통화량 증가 둔화", "달러 강세", "금융 여건 긴축", "실질금리 상승"], "picks": [], "base_bad": 29, "from": "2014"}, {"id": "usd", "name": "달러(원화)", "count": 1, "full": 5, "st": "none", "k": 2, "per": [{"lab": "~1999", "hit": 100, "base": 75, "ep": 1}, {"lab": "2000~13", "hit": 88, "base": 76, "ep": 5}, {"lab": "2014~", "hit": 22, "base": 32, "ep": 4}], "lit": ["한국 수출 회복"], "off": ["미 금리 인하", "달러 이미 강세(원화 약세 1년)", "위험 선호(금융 여건 완화)", "미 장단기 금리차 확대"], "picks": [{"m": "2021.06", "ex": 13}, {"m": "2003.02", "ex": -5}, {"m": "2011.06", "ex": 4}], "base_bad": 61, "from": "1991"}];
+const ST={hold:"관망",ok:"보통",none:"판정 없음",nodata:"판정 없음"};
+const holds=D.filter(d=>d.st==="hold");
+document.getElementById("sumA").textContent=holds.length?holds.map(d=>d.name).join(" · "):"없음";
+const passed=D.filter(d=>d.st==="hold"||d.st==="ok").map(d=>d.name);
+document.getElementById("sumN").textContent="관망 판정은 검증을 통과한 "+(passed.join("·")||"자산")+"만 냅니다. 나머지는 경고등 상태만 보여 줍니다.";
+const g=document.getElementById("grid");
+for(const d of D){
+ const c=document.createElement("article");c.className="card";
+ let dots="";for(let i=0;i<d.full;i++)dots+=`<span class="dot${i<d.count?" on":""}"></span>`;
+ const chips=d.lit.length?d.lit.map(n=>`<span class="chip">${n}</span>`).join(""):`<span class="chip quiet">켜진 경고등 없음</span>`;
+ let bars="";
+ if(d.per.length){
+  bars=`<div class="sec"><span class="lab">경고 ${d.k}개 이상일 때 관망 적중</span><div class="bars">`+
+  d.per.map(p=>{
+   const h=p.hit, w=h==null?0:h, weak=h==null||h<75;
+   return `<span class="p">${p.lab}</span><span class="track"><span class="fill${weak?" weak":""}" style="width:${w}%"></span>${p.base!=null?`<span class="base" style="left:${p.base}%"></span>`:""}<span class="goal"></span></span><span class="v">${h==null?"표본 적음":h+"%"}</span>`;
+  }).join("")+`</div></div>`;
+ } else {
+  bars=`<div class="sec"><span class="lab">관망 적중</span><span class="note">${d.from}년부터 자료뿐이라 규칙을 정하고 따로 시험할 기간이 없음</span></div>`;
+ }
+ const picks=d.picks.length?`<div class="sec"><span class="lab">지금과 비슷했던 때 → 1년 뒤 현금 대비 · 참고용</span><div class="picks">`+
+  d.picks.map(p=>`<span><span class="m">${p.m}</span> <span class="${p.ex>=0?"up":"down"}">${p.ex>0?"+":""}${p.ex}%</span></span>`).join("")+`</div></div>`:"";
+ c.innerHTML=`<div class="top"><span class="nm">${d.name}</span><span class="pill ${d.st}">${ST[d.st]}</span></div>
+  <div class="lights"><span class="dots">${dots}</span><span class="cnt">${d.count}/${d.full}</span></div>
+  <div class="litnames">${chips}</div>${bars}${picks}`;
+ g.appendChild(c);
+}
+</script>

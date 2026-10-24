@@ -1,0 +1,215 @@
+[
+ {
+  "id": "nasdaq_sell_1",
+  "asset": "nasdaq",
+  "kind": "관망",
+  "dev": 0.8,
+  "conds": [
+   [
+    "d_y2_12",
+    ">=",
+    0.7
+   ]
+  ],
+  "k": 1,
+  "status": "확정",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "nasdaq_strong_1",
+  "asset": "nasdaq",
+  "kind": "강한관망",
+  "dev": 0.8,
+  "conds": [
+   [
+    "d_y2_12",
+    ">=",
+    0.7
+   ],
+   [
+    "d_y10_12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_cpi12",
+    ">=",
+    0.7
+   ],
+   [
+    "oil12",
+    ">=",
+    0.8
+   ]
+  ],
+  "k": 3,
+  "status": "참고",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "spx_strong_1",
+  "asset": "spx",
+  "kind": "강한관망",
+  "dev": 0.8,
+  "conds": [
+   [
+    "d_y2_12",
+    ">=",
+    0.7
+   ],
+   [
+    "d_y10_12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_cpi12",
+    ">=",
+    0.7
+   ],
+   [
+    "oil12",
+    ">=",
+    0.8
+   ]
+  ],
+  "k": 3,
+  "status": "확정",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "kospi_sell_1",
+  "asset": "kospi",
+  "kind": "관망",
+  "dev": 0.7,
+  "conds": [
+   [
+    "kr_exp_yoy",
+    ">=",
+    0.7
+   ]
+  ],
+  "k": 1,
+  "status": "확정",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "ust10_sell_1",
+  "asset": "ust10",
+  "kind": "관망",
+  "dev": null,
+  "conds": [
+   [
+    "d_cpi12",
+    ">=",
+    0.7
+   ],
+   [
+    "d_ff12",
+    ">=",
+    0.7
+   ]
+  ],
+  "k": 2,
+  "status": "참고",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "oil_sell_1",
+  "asset": "oil",
+  "kind": "관망",
+  "dev": 0.7,
+  "conds": [
+   [
+    "dxy12",
+    ">=",
+    0.7
+   ]
+  ],
+  "k": 1,
+  "status": "참고",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "nasdaq_buy_1",
+  "asset": "nasdaq",
+  "kind": "매수",
+  "form": "trend",
+  "status": "확정",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "spx_buy_1",
+  "asset": "spx",
+  "kind": "매수",
+  "form": "trend",
+  "status": "확정",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "dji_buy_1",
+  "asset": "dji",
+  "kind": "매수",
+  "form": "trend",
+  "status": "참고",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "id": "kospi_buy_1",
+  "asset": "kospi",
+  "kind": "매수",
+  "form": "cheap",
+  "dev": 0.2,
+  "status": "확정",
+  "since": "2026-10-21",
+  "streak": 0
+ },
+ {
+  "asset": "nasdaq",
+  "kind": "관망",
+  "dev": 0.7,
+  "conds": [
+   [
+    "d_y10_12",
+    ">=",
+    0.7
+   ],
+   [
+    "d_nfci6",
+    ">=",
+    0.7
+   ]
+  ],
+  "k": 2,
+  "id": "nasdaq_cand_2026-10-21",
+  "status": "후보",
+  "since": "2026-10-21",
+  "streak": 1
+ },
+ {
+  "asset": "oil",
+  "kind": "관망",
+  "dev": 0.7,
+  "conds": [
+   [
+    "dxy12",
+    ">=",
+    0.8
+   ]
+  ],
+  "k": 1,
+  "id": "oil_cand_2026-10-21",
+  "status": "후보",
+  "since": "2026-10-21",
+  "streak": 1
+ }
+]
