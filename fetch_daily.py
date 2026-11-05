@@ -10,7 +10,7 @@ OUT = os.path.join(B, "data", "daily")
 os.makedirs(OUT, exist_ok=True)
 from fetch import curl, YAHOO
 
-FRED_D = ["DGS2", "DGS10", "DGS30", "DTB3", "DFF", "BAA10Y", "VIXCLS", "DCOILWTICO", "DEXKOUS", "DEXJPUS", "ICSA", "NFCI", "DFII10"]
+FRED_D = ["DGS2", "DGS5", "DGS10", "DGS30", "DTB3", "DFF", "BAA10Y", "VIXCLS", "DCOILWTICO", "DEXKOUS", "DEXJPUS", "ICSA", "NFCI", "DFII10"]
 
 
 def save(name, rows):

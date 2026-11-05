@@ -211,5 +211,191 @@
   "status": "후보",
   "since": "2026-10-21",
   "streak": 2
+ },
+ {
+  "id": "ust2_sell_1",
+  "asset": "ust2",
+  "kind": "관망",
+  "dev": null,
+  "conds": [
+   [
+    "d_cpi12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_ff12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_y2_12",
+    ">=",
+    0.8
+   ]
+  ],
+  "k": 3,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "ust5_sell_1",
+  "asset": "ust5",
+  "kind": "관망",
+  "dev": null,
+  "conds": [
+   [
+    "d_cpi12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_ff12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_y2_12",
+    ">=",
+    0.8
+   ]
+  ],
+  "k": 3,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "ust10_sell_2",
+  "asset": "ust10",
+  "kind": "관망",
+  "dev": null,
+  "conds": [
+   [
+    "d_cpi12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_ff12",
+    ">=",
+    0.8
+   ],
+   [
+    "d_y2_12",
+    ">=",
+    0.8
+   ]
+  ],
+  "k": 3,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "ust2_buy_1",
+  "asset": "ust2",
+  "kind": "매수",
+  "dev": null,
+  "conds": [
+   [
+    "d_cpi12",
+    "<=",
+    0.3
+   ],
+   [
+    "d_ff12",
+    "<=",
+    0.3
+   ]
+  ],
+  "k": 2,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "ust5_buy_1",
+  "asset": "ust5",
+  "kind": "매수",
+  "dev": null,
+  "conds": [
+   [
+    "real2",
+    ">=",
+    0.7
+   ]
+  ],
+  "k": 1,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "ust10_buy_1",
+  "asset": "ust10",
+  "kind": "매수",
+  "dev": null,
+  "conds": [
+   [
+    "d_ff12",
+    "<=",
+    0.3
+   ],
+   [
+    "d_y2_12",
+    "<=",
+    0.3
+   ]
+  ],
+  "k": 2,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "corp_l_buy_1",
+  "asset": "corp_l",
+  "kind": "매수",
+  "dev": null,
+  "conds": [
+   [
+    "d_ff12",
+    "<=",
+    0.2
+   ],
+   [
+    "d_spr6",
+    "<=",
+    0.2
+   ]
+  ],
+  "k": 2,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
+ },
+ {
+  "id": "corp_m_buy_1",
+  "asset": "corp_m",
+  "kind": "매수",
+  "dev": null,
+  "conds": [
+   [
+    "d_cpi12",
+    "<=",
+    0.3
+   ],
+   [
+    "d_y2_12",
+    "<=",
+    0.3
+   ]
+  ],
+  "k": 2,
+  "status": "확정",
+  "since": "2026-10-31",
+  "streak": 0
  }
 ]

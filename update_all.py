@@ -5,7 +5,9 @@ py update_all.py  → logs/update.txt (콘솔은 ASCII 만)
 """
 import os, sys, subprocess, datetime
 B = os.path.dirname(os.path.abspath(__file__))
-STEPS = [["fetch.py"], ["fetch_daily.py"], ["fetch_fx2.py"], ["panel.py"], ["weekly.py"], ["evolve.py"], ["build_history.py"], ["wk_board.py"]]
+STEPS = [["fetch.py"], ["fetch_daily.py"], ["fetch_fx2.py"], ["fetch_fg.py"], ["panel.py"], ["weekly.py"], ["evolve.py"], ["build_history.py"], ["wk_board.py"], ["watch.py", "once"], ["wk_board.py"]]
+if "quick" in sys.argv:      # 11-06: 15분마다 — 시세만 받아 판 다시 만들기 (깃허브 페이지)
+    STEPS = [["fetch_daily.py"], ["fetch_fg.py"], ["panel.py"], ["weekly.py"], ["wk_board.py"], ["watch.py", "once"], ["wk_board.py"]]
 log = open(os.path.join(B, "logs", "update.txt"), "w", encoding="utf-8")
 log.write(f"start {datetime.datetime.now():%Y-%m-%d %H:%M}\n")
 ok = True

@@ -38,12 +38,19 @@ PIECES = {
     "oil": [("dxy12", ">=", "달러 강세"), ("d_ip_yoy6", "<=", "미 산업생산 둔화"), ("d_y2_12", ">=", "미 2년물 급등")],
     "ust10": [("d_cpi12", ">=", "물가 가속"), ("d_ff12", ">=", "기준금리 인상"), ("oil12", ">=", "유가 급등"), ("d_y2_12", ">=", "2년물 급등")],
 }
+# 10-31 사용자: 단기채(2년)·중기채(5년)·회사채도 같은 방식. 관망 재료는 10년물과 같음(금리 오를 압력), 회사채는 + 신용 악화
+PIECES["ust2"] = PIECES["ust5"] = PIECES["ust10"]
+PIECES["corp_l"] = PIECES["corp_m"] = PIECES["ust10"] + [("d_spr6", ">=", "회사채 가산금리 확대(신용 악화)"), ("claims", ">=", "실업수당 청구 증가")]
+# 매수(사기 좋은 때) 재료 이름: 같은 지표라도 방향(<=)이 다르면 뜻이 다름
+BUY_NAMES = {("d_cpi12", "<="): "물가 둔화", ("d_ff12", "<="): "기준금리 인하", ("d_y2_12", "<="): "2년물 하락",
+             ("real2", ">="): "실질금리 높음(2년물 − 물가)", ("d_spr6", "<="): "가산금리 축소 시작", ("y2_lvl", ">="): "2년물 금리 높음"}
 SIBLING = {"nasdaq": ["spx", "rut", "dji"], "spx": ["nasdaq", "rut", "dji"], "dji": ["spx", "nasdaq"], "rut": ["spx", "nasdaq"]}
 CASH = {"kospi": "cash_kr"}
-NODEV = {"ust10"}     # 채권은 '많이 오름' 조건 없이 압력만
+NODEV = {"ust10", "ust2", "ust5", "corp_l", "corp_m"}     # 채권은 '많이 오름' 조건 없이 압력만
 ERAS = [("~1999", None, "1999-12-31"), ("2000~13", "2000-01-01", "2013-12-31"), ("2014~", "2014-01-01", None)]
 Z = 1.28; ACCEPT = 0.55
-NAME = {"nasdaq": "나스닥", "spx": "S&P500", "dji": "다우", "rut": "러셀2000", "kospi": "코스피", "oil": "원유", "ust10": "미국채 10년"}
+NAME = {"nasdaq": "나스닥", "spx": "S&P500", "dji": "다우", "rut": "러셀2000", "kospi": "코스피", "oil": "원유", "ust10": "미국채 10년",
+        "ust2": "미국채 2년(단기)", "ust5": "미국채 5년(중기)", "corp_l": "회사채(장기)", "corp_m": "회사채(중기)"}
 KN = lambda sc: f"{sc['n']}번 중 {sc['k']}번 맞음"
 
 
@@ -102,7 +109,7 @@ def describe(r):
     if r.get("form") == "cheap": return f"5년 평균보다 많이 싸짐(하위 {round(r['dev']*100)}%)"
     names = {c: why for p in PIECES.values() for c, _, why in p}
     top = lambda op, q: f"상위 {round((1-q)*100)}%" if op == ">=" else f"하위 {round(q*100)}%"
-    parts = [f"{names.get(c, c)}({top(op, q)})" for c, op, q in r["conds"]]
+    parts = [f"{BUY_NAMES.get((c, op)) or names.get(c, c)}({top(op, q)})" for c, op, q in r["conds"]]
     s = " · ".join(parts) if r.get("k", len(parts)) == len(parts) else f"{' · '.join(parts)} 중 {r['k']}개 이상"
     return (f"많이 오른 상태(상위 {round((1-r['dev'])*100)}%) + " if r.get("dev") is not None else "") + s
 
@@ -212,6 +219,20 @@ def seed():
     return R
 
 
+# 10-31 채권 시험(_bond3): 같은 모양(재료 1~3개·문턱 0.7/0.8)에서 사건 단위로 뽑음. 매수 = 1년 들고 있었을 때 현금(3개월 국채)보다 나았나
+C8 = [["d_cpi12", ">=", 0.8], ["d_ff12", ">=", 0.8], ["d_y2_12", ">=", 0.8]]     # 물가 가속 + 금리 인상 + 2년물 급등 (모두 상위 20%)
+ADD_1031 = [
+    {"id": "ust2_sell_1", "asset": "ust2", "kind": "관망", "dev": None, "conds": C8, "k": 3},          # 6번 중 5번
+    {"id": "ust5_sell_1", "asset": "ust5", "kind": "관망", "dev": None, "conds": C8, "k": 3},          # 10번 중 8번
+    {"id": "ust10_sell_2", "asset": "ust10", "kind": "관망", "dev": None, "conds": C8, "k": 3},        # 10번 중 8번 (예전 0.7 규칙 12번 중 7번)
+    {"id": "ust2_buy_1", "asset": "ust2", "kind": "매수", "dev": None, "conds": [["d_cpi12", "<=", 0.3], ["d_ff12", "<=", 0.3]], "k": 2},   # 11번 중 10번
+    {"id": "ust5_buy_1", "asset": "ust5", "kind": "매수", "dev": None, "conds": [["real2", ">=", 0.7]], "k": 1},                          # 8번 중 7번
+    {"id": "ust10_buy_1", "asset": "ust10", "kind": "매수", "dev": None, "conds": [["d_ff12", "<=", 0.3], ["d_y2_12", "<=", 0.3]], "k": 2},  # 12번 중 9번
+    {"id": "corp_l_buy_1", "asset": "corp_l", "kind": "매수", "dev": None, "conds": [["d_ff12", "<=", 0.2], ["d_spr6", "<=", 0.2]], "k": 2},  # 7번 중 6번
+    {"id": "corp_m_buy_1", "asset": "corp_m", "kind": "매수", "dev": None, "conds": [["d_cpi12", "<=", 0.3], ["d_y2_12", "<=", 0.3]], "k": 2}, # 7번 중 7번 (1993~)
+]
+
+
 def log(lines):
     if not lines: return
     new = not os.path.exists(LOG_F)
@@ -279,6 +300,10 @@ def main(force_search=False):
     R = json.load(open(RULES_F, encoding="utf-8")) if os.path.exists(RULES_F) else seed()
     state = json.load(open(STATE_F, encoding="utf-8")) if os.path.exists(STATE_F) else {}
     first = not state; state.setdefault("scores", {}); logs = []
+    have = {r["id"] for r in R}
+    for r in ADD_1031:
+        if r["id"] not in have:
+            R.append(dict(r, status="확정", since="2026-10-31", streak=0)); logs.append(f"{NAME.get(r['asset'], r['asset'])} {r['kind']}: '{describe(r)}' 추가 (10-31 채권 시험)")
     if first: logs.append("루프 시작: 지금 신호판 규칙 10개를 '확정'으로 등록")
     for r in R:
         if r["status"] == "은퇴": continue

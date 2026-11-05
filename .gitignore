@@ -3,3 +3,7 @@ data/*.pkl
 __pycache__/
 logs/update.txt
 site/
+watch_config.json
+watch_start.vbs
+logs/watch*
+logs/_*.txt

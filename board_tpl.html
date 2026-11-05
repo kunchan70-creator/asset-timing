@@ -47,7 +47,9 @@ header p{margin:2px 0 0;color:var(--mute);font-size:13px}
 .bar{height:8px;border-radius:4px;background:var(--track);overflow:hidden}
 .bar i{display:block;height:100%;border-radius:4px}
 .mini{font-size:12.5px;color:var(--sub);font-variant-numeric:tabular-nums}
-button.more{all:unset;cursor:pointer;font-size:13px;color:var(--hold);font-weight:500;justify-self:start;padding:2px 0}
+button.more{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--track);font-size:13px;color:var(--hold);font-weight:600}
+button.more .spark{flex:1;height:30px;min-width:0}
+button.more .mlab{flex:none;white-space:nowrap}
 button.more:focus-visible{outline:2px solid var(--hold);outline-offset:2px;border-radius:4px}
 .chartbox{display:grid;gap:8px}
 .chips{display:flex;gap:6px}
@@ -85,71 +87,98 @@ canvas{width:100%;height:240px;display:block;cursor:crosshair}
 .crit dt{font-weight:700;color:var(--fg)}
 .crit dd{margin:0;min-width:0}
 .hint{display:none}
+.key{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:12px 0 0;font-size:12.5px;line-height:1.45;opacity:.95}.key dt{font-weight:700;white-space:nowrap}.key dd{margin:0;min-width:0}
+@media (max-width:600px){.tr{grid-template-columns:auto 1fr}.tr .tw{grid-column:1/-1;font-size:12px}canvas{height:300px}}
+.keybox{margin-top:10px;font-size:12.5px}.keybox summary{cursor:pointer;opacity:.85}
 .foot{font-size:12px;color:var(--mute);line-height:1.6}
 __JIPSEM_CSS__
 </style>
 <div class="wrap">
  <header><h1>자산 신호판</h1><p>__ASOF__ 주 기준</p></header>
- <section class="hero" aria-label="이번 주 할 일"><small>이번 주 할 일 · 검증된 신호만</small><div id="todo" class="todo"></div><p id="why" class="why"></p></section>
- <details class="card" id="ex"><summary class="nm" style="font-size:15px;cursor:pointer">예시 · 그때 이 판을 봤다면</summary>
-  <div class="chips" id="exchips" style="flex-wrap:wrap"></div>
-  <label class="mini">아무 달이나: <input type="month" id="exmon" min="1990-01" style="font:inherit;font-size:13px;padding:3px 6px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg)"></label>
-  <div id="exrows" class="exrows"></div>
-  <div class="mini">지금 규칙을 그때 자료로 적용한 결과 · 주식은 1년 뒤, 환율은 9개월 뒤 · ✓ 할 일과 결과가 맞음 ✗ 틀림</div>
- </details>
+ <section class="hero" aria-label="지금 상황"><small>지금 할 일</small><p id="why" class="why" style="margin:6px 0 0;font-weight:500"></p><div id="todo" class="todo"></div><details class="keybox"><summary>신호 뜻</summary><dl id="key" class="key"></dl></details></section>
+
  <div id="cards" style="display:grid;gap:12px"></div>
- <details class="card" id="evo"><summary class="nm" style="font-size:14px;cursor:pointer">규칙 변경 기록</summary><div class="mini" id="evochk"></div><ul id="evolog" style="margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--sub);line-height:1.6"></ul></details>
- <p class="foot">과거 자료 기준 · 투자 권유 아님 · 세금·수수료 뺀 계산 · 상품 이름은 종류를 알리는 예시일 뿐 추천 아님 · 현금 = 미국 주식은 달러 3개월 국채(연 __TB3__%), 코스피는 원화 단기금리로 계산</p>
+ <p class="foot">과거 자료 기준 · 투자 권유 아님 · 세금·수수료 제외 · 현금 = 달러 3개월 국채(연 __TB3__%)·원화 단기금리</p>
 </div>
 <script>
 __CHART_JS__
 </script>
 <script>
-const D=__DATA__;
+const D=__DATA__,LV=__LIVE__;
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const FX=D.find(d=>d.fxcard)||{};
+const BONDS_ID=["ust2","ust5","ust10","corp_m","corp_l"],US=["nasdaq","spx","dji","ust2","ust5","ust10","corp_m","corp_l"];   // 10-31: 미국 채권도 달러 자산 (할 일 표보다 먼저 선언)
 // 묶음: 환율 / 살 것 / 팔 것 / 사도 됨 / 신호 없음 / 참고(근거 약한 신호·매수 규칙 없는 자산)
 D.forEach(d=>{const ev=d.ev||{};
  const s0=d.stats["보통"]||{};
  // 맨 위 할 일과 같은 조건: 매수 → 살 것 / 경고·유지 → 팔 것 / 보통이면서 평소 70%+ → 사도 됨 / 나머지 → 신호 없음
  if(d.fxcard)d.g="환율";else if(d.now==="매수")d.g="매수";else if(d.now!=="보통")d.g="관망";
  else d.g=(s0.n1||0)>=20&&s0.k1/s0.n1>=0.7?"보통":"없음"});
+if(LV)D.forEach(d=>{const v=LV.rows[d.id];if(v){d.lv=v;d.g=v.dot==="🔴"?"관망":v.dot==="🟠"?"조심":v.dot==="⚪"?"보통":"매수"}});
 const grp={};D.forEach(d=>(grp[d.g]=grp[d.g]||[]).push(d.name));
 const G=k=>grp[k]||[];
 // 10-21 사용자: 맨 위는 조건문으로, 어느 조건도 빠짐없이. 자산마다 같은 순서로 판정:
 //  ① 매수 신호 → 사기  ② 경고 켜짐 → 팔고 현금  ③ 경고 꺼짐·유지 기간 → 새로 사지 않기(~날짜)  ④ 아무것도 없음 → 사도 됨(평소 확률 70%+일 때)
 //  환율: 기준선 위 → 환전 미루기 / 아래 → 평소대로
 const TODO=[];
+// 11-01 사용자: '설명은 맨 위에만, 신호 뜻·확률을 짧게' — 자산마다 한 줄(할 일 · 왜 · 과거 몇 번 중 몇 번)
+const best=a=>a&&a.length?a.reduce((x,y)=>y.n>x.n?y:x):null,pct=(k,n)=>n?Math.round(k/n*100)+"%":"-",kn=e=>e?pct(e.k,e.n):"";   // 11-02 사용자: 'n번 중 k번' 말고 전부 퍼센트
+const short=r=>(r||"").replace(/\([^)]*\)/g,"").replace(/\s+/g," ").trim();
 D.forEach(d=>{
- if(d.fxcard){const on=d.now==="관망";TODO.push({nm:"원→달러",k:on?"wait":"ok",act:on?"미루기":"평소대로",why:on?`${d.fx.toLocaleString()}원 · 기준선 ${d.fxline.toLocaleString()}원 위`:`${d.fx.toLocaleString()}원 · 기준선 ${d.fxline.toLocaleString()}원 아래`});
-  TODO.push({nm:"달러→원",k:d.inv_on?"sell":"ok",act:d.inv_on?"원화로 되돌리기":"해당 없음",why:d.inv_on?`비싼 환율이 꺾임 · ${d.inn}번 중 ${d.ink}번`:"환율이 비싸다 꺾일 때만 켜짐"});return}
- const E=d.ev||{},s=d.stats[d.now]||{};
- const best=a=>a&&a.length?a.reduce((x,y)=>y.n>x.n?y:x):null,se=best(E.sell_ev),be=best(E.buy_ev);
- const kn=e=>e?`${e.n}번 중 ${e.k}번`:"";
- if(d.now==="매수")TODO.push({nm:d.name,k:"buy",act:"사기",why:`매수 신호 · ${kn(be)}`});
- else if(E.nobuy&&(d.now==="강한관망"||d.now==="관망"))TODO.push({nm:d.name,k:"wait",act:"새로 사지 않기",why:`미국 경고 중 · 산 ${se.n}번 중 ${se.k}번 손해 · 들고 있으면 그대로`});
- else if(d.now==="강한관망"||d.now==="관망")TODO.push({nm:d.name,k:"sell",act:`팔고 ${["nasdaq","spx","dji"].includes(d.id)?"달러 단기국채":"원화 단기금리"}`,why:`${d.now==="강한관망"?"강한 경고":"경고"} 켜짐 · ${kn(se)} · ~${d.until}`});
- else if(d.now==="관망유지")TODO.push({nm:d.name,k:"wait",act:"새로 사지 않기",why:`경고 뒤 1년 · ~${d.until}`});
- else if((s.n1||0)>=20&&s.k1/s.n1>=0.7)TODO.push({nm:d.name,k:"ok",act:"사서 들고 가기",why:`신호 없음 · 평소 ${s.n1}번 중 ${s.k1}번`});
+ if(d.fxcard){const on=d.now==="관망";TODO.push({nm:"원→달러",k:on?"wait":"ok",act:on?"환전 미루기":"평소대로",why:`${d.fx.toLocaleString()}원 · ${d.fxline.toLocaleString()}원부터 미루기`});
+  if(d.regime){const R=d.regime,x=R.st[R.kind];TODO.push({nm:"환율 국면",k:R.kind==="hi"?"buy":"info",act:R.kind==="hi"?"달러 우위":R.kind==="mid"?"중립":"원화 우위",why:`한미 금리차 ${R.gap>0?"+":""}${R.gap}%p · 달러가 원화 예금 이김 ${pct(x.k,x.n)}`})}
+  if(d.fxdip&&d.fxdip.n){const X=d.fxdip;TODO.push({nm:"싸게 환전",k:X.on?"buy":"info",act:X.on?"오늘 바꾸기 좋음":"아님",why:`환율 RSI ${X.rsi} · 5년 평균 대비 ${X.dev>0?"+":""}${X.dev}% (켜짐 = RSI 30↓ + 5년 평균 아래) · 켜진 날 바꾸면 다음 6개월 나눠 바꾼 것보다 싸게 ${Math.round(X.cheap/X.n*100)}%(아무 날 ${X.base}%)`})}
+  if(d.inv_on)TODO.push({nm:"달러→원",k:"sell",act:"원화로 되돌리기",why:`비싼 환율이 꺾임 · ${pct(d.ink,d.inn)} 이득`});return}
+ const E=d.ev||{},st=d.stats||{},se=best(E.sell_ev),be=best(E.buy_ev),s0=st["보통"]||{};
+ if(d.now==="매수")TODO.push({nm:d.name,k:"buy",act:"사기",why:`${short(d.buyrule)} · 맞음 ${kn(be)}`});
+ else if(E.nobuy&&(d.now==="강한관망"||d.now==="관망"))TODO.push({nm:d.name,k:"wait",act:"새로 사지 않기",why:`미국 경고 중 · 맞음 ${kn(se)}`});
+ else if(d.now==="강한관망"||d.now==="관망")TODO.push({nm:d.name,k:"sell",act:US.includes(d.id)?"팔고 BOXX":"팔고 국고채",why:`${d.press&&d.press.length?"과열 + "+d.press.join("·"):short(d.rule)} · 맞음 ${kn(se)}`});
+ else if(d.now==="관망유지"){const x=st["관망유지"]||{};TODO.push({nm:d.name,k:"wait",act:"새로 사지 않기",why:`경기 꺾임 · 꺼지면 다시 삼`})}
+ else{const ok=(s0.n1||0)>=20&&s0.k1/s0.n1>=0.7;TODO.push({nm:d.name,k:ok?"ok":"info",act:ok?"사서 들고 가기":"신호 없음",why:`아무 때나 사도 1년 ${pct(s0.k1,s0.n1)} 이득`})}
 });
-const KC={buy:"--buy",sell:"--red",wait:"--sell",ok:"--hold"};
-TODO.sort((x,y)=>(x.nm.includes("→"))-(y.nm.includes("→")));
-document.getElementById("todo").innerHTML=TODO.map(t=>`<div class="tr"><span class="tn">${t.nm}</span><span class="ta" style="--c:var(${KC[t.k]})">${t.act}</span><span class="tw">${t.why}</span></div>`).join("");
-{const NB=TODO.filter(t=>t.k==="wait"&&t.act==="새로 사지 않기"&&!t.nm.includes("→")),S=TODO.filter(t=>t.k==="sell"&&!t.nm.includes("→")),B=TODO.filter(t=>t.k==="buy"),O=TODO.filter(t=>t.k==="ok"&&!t.nm.includes("→")),F=TODO.find(t=>t.nm==="원→달러"),FB=TODO.find(t=>t.nm==="달러→원");
- const L=[];
- if(B.length)L.push(`${B.map(t=>t.nm).join("·")}는 매수 신호가 켜져 있습니다.`);
- if(S.length)L.push(`${S.map(t=>t.nm).join("·")}는 경고 중이라 새로 사지 않고, 들고 있다면 팔아 단기 안전자산에 둡니다(미국 주식 판 돈은 달러 그대로 0~3개월 국채류, 코스피 판 돈은 원화 단기금리 상품). 장기채는 금리 급등이 경고 이유라 맞지 않습니다. 마지막 경고 뒤 1년까지 기다리되, 경고가 꺼지고 6개월이 지나 매수 신호가 뜨면 그때 삽니다.`);
- if(NB.length)L.push(`${NB.map(t=>t.nm).join("·")}는 미국 경고 중이라 새로 사지는 않지만, 들고 있다면 팔 필요는 없습니다(팔고 기다린 게 나았던 건 4번 중 1번).`);
- if(O.length)L.push(`${O.map(t=>t.nm).join("·")}는 신호가 없어 평소처럼 사서 들고 갑니다.`);
- if(F)L.push(F.k==="wait"?"환율이 기준선 위라 원→달러 환전은 미룹니다.":"환율은 기준선 아래라 원→달러 환전은 평소대로 합니다.");
- if(FB)L.push(FB.k==="sell"?"비쌌던 환율이 꺾이기 시작해, 가진 달러를 원화로 되돌릴 때입니다.":"가진 달러를 원화로 되돌릴 신호는 없습니다.");
+const KC={buy:"--buy",sell:"--red",wait:"--sell",ok:"--hold",info:"--mute"};
+const isFx=t=>t.nm.includes("→")||t.nm==="환율 국면"||t.nm==="싸게 환전";TODO.sort((x,y)=>isFx(x)-isFx(y));
+const FE=D.filter(d=>d.fear&&d.fear.tiers),BB=D.filter(d=>d.bear),DIP=FE.length?(FE[0].fear.tiers[0].dip||{}):{};
+if(FE.length){const F=FE[0].fear,onA=FE.filter(d=>d.fear.tiers[0].on||d.fear.tiers[2].on),okA=onA.filter(d=>!d.fear.blocked),v40=F.vix>=40;
+ if(v40)TODO.push({nm:"VIX 40↑",k:"buy",act:"사기",why:`VIX ${F.vix} · 경고 중에도 · 두세 번 나눠서`});
+ TODO.push({nm:"저점매수",k:okA.length?"buy":"info",act:okA.length?`사기 · ${okA.map(d=>d.name).join("·")}`:onA.length?"충족 · 무시(경기 꺾임·경고)":"아님",why:`RSI ${FE.map(d=>`${d.name} ${Math.round(d.fear.rsi)}`).join(" · ")} · VIX ${F.vix} · 공포탐욕 ${F.fg!=null?Math.round(F.fg):"-"}`})}
+if(BB.length){const mx=Math.max(...BB.map(d=>d.bear.n)),b0=BB[0].bear;
+ TODO.push({nm:"하락장 경보",k:mx>=3?"sell":mx===2?"wait":"info",act:mx>=3?"반등 때 팔기":`${mx}/3 주의`,why:`거품 ${b0.bub?"✅":"⬜"} · 침체 ${b0.rec?"✅":"⬜"} · 10개월선 아래 ${BB.map(d=>`${d.name} ${d.bear.trend?"✅":"⬜"}(${d.bear.gap>0?"+":""}${d.bear.gap}%)`).join(" ")}`})}
+if(LV){const KK={"🔴":"sell","🟠":"wait","⚪":"ok","🟢":"buy","📝":"buy"};for(let i=TODO.length-1;i>=0;i--){const t=TODO[i],d=D.find(x=>x.name===t.nm);if(t.nm==="저점매수")TODO.splice(i,1);else if(d&&d.lv){t.k=KK[d.lv.dot];t.act=d.lv.act;t.why=d.lv.why}}}
+document.getElementById("todo").innerHTML=(LV?LV.limits.concat(LV.open.length?["📌 샀다면: "+LV.open.join(" / ")]:[]).map(x=>`<div class="tr" style="grid-template-columns:1fr;font-weight:600"><span class="tw" style="font-size:13px;opacity:1">${x}</span></div>`).join(""):"")+TODO.map(t=>`<div class="tr"><span class="tn">${t.nm}</span><span class="ta" style="--c:var(${KC[t.k]})">${t.act}</span><span class="tw">${t.why}</span></div>`).join("");
+// 한 줄 요약: 지금 무엇을 하나
+{const nm=k=>TODO.filter(t=>t.k===k&&!isFx(t)&&!["저점매수","하락장 경보"].includes(t.nm)).map(t=>t.nm),L=[];
+ const B=nm("buy"),S=nm("sell"),W=nm("wait"),O=nm("ok");
+ if(LV)L.push(LV.title+" ("+LV.at+" 값 · 장중엔 폰 알림이 더 정확)");
+ else if(B.length)L.push(`${B.join("·")} 사기.`);
+ if(!LV&&S.length)L.push(`${S.join("·")}는 팔고 현금성으로.`);
+ if(!LV&&W.length)L.push(`${W.join("·")}는 새로 사지 않기(들고 있으면 그대로).`);
+ if(!LV&&O.length)L.push(`${O.join("·")}는 평소처럼 사기.`);
+ if(BB.length){const mx=Math.max(...BB.map(d=>d.bear.n));if(mx>=3)L.push("하락장 경보 3/3 — 반등이 와도 오래 들고 가지 말 것.");
+  else if(mx===2){const g=BB.filter(d=>!d.bear.trend).map(d=>`${d.name} ${d.bear.gap>0?"+":""}${d.bear.gap}%`);L.push(`하락장 경보 2/3 — 10개월선(${g.join(" · ")}) 아래로 빠지면 3/3.`)}}
  document.getElementById("why").textContent=L.join(" ");}
-const SEC={"환율":"환율","매수":"살 것","관망":"팔 것","보통":"사서 들고 가기","없음":"신호 없음","참고":"참고"};
-const ORD={"환율":0,"매수":1,"관망":2,"보통":3,"없음":4,"참고":5};
+// 신호 뜻 · 과거 성적 (설명은 이 칸에만)
+{const fx=D.find(d=>d.fxcard)||{},K=[],T=(FE[0]||{fear:{}}).fear.turn,V=(FE.find(d=>d.v40)||{}).v40;
+ K.push(["🔴 경고","많이 오름 + 금리·물가·유가 급등. 들고 있는 것 전부 팔기(달러 BOXX, 원화 국고채). 다우는 새로 안 사기만"]);
+ K.push(["🔴 하락장 3/3","나스닥만: 전부 팔고 10개월선 위로 오면 다시 삼. 1981년 뒤 그냥 보유 ×197·낙폭 −77% → ×486·−53%. S&P는 거의 같고 다우는 오히려 손해라 안 팖"]);
+ K.push(["🟠 조심 구간","경고 중 · 꺼진 지 6개월 안 · 하락 추세(10개월선 아래). 저점이 뜨면 현금의 50% 사서 매도가에 전부 팔기, 60거래일이면 무조건 팔기. 지난 매수값보다 7% 더 빠지면 남은 현금의 50% 또 사기(차수별로 따로 팖)"]);
+ K.push(["매도가","산 값 + (60일 고점 − 산 값) × 20%. 깊이 빠질수록 높아짐"]);
+ K.push(["걸어두기","오늘 종가가 이 값이면 RSI 30이 되는 가격에 당일 지정가. VIX 30↑ 또는 공포탐욕 30↓일 때만(코스피는 VIX만)"]);
+ K.push(["🟢 조심 끝","남은 현금 전부 사고 이제 팔지 말기. 다음 경고까지 보유"]);
+ K.push(["⚪ 평시","저점이 뜨면 현금의 50%, VIX 40↑이면 전부 사서 보유"]);
+ if(T)K.push(["경기 꺾임",`실업수당 청구↑ + 한국 수출 꼭대기 · 지금 ${T.claims>=80&&T.kr>=80?"켜짐":"꺼짐"}`]);
+ if(BB.length)K.push(["하락장 경보","거품 + 10개월선 꺾임 + 침체. 셋 다면 반등은 팔 기회"]);
+ if(fx.evn)K.push(["환율","5년 평균 +15%↑면 환전 미루기 · 미 금리 0.5%p↑ 높으면 달러 우위"]);
+ document.getElementById("key").innerHTML=K.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");}
+const SEC={"환율":"환율","매수":"저점","관망":"팔 것","조심":"조심 구간","보통":"사서 들고 가기","없음":"신호 없음","참고":"참고"};
+const ORD={"환율":0,"매수":1,"관망":2,"조심":2.5,"보통":3,"없음":4,"참고":5};
 const PILL={"매수":"매수","관망":"관망","관망유지":"관망 유지","강한관망":"강한 관망","보통":"보통"};
-const US=["nasdaq","spx","dji"];
-const CASHP=id=>US.includes(id)?{kind:"달러 초단기 국채",ex:"예: SGOV·BIL 같은 0~3개월 국채 ETF, 달러 RP·MMF · 원화로 바꾸지 않음"}:{kind:"원화 단기금리",ex:"예: CD금리·KOFR 추종 ETF, MMF·CMA"};
+const CASHP=id=>US.includes(id)?{kind:"달러 초단기 국채",ex:"예: BOXX(분배 없음·양도세 분리과세) · 소액이면 SGOV·BIL도 같음 · 원화로 바꾸지 않음"}:{kind:"원화 단기금리",ex:"예: 저쿠폰 국고채(매매차익 비과세) · CD금리·KOFR ETF(ISA 안이면 세금 유리)"};
 const cards=document.getElementById("cards");let lastSec=null;
+// 11-02 사용자 '차트를 그림과 함께 버튼처럼': 최근 3년 작은 선
+function spark(d,col){const L=d.p[d.p.length-1][0],q=d.p.filter(x=>x[0]>=L-3);if(q.length<2)return"";const st=Math.max(1,Math.floor(q.length/90)),pts=q.filter((_,i)=>i%st===0||i===q.length-1);
+ const lv=pts.map(x=>Math.log(x[1])),lo=Math.min(...lv),hi=Math.max(...lv)||lo+1,t0=pts[0][0],t1=pts[pts.length-1][0];
+ return `<svg class="spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts.map((x,i)=>`${((x[0]-t0)/(t1-t0)*100).toFixed(1)},${(28-(lv[i]-lo)/((hi-lo)||1)*26).toFixed(1)}`).join(" ")}" fill="none" stroke="var(${col||"--line-main"})" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`}
 [...D].sort((a,b)=>ORD[a.g]-ORD[b.g]).forEach(d=>{
  if(d.g!==lastSec){cards.insertAdjacentHTML("beforeend",`<div class="sec">${SEC[d.g]}</div>`);lastSec=d.g}
  const s=d.stats[d.now]||{},E=d.ev||{};
@@ -161,51 +190,58 @@ const cards=document.getElementById("cards");let lastSec=null;
   const avg=Math.round(d.fxline/1.15),lo=Math.round(avg*0.85);
   fxg={pos:Math.max(0,Math.min(100,(d.fx-lo)/(d.fxline-lo)*100)),lo,avg,hi:d.fxline};
   lab="지금 환율";big=`${d.fx.toLocaleString()}원`;
-  sub=`원→달러 미루기: ${d.evn}번 모두 더 싸게 · 평균 ${d.gavg}%<br>달러→원화: ${d.inn}번 중 ${d.ink}번 이득 · 바꾼 뒤 환율이 최대 ${d.iworst}% 더 오른 적 있음`;
+  {const R=d.regime;sub=R?`금리차 ${R.gap>0?"+":""}${R.gap}%p · ${R.kind==="hi"?"달러 우위":R.kind==="mid"?"중립":"원화 우위"}`:""}
  }else{
   pill=PILL[d.now];pcls="p-"+d.now;col={"매수":"--buy","관망":"--sell","관망유지":"--sell","강한관망":"--red","보통":"--hold"}[d.now];
   act=d.g==="없음"?"신호 없음":d.now==="매수"?"사기":d.now==="관망유지"?"새로 사지 않기":isSell?"팔고 현금으로":"사서 들고 가기 · 새 돈도 사도 됨";
-  if(isSell&&E.nobuy){act="새로 사지 않기 · 들고 있으면 그대로"}
-  else if(isSell){const cp=CASHP(d.id);act=`팔고 ${cp.kind}로${d.until?` · ~${d.until}`:""}`;sub=cp.ex}
-  else if(d.g==="보통"||d.g==="매수")sub=`예: ${d.prod}${US.includes(d.id)?" · 환전은 환율 카드 따라":""}`;
-  lab=E.nobuy&&isSell?"미국 경고 중 새로 샀다면 1년 뒤":isSell?"경고 따라 팔고 기다렸을 때":d.now==="매수"?"신호 따라 사서 1년 들고 갔을 때":"아무 때나 사서 1년 들고 갔을 때";
-  const evs=isSell?E.sell_ev:d.now==="매수"?E.buy_ev:null;
-  if(evs&&evs.length){const best=evs.reduce((a,b)=>b.n>a.n?b:a);nn=best.n;kk=best.k;if(best.frame==="월")note=" · 월 자료로 셈(차트보다 길게)"}
-  else if(s.n1){nn=s.n1;kk=s.k1;note=" · 1년씩 안 겹치게"}
+  const hold=d.now==="관망유지";   // 경고 뒤 1년: 팔 때가 아니라 새로 안 사는 때
+  if(hold){act=`새로 사지 않기 · 들고 있으면 그대로${d.until?` · ~${d.until}`:""}`;sub=d.prod}
+  else if(isSell&&E.nobuy){act="새로 사지 않기 · 들고 있으면 그대로"}
+  else if(isSell){act=US.includes(d.id)?"팔고 BOXX":"팔고 저쿠폰 국고채";sub=US.includes(d.id)?"소액이면 SGOV도 같음":"CD금리·KOFR ETF도 됨"}
+  else sub=d.prod;
+  lab=hold?"이때 샀다면 1년 이득":E.nobuy&&isSell?"새로 샀다면 1년 뒤 손해":isSell?"팔고 기다린 게 나음":d.now==="매수"?"사서 1년 이득":"아무 때나 사서 1년 이득";
+  const evs=hold?null:isSell?E.sell_ev:d.now==="매수"?E.buy_ev:null;
+  if(evs&&evs.length){const b_=evs.reduce((a,b)=>b.n>a.n?b:a);nn=b_.n;kk=b_.k}
+  else if(s.n1){nn=s.n1;kk=s.k1}
   big=nn?Math.round(kk/nn*100)+"%":"–";
-  if(d.now==="강한관망")sub+=`<br>과열 압력 ${d.press.length}개: ${d.press.join(" · ")}`;
  }
+ if(d.lv&&!d.fxcard){const v=d.lv;act=`보유분 ${v.hold} · ${v.todo}`;pill={"🔴":"경고","🟠":"조심 구간","🟢":"저점","📝":"저점 찍음","⚪":"평시"}[v.dot];pcls={"🔴":"p-강한관망","🟠":"p-관망","🟢":"p-매수","📝":"p-매수","⚪":"p-보통"}[v.dot];col={"🔴":"--red","🟠":"--sell","🟢":"--buy","📝":"--buy","⚪":"--hold"}[v.dot];
+  if(v.dot!=="🔴"&&v.dot!=="⚪"){const S=(d.dipstat||{}).fearx;if(S&&S.n&&S.hit!=null){lab="조심 구간 저점 → 매도가 닿음";big=Math.round(S.hit/S.n*100)+"%"}}
+  sub=[v.line,v.past].filter(Boolean).join("<br>")||(v.dot==="🔴"?sub:d.prod)}
  const el=document.createElement("article");el.className="card";el.id="a_"+d.id;
  el.innerHTML=`<div class="top"><span class="nm">${d.name}</span><span class="pill ${pcls}">${pill}</span></div>
  <div class="act">${act}</div>
  <div class="prob"><div class="row"><span class="lab">${lab}</span><span class="big">${big}</span></div>
  ${fxg?`<div class="fxbar"><i style="left:${fxg.pos}%"></i><b style="left:50%"></b></div><div class="fxlab"><span>${fxg.lo.toLocaleString()}</span><span>평균 ${fxg.avg.toLocaleString()}</span><span>${fxg.hi.toLocaleString()}부터 미루기</span></div>`
-  :nn?`<div class="tally">${Array.from({length:nn},(_,i)=>`<i class="${i<kk?"y":"n"}" style="--c:var(${col})"></i>`).join("")}</div><div class="mini">${nn}번 중 ${kk}번 ${E.nobuy&&isSell?"사지 않은 게 맞음":"이득"}${note}</div>`:""}</div>
+  :""}</div>
  ${sub?`<div class="mini">${sub}</div>`:""}
- <button class="more" aria-expanded="false">차트</button>
+ <button class="more" aria-expanded="false">${spark(d,col)}<span class="mlab">차트 보기 ›</span></button>
  <div class="chartbox" hidden>
   <div class="chips">${[["3년",3],["10년",10],["전체",0]].map(([l,y])=>`<button data-y="${y}">${l}</button>`).join("")}</div>
   <canvas aria-label="${d.name} 가격과 신호"></canvas>
-    <div class="leg"><span><i style="background:var(--sell);opacity:.4"></i>${d.fxcard?"환전 미루기":"관망"}</span>${d.strong&&d.strong.length?'<span><i style="background:var(--red);opacity:.45"></i>강한 관망</span><span><i style="background:repeating-linear-gradient(135deg,var(--red) 0 1px,transparent 1px 5px);opacity:.7"></i>강한 관망 유지 1년</span>':""}${d.hold&&d.hold.length?'<span><i style="background:repeating-linear-gradient(135deg,var(--sell) 0 1px,transparent 1px 5px);opacity:.6"></i>관망 유지 1년</span>':""}${d.buy&&d.buy.length?'<span><i style="background:var(--buy);opacity:.35"></i>매수</span>':""}${d.fxcard?'<span><i style="border-top:2px dotted var(--sell);height:0;width:14px"></i>위 = 환전 미루기</span>':""}<span>${d.fxcard?'<b style="color:var(--sell)">▼</b> 원→달러 미루기 · <b style="color:var(--red)">▼</b> 달러→원화':'<b style="color:var(--buy)">▲</b> 매수 · <b style="color:var(--red)">▼</b> 경고'}</span></div>
-  <dl class="crit">${d.fxcard?`<dt>원→달러</dt><dd>5년 평균 +15% 위면 미루기 · 내려오면 바꿈 · 그 밖엔 평소대로</dd><dt>달러→원</dt><dd>5년 평균 +10% 위에서 13주 고점 대비 5% 꺾이면 · 5년 평균 +5%까지 내려오면(최대 9개월) 끝</dd>`:
-   `${d.rule?`<dt>관망</dt><dd>${d.rule}</dd>`:""}${d.buyrule?`<dt>매수</dt><dd>${d.buyrule} · 단, 경고 중이거나 마지막 경고 뒤 6개월 안이면 무시</dd>`:""}${E.buy_follow?`<dt>따라 사기</dt><dd>${E.buy_follow} 매수 신호가 켜져도 삼(같은 경고 조건 적용)</dd>`:""}${["nasdaq","spx"].includes(d.id)?`<dt>공포 매수</dt><dd>RSI(14) 30 미만 + 공포지수(VIX) 30 이상 · 단, 경고 중이거나 마지막 경고 뒤 1년 안이면 무시</dd>`:""}<dt>맞음</dt><dd>경고: 마지막 경고 뒤 1년까지 현금이 나았으면 · 매수: 1년 뒤 자산이 나았으면</dd><dt>상위 n%</dt><dd>지난 20년 중 높은 쪽 n%</dd>${E.cands&&E.cands.length?`<dt>후보</dt><dd>${E.cands.join(" / ")} (아직 안 따름)</dd>`:""}`}</dl>
+    <div class="leg">${d.fxcard?'<span><i style="background:var(--sell);opacity:.4"></i>환전 미루기</span><span><b style="color:var(--red)">▼</b> 달러→원화</span><span><i style="background:var(--hold);opacity:.85"></i>위 띠: 달러 우위(미 금리 0.5%p↑)</span><span><i style="background:var(--hold);opacity:.35"></i>중립</span><span><i style="background:var(--mute);opacity:.25"></i>원화 우위</span>'+(d.fxdip&&d.fxdip.n?`<span style="flex-basis:100%"><b style="color:var(--buy)">▲</b> 싸게 환전(환율 RSI 30↓ + 5년 평균 아래) <b>다음 6개월 나눠 바꾼 것보다 싸게 ${Math.round(d.fxdip.cheap/d.fxdip.n*100)}%</b>(아무 날 ${d.fxdip.base}%) · 중앙 ${d.fxdip.med}% (${d.fxdip.n}개)</span>`:""):`<span><i style="background:var(--sell);opacity:.4"></i>${BONDS_ID.includes(d.id)?"경고·경고 뒤 1년":"경고·경기 꺾임"}</span><span><b style="color:var(--red)">▼</b> 경고</span>`+(d.fear?(()=>{const S=d.dipstat||{},pc=k=>{const x=S[k];return x&&x.n?` 다음 6개월 나눠 산 것보다 싸게 <b>${Math.round(x.cheap/x.n*100)}%</b>(아무 날 ${d.dipbase}%) · 1년 평균 ${x.avg>0?"+":""}${x.avg}% (${x.n}개)`:""},pg=()=>{const x=S.fearx;return x&&x.n?` 매도가 닿음 <b>${Math.round(x.hit/x.n*100)}%</b> · 거래당 ${x.gavg>0?"+":""}${x.gavg}% (${x.n}개)`:""};
+   return `<span style="flex-basis:100%"><b style="color:var(--buy)">▲</b> 평시 저점(VIX)${pc("buy")}</span>${d.id==="kospi"?"":`<span style="flex-basis:100%"><b style="color:var(--hold)">▲</b> 평시 저점(공포탐욕)${pc("fg1")}</span>`}<span style="flex-basis:100%"><b style="color:var(--sell)">▲</b> 조심 구간 저점(반등 매매)${pg()}</span><span style="flex-basis:100%"><b style="color:var(--fg)">▲</b> 매수(−20% 뒤 회복)${(()=>{const x=d.stats["매수"];return x&&x.n1?` <b>1년 오름 ${Math.round(x.k1/x.n1*100)}%</b>`:""})()}</span>`})():'<span><b style="color:var(--buy)">▲</b> 매수</span>')}</div>
  </div>`;
  cards.appendChild(el);
  const btn=el.querySelector(".more"),box=el.querySelector(".chartbox");
- btn.addEventListener("click",()=>{box.hidden=!box.hidden;btn.setAttribute("aria-expanded",String(!box.hidden));btn.textContent=box.hidden?"차트":"접기";if(!box.hidden)draw(d)});
+ btn.addEventListener("click",()=>{box.hidden=!box.hidden;btn.setAttribute("aria-expanded",String(!box.hidden));btn.querySelector(".mlab").textContent=box.hidden?"차트 보기 ›":"접기 ‹";if(!box.hidden)draw(d)});
  el.querySelectorAll(".chips button").forEach(b=>b.addEventListener("click",()=>{draw(d);const V=CH[d.id].view,last=d.p[d.p.length-1][0]+0.05,y=+b.dataset.y;V.v1=last;V.v0=y?last-y:d.p[0][0];draw(d)}));
 });
 function eplist(d){
  const ms=(d.marks||[]).slice().sort((a,b)=>a.t0-b.t0);const cnt={};ms.forEach(m=>m.no=cnt[m.kind]=(cnt[m.kind]||0)+1);
- const MC={buy:"--buy",bulk:"--buy",sell:"--red",inv:"--red",defer:"--sell"},up=k=>k==="buy"||k==="bulk";
+ const MC={buy:"--buy",bulk:"--buy",sell:"--red",inv:"--red",defer:"--sell",fearx:"--sell",fg1:"--hold",trend:"--fg",fxdip:"--buy"},up=k=>k==="buy"||k==="bulk"||k==="fearx"||k==="fg1"||k==="trend"||k==="fxdip";
  const row=(m,t)=>`<li><i style="color:var(${m.ok===false?"--mute":MC[m.kind]})">${up(m.kind)?"▲":"▼"}${m.no}</i><span>${t}</span></li>`;
  const sec=(title,rs)=>rs.length?`<div class="eph">${title}</div><ul class="eps">${rs.join("")}</ul>`:"";
  const S=ms.filter(m=>m.kind==="sell"),B=ms.filter(m=>m.kind==="buy");
  if(d.fxcard)return sec("환전 미루기",ms.filter(m=>m.kind==="defer").map(m=>row(m,m.done?`${m.d0}~${m.d1} · 그때 바꿨으면 평균 ${m.avg.toLocaleString()}원 → 미뤄서 ${m.fxj.toLocaleString()}원 · <b>${m.g}% 싸게</b>`:`${m.d0}~ 미루는 중`)))
+  +sec("싸게 환전하는 날",ms.filter(m=>m.kind==="fxdip").slice(-10).map(m=>row(m,m.done?`${m.d0} · ${m.v0.toLocaleString()}원 · 다음 6개월 나눠 바꾼 것보다 <b>${m.g>0?"+":""}${m.g}%</b>`:`${m.d0} · ${m.v0.toLocaleString()}원 · 결과 아직`)))
   +sec("몰아서 환전 (참고)",ms.filter(m=>m.kind==="bulk").map(m=>row(m,m.done?`${m.d0} · ${m.fxa.toLocaleString()}원에 1년치 몰아서 → 나눠 바꾼 것보다 <b>${m.g>0?"+":""}${m.g}%</b>`:`${m.d0}~ 진행 중 (지금)`)))
   +sec("달러 인버스 (참고)",ms.filter(m=>m.kind==="inv").map(m=>row(m,m.done?`${m.d0}~${m.d1} · ${m.fxa.toLocaleString()} → ${m.fxj.toLocaleString()}원 · <b>${m.g>0?"+":""}${m.g}%</b> · 중간 최대 손실 ${m.worst}%`:`${m.d0}~ 진행 중`)));
  const f=(m,w)=>`${m.d0} · ${m.done?w:"지금까지"} <b>${m.chg>0?"+":""}${m.chg}%</b>${m.ok===false?" · 틀림":""}`;
- return sec("관망 경고",S.slice(-8).map(m=>row(m,f(m,"마지막 경고 뒤 1년까지")))) +sec("매수",B.slice(-8).map(m=>row(m,f(m,"1년 뒤"))));
+ return sec("관망 경고",S.slice(-8).map(m=>row(m,f(m,"마지막 경고 뒤 1년까지")))) +sec(d.ind&&d.ind.daily?"저점매수 (VIX)":"매수",B.slice(-8).map(m=>row(m,f(m,"1년 뒤"))))
+  +sec("매수 −20% 뒤 회복",ms.filter(m=>m.kind==="trend").slice(-8).map(m=>row(m,f(m,"1년 뒤"))))
+  +sec("저점매수 (공포탐욕)",ms.filter(m=>m.kind==="fg1").slice(-8).map(m=>row(m,`${m.d0} · ${m.done?"1년 뒤":"지금까지"} <b>${m.chg>0?"+":""}${m.chg}%</b>`)))
+  +sec("무시된 저점매수 (경기 꺾임·경고 중)",ms.filter(m=>m.kind==="fearx").slice(-8).map(m=>row(m,`${m.d0} · ${m.done?"1년 뒤":"지금까지"} <b>${m.chg>0?"+":""}${m.chg}%</b>`)));
 }
 // 10-21 사용자: '여러 시점을 놓고 example' — 그 주의 상태 코드로 할 일을 다시 만들고 1년(환율 9개월) 뒤 결과를 붙임
 const EXD=[["2000.03","닷컴 꼭대기"],["2002.10","닷컴 바닥"],["2007.10","금융위기 전"],["2009.03","금융위기 바닥"],["2018.01","2018 고점"],["2020.03","코로나 급락"],["2021.11","2021 꼭대기"],["2022.10","2022 바닥"],["2025.04","관세 급락"]];
@@ -228,31 +264,32 @@ function exShow(lbl){
  document.getElementById("exrows").innerHTML=rows.join("");
  document.querySelectorAll("#exchips button").forEach(b=>b.classList.toggle("sel",b.dataset.d===lbl));
 }
-document.getElementById("exchips").innerHTML=EXD.map(([d,n])=>`<button data-d="${d}">${d} ${n}</button>`).join("");
-document.querySelectorAll("#exchips button").forEach(b=>b.addEventListener("click",()=>exShow(b.dataset.d)));
-setTimeout(()=>exShow("2021.11"),0);
-{const mi=document.getElementById("exmon");const L=D[1]&&D[1].p.length?D[1].p[D[1].p.length-1][0]:2026;mi.max=`${Math.floor(L)}-12`;
+if(document.getElementById("exchips")){document.getElementById("exchips").innerHTML=EXD.map(([d,n])=>`<button data-d="${d}">${d} ${n}</button>`).join("");}
+if(document.getElementById("exchips")){document.querySelectorAll("#exchips button").forEach(b=>b.addEventListener("click",()=>exShow(b.dataset.d)));}
+if(document.getElementById("exchips")){setTimeout(()=>exShow("2021.11"),0);}
+if(document.getElementById("exmon")){const mi=document.getElementById("exmon");const L=D[1]&&D[1].p.length?D[1].p[D[1].p.length-1][0]:2026;mi.max=`${Math.floor(L)}-12`;
  mi.addEventListener("change",()=>{if(mi.value){const[y,m]=mi.value.split("-");exShow(`${y}.${m}`)}});}
 // 10-21 사용자: '관망이든 매수든 확률 표기' — 상태 코드마다 과거 사건 수로 한 줄
 function probOf(d,c){
- if(d.fxcard){if(c==="D")return `미뤄서 ${d.evn}번 중 ${d.evk}번 이득`;if(c==="V")return `${d.inn}번 중 ${d.ink}번 이득`;return ""}
+ if(d.fxcard){if(c==="D")return `미뤄서 ${pct(d.evk,d.evn)} 이득`;if(c==="V")return `${pct(d.ink,d.inn)} 이득`;return ""}
  const E=d.ev||{},st=d.stats||{},best=a=>a&&a.length?a.reduce((x,y)=>y.n>x.n?y:x):null;
- if(c==="M"){const x=st["매수"];return x&&x.n1?`사서 1년 · ${x.n1}번 중 ${x.k1}번 이득`:""}
- if(c==="R"||c==="O"){const e=best(E.sell_ev);return e?(E.nobuy?`안 산 게 맞음 ${e.n}번 중 ${e.k}번`:`팔고 기다린 게 맞음 ${e.n}번 중 ${e.k}번`):""}
- if(c==="H"||c==="S"){const x=st["관망유지"];return x&&x.n1?`이때 샀다면 1년 · ${x.n1}번 중 ${x.k1}번 이득`:""}
- const x=st["보통"];return x&&x.n1?`사서 1년 · ${x.n1}번 중 ${x.k1}번 이득`:"";
+ if(c==="M"){const x=st["매수"];return x&&x.n1?`사서 1년 · ${pct(x.k1,x.n1)} 이득`:""}
+ if(c==="R"||c==="O"){const e=best(E.sell_ev);return e?(E.nobuy?`안 산 게 맞음 ${pct(e.k,e.n)}`:`팔고 기다린 게 맞음 ${pct(e.k,e.n)}`):""}
+ if(c==="H"||c==="S"){const x=st["관망유지"];return x&&x.n1?`이때 샀다면 1년 · ${pct(x.k1,x.n1)} 이득`:""}
+ const x=st["보통"];return x&&x.n1?`사서 1년 · ${pct(x.k1,x.n1)} 이득`:"";
 }
 D.forEach(d=>{if(!d.fxcard)d.pl={"매수 신호":probOf(d,"M"),"강한 관망":probOf(d,"R"),"관망 신호":probOf(d,"O"),"강한 관망 유지(신호 뒤 1년)":probOf(d,"S"),"관망 유지(신호 뒤 1년)":probOf(d,"H"),"보통 · 신호 없음":probOf(d,"N")};
  else d.pl={"환전 미루기":probOf(d,"D")}});
 const CH={};
-const EVO=__EVOLOG__;document.getElementById("evochk").textContent=EVO.checked?`마지막 점검 ${EVO.checked}`:"";document.getElementById("evolog").innerHTML=EVO.lines.map(x=>`<li>${x.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</li>`).join("")||"<li>변경 없음</li>";
+if(document.getElementById("evochk")){const EVO=__EVOLOG__;document.getElementById("evochk").textContent=EVO.checked?`마지막 점검 ${EVO.checked}`:"";document.getElementById("evolog").innerHTML=EVO.lines.map(x=>`<li>${x.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</li>`).join("")||"<li>변경 없음</li>";}
 function draw(d){
  const el=document.getElementById("a_"+d.id),c=el.querySelector("canvas");
  const last=d.p[d.p.length-1][0]+0.05, first=d.p[0][0];
  if(!CH[d.id]){
-  const view={v0:last-10,v1:last};
-  CH[d.id]={view,ch:LChart(c,{p:d.p,s:d.s,pl:d.pl,bad:[],sell:d.sell,strong:d.strong,hold:d.hold,buy:d.buy,marks:d.marks,ref:d.ref,ref2:null,known:null,unit:d.unit,sellTxt:d.sellTxt},
-   {view,css,xmin:first,xmax:last-0.05,onView:()=>draw(d),reset:()=>{view.v0=last-10;view.v1=last;draw(d)}})};
+  const yrs=innerWidth<600?3:10,view={v0:last-yrs,v1:last};   // 11-02: 폰은 3년부터
+  if(d.ind)c.style.height="380px";   // 11-01: 보조 차트 자리
+  CH[d.id]={view,ch:LChart(c,{p:d.p,s:d.s,pl:d.pl,bad:[],sell:d.sell,strong:d.strong,hold:d.hold,buy:d.buy,marks:d.marks,ref:d.ref,ref2:null,known:null,unit:d.unit,sellTxt:d.sellTxt,ind:d.ind,rg:d.regime?d.regime.bands:null},
+   {view,css,xmin:first,xmax:last-0.05,onView:()=>draw(d),reset:()=>{view.v0=last-yrs;view.v1=last;draw(d)}})};
  }
  const V=CH[d.id].view;
  el.querySelectorAll(".chips button").forEach(b=>{const y=+b.dataset.y;b.classList.toggle("sel",y===0?V.v0<=first+0.01:Math.abs(V.v1-V.v0-y)<0.05&&V.v1>=last-0.06)});

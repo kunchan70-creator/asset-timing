@@ -25,11 +25,11 @@
    "on_share": 4.7,
    "eff": {
     "hold": [
-     12.85,
+     12.76,
      -76.8
     ],
     "rule": [
-     14.48,
+     14.47,
      -53.3
     ]
    },
@@ -117,11 +117,11 @@
    "on_share": 3.9,
    "eff": {
     "hold": [
-     12.85,
+     12.76,
      -76.8
     ],
     "rule": [
-     14.29,
+     14.28,
      -53.3
     ]
    },
@@ -193,7 +193,7 @@
    "on_share": 2.9,
    "eff": {
     "hold": [
-     11.96,
+     11.91,
      -54.8
     ],
     "rule": [
@@ -286,7 +286,7 @@
    "on_share": 5.3,
    "eff": {
     "hold": [
-     8.97,
+     8.94,
      -61.6
     ],
     "rule": [
@@ -382,7 +382,7 @@
    "on_share": 17.1,
    "eff": {
     "hold": [
-     5.93,
+     5.92,
      -26.5
     ],
     "rule": [
@@ -496,7 +496,7 @@
    "on_share": 4.6,
    "eff": {
     "hold": [
-     3.54,
+     3.34,
      -89.3
     ],
     "rule": [
@@ -963,11 +963,11 @@
    "on_share": 1.9,
    "eff": {
     "hold": [
-     12.85,
+     12.76,
      -76.8
     ],
     "rule": [
-     14.81,
+     14.71,
      -53.3
     ]
    },
@@ -1043,11 +1043,11 @@
    "on_share": 5.1,
    "eff": {
     "hold": [
-     3.54,
+     3.34,
      -89.3
     ],
     "rule": [
-     5.39,
+     5.19,
      -89.3
     ]
    },
@@ -1109,9 +1109,827 @@
      "cash": 6.6
     }
    ]
+  },
+  "ust2_sell_1": {
+   "desc": "물가 가속(상위 20%) · 기준금리 인상(상위 20%) · 2년물 급등(상위 20%)",
+   "asset": "ust2",
+   "kind": "관망",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 6,
+   "k": 5,
+   "lb": 0.575,
+   "wk": 87.1,
+   "mo": null,
+   "frame": "주",
+   "era": {
+    "~1999": [
+     2,
+     2
+    ],
+    "2000~13": [
+     1,
+     2
+    ],
+    "2014~": [
+     2,
+     2
+    ]
+   },
+   "on_share": 5.9,
+   "eff": {
+    "hold": [
+     4.16,
+     -6.1
+    ],
+    "rule": [
+     4.27,
+     -4.3
+    ]
+   },
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "1978-01-06",
+     "end": "1978-03-24",
+     "done": true,
+     "hit": true,
+     "asset": 6.1,
+     "cash": 9.7
+    },
+    {
+     "start": "1978-11-03",
+     "end": "1980-04-18",
+     "done": true,
+     "hit": true,
+     "asset": 21.1,
+     "cash": 31.2
+    },
+    {
+     "start": "2000-03-24",
+     "end": "2000-05-19",
+     "done": true,
+     "hit": false,
+     "asset": 11.3,
+     "cash": 6.4
+    },
+    {
+     "start": "2004-12-03",
+     "end": "2006-07-14",
+     "done": true,
+     "hit": true,
+     "asset": 8.0,
+     "cash": 11.2
+    },
+    {
+     "start": "2017-03-31",
+     "end": "2017-05-26",
+     "done": true,
+     "hit": true,
+     "asset": -0.4,
+     "cash": 1.5
+    },
+    {
+     "start": "2022-05-06",
+     "end": "2022-11-25",
+     "done": true,
+     "hit": true,
+     "asset": 2.4,
+     "cash": 6.6
+    }
+   ]
+  },
+  "ust5_sell_1": {
+   "desc": "물가 가속(상위 20%) · 기준금리 인상(상위 20%) · 2년물 급등(상위 20%)",
+   "asset": "ust5",
+   "kind": "관망",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 10,
+   "k": 8,
+   "lb": 0.602,
+   "wk": 86.0,
+   "mo": null,
+   "frame": "주",
+   "era": {
+    "~1999": [
+     5,
+     6
+    ],
+    "2000~13": [
+     1,
+     2
+    ],
+    "2014~": [
+     2,
+     2
+    ]
+   },
+   "on_share": 7.4,
+   "eff": {
+    "hold": [
+     5.04,
+     -15.0
+    ],
+    "rule": [
+     5.25,
+     -11.2
+    ]
+   },
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "1970-01-02",
+     "end": "1970-01-30",
+     "done": true,
+     "hit": false,
+     "asset": 19.4,
+     "cash": 6.9
+    },
+    {
+     "start": "1973-05-04",
+     "end": "1974-05-17",
+     "done": true,
+     "hit": true,
+     "asset": 12.5,
+     "cash": 16.1
+    },
+    {
+     "start": "1978-01-06",
+     "end": "1978-03-24",
+     "done": true,
+     "hit": true,
+     "asset": 3.9,
+     "cash": 9.7
+    },
+    {
+     "start": "1978-11-03",
+     "end": "1980-04-18",
+     "done": true,
+     "hit": true,
+     "asset": 6.5,
+     "cash": 31.2
+    },
+    {
+     "start": "2000-03-24",
+     "end": "2000-05-19",
+     "done": true,
+     "hit": false,
+     "asset": 13.8,
+     "cash": 6.4
+    },
+    {
+     "start": "2004-12-03",
+     "end": "2006-07-14",
+     "done": true,
+     "hit": true,
+     "asset": 5.5,
+     "cash": 11.2
+    },
+    {
+     "start": "2017-03-31",
+     "end": "2017-05-26",
+     "done": true,
+     "hit": true,
+     "asset": -1.4,
+     "cash": 1.5
+    },
+    {
+     "start": "2022-05-06",
+     "end": "2022-11-25",
+     "done": true,
+     "hit": true,
+     "asset": -0.6,
+     "cash": 6.6
+    }
+   ]
+  },
+  "ust10_sell_2": {
+   "desc": "물가 가속(상위 20%) · 기준금리 인상(상위 20%) · 2년물 급등(상위 20%)",
+   "asset": "ust10",
+   "kind": "관망",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 10,
+   "k": 8,
+   "lb": 0.602,
+   "wk": 92.0,
+   "mo": 86.2,
+   "frame": "주",
+   "era": {
+    "~1999": [
+     5,
+     6
+    ],
+    "2000~13": [
+     1,
+     2
+    ],
+    "2014~": [
+     2,
+     2
+    ]
+   },
+   "on_share": 7.4,
+   "eff": {
+    "hold": [
+     5.92,
+     -26.5
+    ],
+    "rule": [
+     6.3,
+     -19.0
+    ]
+   },
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "1970-01-02",
+     "end": "1970-01-30",
+     "done": true,
+     "hit": false,
+     "asset": 22.5,
+     "cash": 6.9
+    },
+    {
+     "start": "1973-05-04",
+     "end": "1974-05-17",
+     "done": true,
+     "hit": true,
+     "asset": 6.7,
+     "cash": 16.1
+    },
+    {
+     "start": "1978-01-06",
+     "end": "1978-03-24",
+     "done": true,
+     "hit": true,
+     "asset": 1.9,
+     "cash": 9.7
+    },
+    {
+     "start": "1978-11-03",
+     "end": "1980-04-18",
+     "done": true,
+     "hit": true,
+     "asset": -3.4,
+     "cash": 31.2
+    },
+    {
+     "start": "2000-03-24",
+     "end": "2000-05-19",
+     "done": true,
+     "hit": false,
+     "asset": 13.1,
+     "cash": 6.4
+    },
+    {
+     "start": "2004-12-03",
+     "end": "2006-07-14",
+     "done": true,
+     "hit": true,
+     "asset": 5.3,
+     "cash": 11.2
+    },
+    {
+     "start": "2017-03-31",
+     "end": "2017-05-26",
+     "done": true,
+     "hit": true,
+     "asset": -1.8,
+     "cash": 1.5
+    },
+    {
+     "start": "2022-05-06",
+     "end": "2022-11-25",
+     "done": true,
+     "hit": true,
+     "asset": -5.5,
+     "cash": 6.6
+    }
+   ]
+  },
+  "ust2_buy_1": {
+   "desc": "물가 둔화(하위 30%) · 기준금리 인하(하위 30%)",
+   "asset": "ust2",
+   "kind": "매수",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 11,
+   "k": 10,
+   "lb": 0.74,
+   "wk": 69.0,
+   "mo": null,
+   "frame": "주",
+   "era": {
+    "~1999": [
+     4,
+     5
+    ],
+    "2000~13": [
+     3,
+     3
+    ],
+    "2014~": [
+     3,
+     3
+    ]
+   },
+   "on_share": 12.9,
+   "eff": null,
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "1986-05-02",
+     "end": "1987-03-13",
+     "done": true,
+     "hit": false,
+     "asset": 5.6,
+     "cash": 5.7
+    },
+    {
+     "start": "1991-10-04",
+     "end": "1992-08-28",
+     "done": true,
+     "hit": true,
+     "asset": 9.6,
+     "cash": 3.8
+    },
+    {
+     "start": "2001-08-31",
+     "end": "2002-09-20",
+     "done": true,
+     "hit": true,
+     "asset": 6.0,
+     "cash": 1.8
+    },
+    {
+     "start": "2007-09-28",
+     "end": "2007-09-28",
+     "done": true,
+     "hit": true,
+     "asset": 6.3,
+     "cash": 2.2
+    },
+    {
+     "start": "2009-01-02",
+     "end": "2009-09-18",
+     "done": true,
+     "hit": true,
+     "asset": 0.5,
+     "cash": 0.1
+    },
+    {
+     "start": "2019-09-27",
+     "end": "2019-10-25",
+     "done": true,
+     "hit": true,
+     "asset": 3.8,
+     "cash": 0.7
+    },
+    {
+     "start": "2020-06-05",
+     "end": "2021-03-12",
+     "done": true,
+     "hit": true,
+     "asset": 0.3,
+     "cash": 0.1
+    },
+    {
+     "start": "2024-10-04",
+     "end": "2025-06-27",
+     "done": true,
+     "hit": true,
+     "asset": 4.7,
+     "cash": 4.3
+    }
+   ]
+  },
+  "ust5_buy_1": {
+   "desc": "실질금리 높음(2년물 − 물가)(상위 30%)",
+   "asset": "ust5",
+   "kind": "매수",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 8,
+   "k": 7,
+   "lb": 0.661,
+   "wk": 67.3,
+   "mo": null,
+   "frame": "주",
+   "era": {
+    "~1999": [
+     5,
+     5
+    ],
+    "2000~13": [
+     1,
+     1
+    ],
+    "2014~": [
+     1,
+     2
+    ]
+   },
+   "on_share": 11.6,
+   "eff": null,
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 1
+   },
+   "eps": [
+    {
+     "start": "1981-05-22",
+     "end": "1985-05-03",
+     "done": true,
+     "hit": true,
+     "asset": 18.3,
+     "cash": 14.1
+    },
+    {
+     "start": "1986-06-06",
+     "end": "1986-06-13",
+     "done": true,
+     "hit": true,
+     "asset": 5.8,
+     "cash": 5.7
+    },
+    {
+     "start": "1987-04-24",
+     "end": "1987-04-24",
+     "done": true,
+     "hit": true,
+     "asset": 7.7,
+     "cash": 6.0
+    },
+    {
+     "start": "1989-02-24",
+     "end": "1989-03-24",
+     "done": true,
+     "hit": true,
+     "asset": 13.1,
+     "cash": 8.3
+    },
+    {
+     "start": "1994-12-02",
+     "end": "1995-02-10",
+     "done": true,
+     "hit": true,
+     "asset": 17.1,
+     "cash": 5.7
+    },
+    {
+     "start": "2006-12-29",
+     "end": "2006-12-29",
+     "done": true,
+     "hit": true,
+     "asset": 10.2,
+     "cash": 4.4
+    },
+    {
+     "start": "2019-03-01",
+     "end": "2019-04-19",
+     "done": true,
+     "hit": true,
+     "asset": 10.2,
+     "cash": 1.9
+    },
+    {
+     "start": "2023-06-30",
+     "end": "2026-11-06",
+     "done": true,
+     "hit": false,
+     "asset": 3.4,
+     "cash": 5.4
+    }
+   ]
+  },
+  "ust10_buy_1": {
+   "desc": "기준금리 인하(하위 30%) · 2년물 하락(하위 30%)",
+   "asset": "ust10",
+   "kind": "매수",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 14,
+   "k": 9,
+   "lb": 0.472,
+   "wk": 63.2,
+   "mo": 61.8,
+   "frame": "월",
+   "era": {
+    "~1999": [
+     6,
+     10
+    ],
+    "2000~13": [
+     2,
+     2
+    ],
+    "2014~": [
+     1,
+     2
+    ]
+   },
+   "on_share": 21.9,
+   "eff": null,
+   "sib": null,
+   "ok": false,
+   "why": [
+    "보수적 하한 0.472"
+   ],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "1981-11-01",
+     "end": "1983-09-01",
+     "done": true,
+     "hit": true,
+     "asset": 30.1,
+     "cash": 11.4
+    },
+    {
+     "start": "1984-12-01",
+     "end": "1987-02-01",
+     "done": true,
+     "hit": true,
+     "asset": 29.8,
+     "cash": 7.7
+    },
+    {
+     "start": "1990-03-01",
+     "end": "1990-03-01",
+     "done": true,
+     "hit": true,
+     "asset": 13.2,
+     "cash": 7.3
+    },
+    {
+     "start": "1991-01-01",
+     "end": "1992-10-01",
+     "done": true,
+     "hit": true,
+     "asset": 13.4,
+     "cash": 5.3
+    },
+    {
+     "start": "2001-04-01",
+     "end": "2002-08-01",
+     "done": true,
+     "hit": true,
+     "asset": 6.9,
+     "cash": 2.5
+    },
+    {
+     "start": "2007-11-01",
+     "end": "2009-08-01",
+     "done": true,
+     "hit": true,
+     "asset": 13.0,
+     "cash": 1.6
+    },
+    {
+     "start": "2019-10-01",
+     "end": "2021-02-01",
+     "done": true,
+     "hit": true,
+     "asset": 8.8,
+     "cash": 0.6
+    },
+    {
+     "start": "2024-09-01",
+     "end": "2026-02-01",
+     "done": true,
+     "hit": false,
+     "asset": 1.4,
+     "cash": 4.3
+    }
+   ],
+   "warn": true
+  },
+  "corp_l_buy_1": {
+   "desc": "기준금리 인하(하위 20%) · 가산금리 축소 시작(하위 20%)",
+   "asset": "corp_l",
+   "kind": "매수",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 7,
+   "k": 6,
+   "lb": 0.623,
+   "wk": 51.7,
+   "mo": null,
+   "frame": "주",
+   "era": {
+    "~1999": [
+     2,
+     3
+    ],
+    "2000~13": [
+     2,
+     2
+    ],
+    "2014~": [
+     2,
+     2
+    ]
+   },
+   "on_share": 2.5,
+   "eff": null,
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "1983-05-06",
+     "end": "1983-07-29",
+     "done": true,
+     "hit": false,
+     "asset": -3.2,
+     "cash": 9.5
+    },
+    {
+     "start": "1991-05-10",
+     "end": "1991-08-16",
+     "done": true,
+     "hit": true,
+     "asset": 15.4,
+     "cash": 4.7
+    },
+    {
+     "start": "1992-06-26",
+     "end": "1992-06-26",
+     "done": true,
+     "hit": true,
+     "asset": 17.3,
+     "cash": 3.1
+    },
+    {
+     "start": "2002-03-15",
+     "end": "2002-05-10",
+     "done": true,
+     "hit": true,
+     "asset": 17.1,
+     "cash": 1.5
+    },
+    {
+     "start": "2009-04-24",
+     "end": "2009-04-24",
+     "done": true,
+     "hit": true,
+     "asset": 22.1,
+     "cash": 0.1
+    },
+    {
+     "start": "2019-12-20",
+     "end": "2019-12-20",
+     "done": true,
+     "hit": true,
+     "asset": 13.9,
+     "cash": 0.4
+    },
+    {
+     "start": "2020-09-11",
+     "end": "2021-02-26",
+     "done": true,
+     "hit": true,
+     "asset": 0.2,
+     "cash": 0.1
+    }
+   ]
+  },
+  "corp_m_buy_1": {
+   "desc": "물가 둔화(하위 30%) · 2년물 하락(하위 30%)",
+   "asset": "corp_m",
+   "kind": "매수",
+   "status": "확정",
+   "since": "2026-10-31",
+   "n": 7,
+   "k": 7,
+   "lb": 0.81,
+   "wk": 90.3,
+   "mo": null,
+   "frame": "주",
+   "era": {
+    "2000~13": [
+     3,
+     3
+    ],
+    "2014~": [
+     4,
+     4
+    ]
+   },
+   "on_share": 6.6,
+   "eff": null,
+   "sib": null,
+   "ok": true,
+   "why": [],
+   "live": {
+    "n": 0,
+    "k": 0,
+    "open": 0
+   },
+   "eps": [
+    {
+     "start": "2001-08-31",
+     "end": "2002-08-30",
+     "done": true,
+     "hit": true,
+     "asset": 6.5,
+     "cash": 1.8
+    },
+    {
+     "start": "2007-09-07",
+     "end": "2007-10-26",
+     "done": true,
+     "hit": true,
+     "asset": 2.8,
+     "cash": 2.3
+    },
+    {
+     "start": "2009-01-02",
+     "end": "2009-09-11",
+     "done": true,
+     "hit": true,
+     "asset": 18.7,
+     "cash": 0.1
+    },
+    {
+     "start": "2019-07-05",
+     "end": "2019-10-25",
+     "done": true,
+     "hit": true,
+     "asset": 9.9,
+     "cash": 1.2
+    },
+    {
+     "start": "2020-06-05",
+     "end": "2021-02-26",
+     "done": true,
+     "hit": true,
+     "asset": 3.1,
+     "cash": 0.1
+    },
+    {
+     "start": "2024-03-01",
+     "end": "2024-03-01",
+     "done": true,
+     "hit": true,
+     "asset": 7.1,
+     "cash": 4.9
+    },
+    {
+     "start": "2024-10-04",
+     "end": "2025-06-27",
+     "done": true,
+     "hit": true,
+     "asset": 6.4,
+     "cash": 4.3
+    }
+   ]
   }
  },
  "last_search": "2026-11",
- "tried_total": 854,
- "checked": "2026-11-05"
+ "tried_total": 900,
+ "checked": "2026-11-06"
 }

@@ -1,0 +1,60 @@
+{
+ "asof": "2026.11.06",
+ "made": "2026-11-06 02:05",
+ "assets": {
+  "nasdaq": {
+   "name": "나스닥",
+   "now": "보통",
+   "blocked": false,
+   "nofg": false,
+   "bear": 2,
+   "turn": {
+    "claims": 16,
+    "kr": 100,
+    "warn": false
+   }
+  },
+  "spx": {
+   "name": "S&P500",
+   "now": "보통",
+   "blocked": false,
+   "nofg": false,
+   "bear": 2,
+   "turn": {
+    "claims": 16,
+    "kr": 100,
+    "warn": false
+   }
+  },
+  "dji": {
+   "name": "다우",
+   "now": "보통",
+   "blocked": false,
+   "nofg": false,
+   "bear": null,
+   "turn": {
+    "claims": 16,
+    "kr": 100,
+    "warn": false
+   }
+  },
+  "kospi": {
+   "name": "코스피",
+   "now": "관망",
+   "blocked": true,
+   "nofg": true,
+   "bear": null,
+   "turn": {
+    "claims": 16,
+    "kr": 100,
+    "warn": true
+   }
+  }
+ },
+ "fx": {
+  "now": "보통",
+  "fx": 1354,
+  "regime": "hi",
+  "gap": 0.88
+ }
+}

@@ -103,7 +103,12 @@ def build():
     W["oil"] = wk(despike(d("f_DCOILWTICO").where(lambda x: x > 0)))   # WTI 현물 1986~ (2020-04 음수 하루 제외)
     W["ust10"] = bond_tr(wk(d("f_DGS10")) / 100, 10)
     W["ust30"] = bond_tr(wk(d("f_DGS30")) / 100, 30)
-    fx = wk(d("f_DEXKOUS")); W["usdkrw"] = fx; W["usd"] = W["cash_us"] * fx
+    # 10-31 사용자: 단기채·중기채·회사채도. 2년·5년은 금리로 만든 총수익(SHY·IEI 1년 수익 상관 0.99), 회사채는 펀드(LQD 상관 0.94)
+    W["ust2"] = bond_tr(wk(d("f_DGS2")) / 100, 2)
+    W["ust5"] = bond_tr(wk(d("f_DGS5")) / 100, 5)
+    W["corp_l"] = wk(d("y_corp_l")); W["corp_m"] = wk(d("y_corp_m"))
+    _fx = d("f_DEXKOUS").dropna(); _fy = d("y_usdkrw").dropna()    # 11-06: FRED 는 1주일쯤 늦음 → 그 뒤는 야후로 이음
+    fx = wk(pd.concat([_fx, _fy[_fy.index > _fx.index[-1]]])); W["usdkrw"] = fx; W["usd"] = W["cash_us"] * fx
     # ---- 지표 ----
     y2 = wk(d("f_DGS2")).combine_first(tb)
     W["d_y2_12"] = y2 - y2.shift(52)
@@ -116,13 +121,15 @@ def build():
     baa = wk(d("f_BAA10Y")).combine_first(from_month("baa_spr")); W["d_spr6"] = baa - baa.shift(26); W["baa_spr"] = baa
     for c in ("d_cpi12", "d_ip_yoy6", "kr_exp_yoy", "cape", "d_real10_12", "core6", "cpi_yoy"):
         W[c] = from_month(c)
+    W["y2_lvl"] = wk(d("f_DGS2")); W["real2"] = W["y2_lvl"] - W["cpi_yoy"]     # 10-31 채권 매수 재료: 금리 수준·실질금리
     return W
 
 
 ASSETS = {"spx": "cash_us", "nasdaq": "cash_us", "kospi": "cash_kr", "dji": "cash_us", "rut": "cash_us", "sox": "cash_us",
           "nikkei": "cash_jp", "schd": "cash_us", "btc": "cash_us", "gold_f": "cash_us", "silver_f": "cash_us",
           "copper_f": "cash_us", "gsci": "cash_us", "em_f": "cash_us", "hy_f": "cash_us", "reit_f": "cash_us",
-          "oil": "cash_us", "ust10": "cash_us", "ust30": "cash_us", "usd": "cash_kr"}
+          "oil": "cash_us", "ust10": "cash_us", "ust30": "cash_us", "usd": "cash_kr",
+          "ust2": "cash_us", "ust5": "cash_us", "corp_l": "cash_us", "corp_m": "cash_us"}
 
 
 def targets(W, h=52):
@@ -136,7 +143,7 @@ def targets(W, h=52):
 
 if __name__ == "__main__":
     W = build(); T = targets(W)
-    feats = ["d_y2_12", "d_y10_12", "oil12", "d_ff12", "dxy12", "claims", "d_nfci6", "d_spr6", "d_cpi12", "d_ip_yoy6", "kr_exp_yoy", "cape", "d_real10_12"]
+    feats = ["d_y2_12", "d_y10_12", "oil12", "d_ff12", "dxy12", "claims", "d_nfci6", "d_spr6", "d_cpi12", "d_ip_yoy6", "kr_exp_yoy", "cape", "d_real10_12", "y2_lvl", "real2", "baa_spr"]
     Q = pd.DataFrame({f: roll_pct(W[f]) for f in feats})
     for a in ASSETS:
         px = W[a]; Q["dev5_" + a] = roll_pct(px / px.rolling(260).mean())

@@ -15,6 +15,7 @@ YAHOO = {  # 이름: 기호
     "btc": "BTC-USD", "tlt": "TLT", "ief": "IEF", "dxy": "DX-Y.NYB", "usdkrw": "KRW=X", "vix": "^VIX",
     "eem": "EEM", "hyg": "HYG", "qqq": "QQQ",
     "em_f": "VEIEX", "hy_f": "VWEHX", "reit_f": "FRESX",
+    "corp_l": "VWESX", "corp_m": "VFICX",   # 10-31: 투자등급 회사채 펀드(장기 1980~ / 중기 1993~, 분배금 포함)
     "dji": "^DJI", "sox": "^SOX", "schd": "SCHD", "rut": "^RUT",   # 10-21: 규칙 만들 때 안 본 미국 주식(깨끗한 시험)   # 10-21: 신흥국·하이일드·리츠 장기 펀드(분배금 포함)
 }
 # FRED: 월평균으로 접음. (자료 시작이 긴 것 위주)
