@@ -140,82 +140,81 @@ def key_of(c):
 
 
 SHORT = {"nasdaq": "나스닥", "spx": "S&P", "dji": "다우", "kospi": "코스피"}
-BOARD = "https://claude.ai/artifact/6gF3PXVXsahXvu29v1ziF9"
+BOARD = "https://kunchan70-creator.github.io/asset-timing/"
 
 
 SECOND = .07; TAKE = .20; BUY = .50; DAYS = 87      # 빠진 폭의 20% 되돌림에 팖 · 현금의 50% · 60거래일(약 87일). _playbook.py·_retrace.py
 
 
 def todo_of(aid, v):
-    """(점, 할 일) — 🔴 팔기 · 🟠 새로 안 사기/조심 · 🟢 사기 · ⚪ 들고 가기"""
+    """(점, 할 일) — 🔴 파세요 · 🟠 조심 · 🟢 사세요 · ⚪ 평소"""
     now = v["now"] if isinstance(v, dict) else v
-    if isinstance(v, dict) and v.get("bear3"): return "🔴", "하락장 3/3 · 전부 팔기 (10개월선 위로 오면 다시)"
+    if isinstance(v, dict) and v.get("bear3"): return "🔴", "큰 하락장이에요. 파세요 (10개월 평균선 위로 올라오면 다시 사요)"
     if now in ("관망", "강한관망"):
-        if aid == "dji": return "🟠", "새로 안 사기"
-        return "🔴", "팔고 국고채" if aid == "kospi" else "팔고 BOXX"
-    if isinstance(v, dict) and v.get("reg"): return "🟠", "조심 구간 (저점 뜰 때만 반등 매매)"
-    if now == "관망유지": return "🟠", "새로 안 사기"
-    if now == "매수": return "🟢", "사기"
-    return "⚪", "들고 가기"
+        if aid == "dji": return "🟠", "새로 사지 마세요"
+        return "🔴", "위험해요. 파세요 (돈은 국고채에)" if aid == "kospi" else "위험해요. 파세요 (돈은 BOXX에)"
+    if isinstance(v, dict) and v.get("reg"): return "🟠", "조심할 때예요. 많이 떨어질 때만 사세요"
+    if now == "관망유지": return "🟠", "새로 사지 마세요"
+    if now == "매수": return "🟢", "사세요"
+    return "⚪", "평소예요. 그냥 들고 가세요"
 
 
 def hold_txt(aid, v):
     """이미 들고 있는 것: 🔴(다우 빼고)면 팔기, 나머지는 그대로"""
-    return "전부 팔기" if todo_of(aid, v)[0] == "🔴" else "그대로"
+    return "파세요" if todo_of(aid, v)[0] == "🔴" else "그대로 두세요"
 
 
 def plan_txt(aid, v):
     if v["mode"] == "bounce":
         e = v.get("ent") or v["p"]; goal = e + TAKE * (v["hi"] - e)
-        return f"현금의 {BUY*100:.0f}% {e:,.0f}에 사기 → {goal:,.0f}({(goal/e-1)*100:+.1f}%) 되면 전부 팔기"
-    return "현금 전부 사서 들고 가기" if v["mode"] == "all" else f"현금의 {BUY*100:.0f}% 사서 들고 가기"
+        return f"돈의 절반으로 {e:,.0f}에 사고, {goal:,.0f}({(goal/e-1)*100:+.1f}%)에 전부 파세요"
+    return "남은 돈 전부 사서 들고 가세요" if v["mode"] == "all" else "돈의 절반으로 사서 들고 가세요"
 
 
 def text_of(c, changed=""):
-    """11-02 사용자 '줄글 말고 보기 편하게': 자산마다 한 줄(색 점 + 할 일), 저점매수·공포·경보·환율 한 줄씩"""
+    """11-06 사용자 '쉽게': 자산마다 한 줄, 어려운 말 빼고"""
     L = list(c.get("notes") or [])
     if L: L.append("━━━━━━━━━━")
     for aid, v in c["rows"].items():
         dot, todo = todo_of(aid, v)
         if v["dip"] == "걸림":
-            g = v["L"] + TAKE * (v["hi"] - v["L"]); dot, todo = "📝", f"오늘 {v['L']:,.0f} 찍고 반등(저가 {v['low']:,.0f}, 지금 {v['p']:,.0f}) · 걸어뒀다면 {g:,.0f}({(g/v['L']-1)*100:+.1f}%)에 전부 팔기"
+            g = v["L"] + TAKE * (v["hi"] - v["L"]); dot, todo = "📝", f"오늘 {v['L']:,.0f} 아래까지 갔다가 올라왔어요. 샀다면 {g:,.0f}({(g/v['L']-1)*100:+.1f}%)에 파세요"
         elif v["dip"] != "아님": dot, todo = "🟢", plan_txt(aid, v)
-        L.append(f"{dot} {SHORT[aid]} — {todo} · 보유분 {hold_txt(aid, v)}" + (" (장중 추정)" if v.get("est") else ""))
-    if c.get("open_lines"): L.append("📌 샀다면 → " + " / ".join(c["open_lines"]))
-    if c.get("next_lines"): L.append("📉 더 빠지면 → " + " / ".join(c["next_lines"]))
+        L.append(f"{dot} {SHORT[aid]}: {todo}" + ("" if dot == "🔴" else f" · 가진 건 {hold_txt(aid, v)}") + (" (금요일에 확정돼요)" if v.get("est") else ""))
+    if c.get("open_lines"): L.append("📌 샀다면: " + " / ".join(c["open_lines"]))
+    if c.get("next_lines"): L.append("📉 더 떨어지면: " + " / ".join(c["next_lines"]))
     L.extend(limit_lines(c))
     L.append("━━━━━━━━━━")
-    L.append("📉 RSI " + " · ".join(f"{SHORT[k]} {v['rsi']}" for k, v in c["rows"].items()) + (" (장중)" if any(v["live"] for v in c["rows"].values()) else "") + " · 30 아래면 켜짐")
-    if c.get("q"):
-        q = c["q"]; pc = lambda k: round(q[k] * 100)
-        L.append(f"⚙️ 많이 오름 S&P {pc('dev5_spx')}·나스닥 {pc('dev5_nasdaq')}·코스피 {pc('dev5_kospi')} / 2년 {pc('d_y2_12')}·10년 {pc('d_y10_12')}·유가 {pc('oil12')}·물가 {pc('d_cpi12')}")
-    L.append(f"😨 VIX {c['vix']}{' 🚨40↑' if c['vix'] >= 40 else ''} · 공포탐욕 {c['fg'] if c['fg'] is not None else '-'}")
-    L.append(f"🐻 하락장 경보 {c['bear']}/3" + (" ⚠️" if c["bear"] >= 3 else ""))
-    L.append(f"💵 환율: {'달러 우위' if c['regime'] == 'hi' else '중립' if c['regime'] == 'mid' else '원화 우위'} (금리차 {c['gap']:+}%p)")
+    L.append("공포 지수 VIX " + f"{c['vix']:.0f}{' 🚨 지금이 살 때(40 넘음)' if c['vix'] >= 40 else ''} · 공포탐욕 {c['fg'] if c['fg'] is not None else '-'} (낮을수록 공포)")
+    L.append(f"큰 하락장 신호 3개 중 {c['bear']}개" + (" ⚠️ 나스닥은 파세요" if c["bear"] >= 3 else ""))
+    L.append(f"환율: {'달러가 유리한 때' if c['regime'] == 'hi' else '중간' if c['regime'] == 'mid' else '원화가 유리한 때'}")
     if changed: L.append(f"🔄 {changed}")
-    L.append(f"🕐 {datetime.datetime.now():%m/%d %H:%M} · 판 {c['asof'][5:]} 기준")
+    L.append(f"🕐 {datetime.datetime.now():%m/%d %H:%M}")
     return "\n".join(L)
 
 
+STATE_TXT = {"평시": "평소", "경고 꺼진 6개월": "위험 신호가 막 꺼진 뒤", "경고 중": "위험 신호 중", "하락 추세": "하락 중"}
+
+
 def past_txt(aid, v, etf=False):
-    """지금 상황에서 과거에 샀다면: 이득 확률·최대 하락"""
+    """지금과 같은 때 과거에 샀다면"""
     try:
         x = json.load(open(os.path.join(B, "data", "oneline.json"), encoding="utf-8"))[aid][v["state"]]
-        t = f"과거 {v['state']} {x['n']}번: 이득 {x['win']}% · 10번 중 9번은 {x['dd90']}% 안 · 최악 {x['worst']}%"
-        return t + f" (QLD {x['dd90_2']}% 안 · 최악 {x['worst2']}%)" if etf else t
+        t = f"과거 '{STATE_TXT[v['state']]}'에 이 방법으로 샀다면 ({x['n']}번): {x['win']}%는 이득. 산 뒤 대부분 {x['dd90']}% 안쪽까지만 더 빠졌고, 가장 심할 땐 {x['worst']}%"
+        return t + f" (QLD는 대부분 {x['dd90_2']}% 안쪽, 가장 심할 땐 {x['worst2']}%)" if etf else t
     except Exception: return ""
 
 
 def limit_lines(c):
-    """📝 걸어둘 가격: 지금 값에서 5% 안인 것만"""
+    """📝 주문 가격: 지금 값에서 5% 안인 것만"""
     o = []
     for aid, v in c["rows"].items():
         if v["L"] <= 0 or v["p"] / v["L"] - 1 > .05 or v["p"] < v["L"]: continue
-        goal = v["L"] + TAKE * (v["hi"] - v["L"]); tail = "" if v["fear"] else " · 공포 조건 꺼짐(켜져야 유효)"
+        goal = v["L"] + TAKE * (v["hi"] - v["L"]); tail = "" if v["fear"] else " (지금은 시장 공포가 약해서 주문하지 마세요)"
         if aid == "nasdaq":
             e = etf_prices(v["L"], goal)
-            if e: o.append(f"📝 걸어두기(오늘만) 나스닥 {v['L']:,.0f}: QQQ {e['qqq']:.1f}·QLD {e['qld']:.1f} 매수 → QQQ {e['qqq_goal']:.1f}·QLD {e['qld_goal']:.1f} 매도{tail}"); o.append("    └ " + past_txt(aid, v, True)); continue
-        o.append(f"📝 걸어두기(오늘만) {SHORT[aid]} {v['L']:,.0f} 매수 → {goal:,.0f} 매도{tail}"); o.append("    └ " + past_txt(aid, v))
+            if e: o.append(f"📝 오늘의 주문: QQQ {e['qqq']:.1f}에 사기 → {e['qqq_goal']:.1f}에 팔기 / QLD {e['qld']:.1f}에 사기 → {e['qld_goal']:.1f}에 팔기 (나스닥 {v['L']:,.0f}까지 떨어질 때){tail}"); o.append("    └ " + past_txt(aid, v, True)); continue
+        o.append(f"📝 오늘의 주문: {SHORT[aid]} {v['L']:,.0f}에 사기 → {goal:,.0f}에 팔기{tail}"); o.append("    └ " + past_txt(aid, v))
     return o
 
 
@@ -223,11 +222,10 @@ def write_live(c):
     """판(wk_board)이 읽는 지금 상태"""
     rows = {}; ll = limit_lines(c)
     for aid, v in c["rows"].items():
-        dot, todo = todo_of(aid, v); act = {"🔴": todo, "🟠": "조심" if v.get("reg") and v["now"] not in ("관망", "강한관망") else todo, "⚪": "들고 가기"}.get(dot, todo)
-        why = "저점 뜰 때만 반등 매매" if act == "조심" else ""
-        if v["dip"] == "걸림": dot = "📝"; act = "저점 찍음"; why = f"{v['L']:,.0f} 찍고 반등 · 걸어뒀다면 {v['L'] + TAKE * (v['hi'] - v['L']):,.0f}에 전부 팔기"; todo = why
-        elif v["dip"] != "아님": dot = "🟢"; act = "저점"; why = todo = plan_txt(aid, v)
-        rows[aid] = {"dot": dot, "act": act, "todo": todo, "hold": hold_txt(aid, v), "why": " · ".join(x for x in (f"보유분 {hold_txt(aid, v)}", why, f"RSI {v['rsi']}") if x) + (" · 장중 추정" if v.get("est") else ""), "line": next((x.replace("📝 걸어두기(오늘만) ", "오늘 걸어두기: ") for x in ll if SHORT[aid] in x), ""), "past": past_txt(aid, v)}
+        dot, todo = todo_of(aid, v); act = {"🔴": "파세요", "🟠": "새로 사지 마세요" if "새로 사지" in todo else "조심", "⚪": "평소", "🟢": "사세요"}.get(dot, todo); why = todo
+        if v["dip"] == "걸림": dot = "📝"; act = "갔다 옴"; why = todo = f"오늘 {v['L']:,.0f} 아래까지 갔다가 올라왔어요. 샀다면 {v['L'] + TAKE * (v['hi'] - v['L']):,.0f}에 파세요"
+        elif v["dip"] != "아님": dot = "🟢"; act = "사세요"; why = todo = plan_txt(aid, v)
+        rows[aid] = {"dot": dot, "act": act, "todo": todo, "hold": hold_txt(aid, v), "why": why if dot == "🔴" else f"가진 건 {hold_txt(aid, v)} · {why}", "line": next((x for x in ll if aid != "nasdaq" and SHORT[aid] in x or aid == "nasdaq" and "QQQ" in x), ""), "past": past_txt(aid, v)}
     j = {"at": datetime.datetime.now().strftime("%m/%d %H:%M"), "title": title_of(c), "rows": rows, "detail": c.get("detail"), "limits": ll, "open": (c.get("open_lines") or []) + (c.get("next_lines") or [])}
     json.dump(j, open(os.path.join(B, "data", "watch_live.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
@@ -235,12 +233,13 @@ def write_live(c):
 def title_of(c):
     if c.get("notes"): return c["notes"][0]
     buy = [SHORT[k] for k, v in c["rows"].items() if v["dip"].startswith("사기")]
-    if buy: return "🟢 저점 켜짐: " + "·".join(buy)
-    tc = [SHORT[k] for k, v in c["rows"].items() if v["dip"] == "걸림"]
-    if tc: return "📝 걸어둔 값 찍음: " + "·".join(tc)
+    if buy: return "🟢 사세요: " + "·".join(buy)
     sell = [SHORT[k] for k, v in c["rows"].items() if todo_of(k, v)[0] == "🔴"]
     care = [SHORT[k] for k, v in c["rows"].items() if todo_of(k, v)[0] == "🟠"]
-    return ("🔴 팔기: " + "·".join(sell) if sell else "🟠 조심: " + "·".join(care) if care else "⚪ 들고 가기") + " · 저점 없음"
+    p = []
+    if sell: p.append("🔴 파세요: " + "·".join(sell))
+    if care: p.append("🟠 조심: " + "·".join(care))
+    return " / ".join(p) or "⚪ 평소예요"
 
 
 def apply_arrows(c, last):
@@ -250,13 +249,13 @@ def apply_arrows(c, last):
         st = A.setdefault(aid, {"on": None, "lp": None, "n": 0, "open": [], "pend": False})
         today = datetime.datetime.now(SEOUL if aid == "kospi" else NY).date(); ts = today.isoformat()
         if st.get("reg") and not v["reg"]:       # 조심 구간 끝: 반등 매매 끝, 이제 보유
-            notes.append(f"🟢 {SHORT[aid]} 조심 구간 끝 → 남은 현금 전부 사고, 이제 팔지 마세요" + (" (반등 매도가 취소)" if st["open"] else "")); st["open"] = []
+            notes.append(f"🟢 {SHORT[aid]} 이제 괜찮아졌어요. 남은 돈 전부 사고, 이제 팔지 마세요" + (" (걸어둔 팔기 주문은 취소)" if st["open"] else "")); st["open"] = []
         st["reg"] = v["reg"]
         for pos in st["open"][:]:
             if v["p"] >= pos["goal"]:
-                notes.append(f"💰 {SHORT[aid]} {pos['goal']:,.0f} 도달 → {pos['n']}차 전부 파세요"); st["open"].remove(pos)
+                notes.append(f"💰 {SHORT[aid]} {pos['goal']:,.0f} 도착! {pos['n']}차로 산 것 전부 파세요"); st["open"].remove(pos)
             elif ts > pos["until"]:
-                notes.append(f"⏰ {SHORT[aid]} {pos['n']}차 기한 끝 → 전부 파세요 (지금 {v['p']:,.0f})"); st["open"].remove(pos)
+                notes.append(f"⏰ {SHORT[aid]} {pos['n']}차 기한 끝! 손해여도 오늘 전부 파세요 (지금 {v['p']:,.0f})"); st["open"].remove(pos)
         seen = st.get("seen") == ts; pl = st.get("low")     # 켜기 전에 이미 지나간 터치는 체결로 안 봄: 지켜보던 중 새로 찍었거나 지금 그 값 근처일 때만
         st["seen"] = ts; st["low"] = v["low"]
         fresh = (seen and pl is not None and pl > v["L"] >= v["low"]) or v["p"] <= v["L"] * 1.005 or v["dip"].startswith("사기")
@@ -264,21 +263,21 @@ def apply_arrows(c, last):
             st["n"] += 1; st["lp"] = e; vv = dict(v); vv["ent"] = e; msg = f"🟢 {SHORT[aid]} {st['n']}차: {plan_txt(aid, vv)}"
             if v["mode"] == "bounce":
                 goal = e + TAKE * (v["hi"] - e); pos_ = {"n": st["n"], "buy": e, "goal": goal, "until": (today + datetime.timedelta(days=DAYS)).isoformat()}; st["open"].append(pos_)
-                msg += f" (~{(today + datetime.timedelta(days=DAYS)).strftime('%m/%d')})"
+                msg += f" ({(today + datetime.timedelta(days=DAYS)).strftime('%m/%d')}까지 안 오면 그날 파세요)"
                 if aid == "nasdaq":
                     x = etf_prices(e, goal)
-                    if x: msg += f" · QQQ {x['qqq']:.1f}→{x['qqq_goal']:.1f} · QLD {x['qld']:.1f}→{x['qld_goal']:.1f}"; pos_["goal_q"] = x["qqq_goal"]
+                    if x: msg += f" · QQQ {x['qqq']:.1f}에 사서 {x['qqq_goal']:.1f}에 팔기 · QLD {x['qld']:.1f}에 사서 {x['qld_goal']:.1f}에 팔기"; pos_["goal_q"] = x["qqq_goal"]
             notes.append(msg)
         if st["open"]:           # 들고 있으면: 지난 매수값보다 7% 더 빠지면 다음 차수 (_second.py)
             e2 = st["lp"] * (1 - SECOND)
             if v["live"] and v["low"] <= e2 and ((seen and pl is not None and pl > e2) or v["p"] <= e2 * 1.005): add(min(e2, v["p"]))
             e2 = st["lp"] * (1 - SECOND)
             if st["open"]:
-                t2 = f"{SHORT[aid]} {st['n'] + 1}차 걸어두기 {e2:,.0f}"
+                t2 = f"{SHORT[aid]} {e2:,.0f}"
                 if aid == "nasdaq":
                     x = etf_prices(e2, e2 + TAKE * (v["hi"] - e2))
                     if x: t2 += f"(QQQ {x['qqq']:.1f}·QLD {x['qld']:.1f})"
-                nexts.append(t2 + f" 남은 현금 {BUY*100:.0f}%")
+                nexts.append(t2 + "에서 남은 돈의 절반으로 또 사세요")
         elif v["cond"] and v["live"] and fresh:
             gap = 99 if not st["on"] else (today - datetime.date.fromisoformat(st["on"])).days
             if gap > 14: add(v.get("ent") or v["p"])
@@ -291,7 +290,7 @@ def apply_arrows(c, last):
                     live("QQQ"); live("QLD"); pq, pl = float(META["QQQ"]["chartPreviousClose"]), float(META["QLD"]["chartPreviousClose"])
                     t_ += f"(QQQ {pos['goal_q']:.1f}·QLD {pl * (pos['goal_q'] / pq * 2 - 1):.1f})"
                 except Exception: pass
-            lines.append(t_ + f"에 전부 팔기(~{pos['until'][5:].replace('-', '/')})")
+            lines.append(t_ + f"에 전부 파세요 ({pos['until'][5:].replace('-', '/')}까지 안 오면 그날 파세요)")
     c["open_lines"] = lines; c["next_lines"] = nexts; c["open_n"] = {k: [A[k]["n"], len(A[k]["open"])] for k in A}
     return notes
 
@@ -317,15 +316,18 @@ def send(c, changed):
 SEQ = [None]
 
 
+NOW_TXT = {"관망": "위험", "강한관망": "위험", "관망유지": "새로 사지 않기", "매수": "사기", "보통": "평소"}
+
+
 def diff(old, new):
     if not old: return "감시 시작"
     o, n = json.loads(old), json.loads(new); out = []
     for k, v in n["r"].items():
-        if o["r"].get(k) != v: out.append(f"{SHORT[k]} {o['r'].get(k, ['-', '-'])[0]} → {v[0]}" + (f"·저점 {v[1]}" if v[1] != "아님" else ""))
-    if o["v40"] != n["v40"]: out.append("VIX 40↑ " + ("켜짐" if n["v40"] else "꺼짐"))
-    if o["bear"] != n["bear"]: out.append(f"하락장 경보 {o['bear']} → {n['bear']}/3")
-    if o["rg"] != n["rg"]: out.append("환율 국면 바뀜")
-    if not out and o.get("o") != n.get("o"): out.append("매수·매도 표 바뀜")
+        if o["r"].get(k) != v: out.append(f"{SHORT[k]} {NOW_TXT.get(o['r'].get(k, ['-', '-'])[0], '-')} → {NOW_TXT.get(v[0], v[0])}" + ("" if v[1] == "아님" else " (주문 가격까지 갔다 옴)" if v[1] == "걸림" else " (지금 살 가격)"))
+    if o["v40"] != n["v40"]: out.append("VIX 40 " + ("넘음" if n["v40"] else "아래로"))
+    if o["bear"] != n["bear"]: out.append(f"큰 하락장 신호 {o['bear']}개 → {n['bear']}개 (3개면 나스닥 팔기)")
+    if o["rg"] != n["rg"]: out.append("환율 흐름 바뀜")
+    if not out and o.get("o") != n.get("o"): out.append("사고팔 가격 바뀜")
     return " · ".join(out)
 
 
@@ -377,7 +379,7 @@ def main():
             ny = datetime.datetime.now(NY)
             if ny.weekday() < 5 and (ny.hour, ny.minute) >= (9, 0) and (ny.hour, ny.minute) < (9, 30) and last.get("pre") != ny.date().isoformat():
                 ll = limit_lines(c)
-                if ll: c["notes"] = c["notes"] + ["📝 오늘 걸어둘 가격 (장 시작 전)"]
+                if ll: c["notes"] = c["notes"] + ["📝 오늘 주문할 가격이에요 (장 시작 전)"]
                 last["pre"] = ny.date().isoformat()
             json.dump(last, open(LAST, "w", encoding="utf-8"), ensure_ascii=False)
             write_live(c)

@@ -123,20 +123,22 @@ def evaluate(prices, neutral=False):
             if r.get("dev") is not None: m = m & (Q["dev5_" + r["asset"]] >= r["dev"]).fillna(False)
             h = h | m
         return h[h].index[-1] if h.any() else None
-    pr = [item("2년물 1년 변화", "d_y2_12", .7, "%p"), item("10년물 1년 변화", "d_y10_12", .8, "%p"), item("유가 1년 변화", "oil12", .8, "%"), item("물가 가속", "d_cpi12", .7)]
-    npr = sum(x["on"] for x in pr); sp_d = item("S&P 많이 오름(5년 평균 대비)", "dev5_spx", .8, "%"); nq_d = item("나스닥 많이 오름(5년 평균 대비)", "dev5_nasdaq", .8, "%")
+    def yn(lab, c, th, fmt=None):
+        x = rw.get(c); return {"k": lab + (f" ({fmt.format(x)})" if fmt and x is not None else ""), "on": bool(qv[c] >= th)}
+    pr = [yn("2년 금리가 많이 올랐나", "d_y2_12", .7, "1년 전보다 {:+.2f}%"), yn("10년 금리가 많이 올랐나", "d_y10_12", .8, "1년 전보다 {:+.2f}%"), yn("기름값이 많이 올랐나", "oil12", .8, "1년 전보다 {:+.0f}%"), yn("물가 오르는 속도가 빨라졌나", "d_cpi12", .7)]
+    npr = sum(x["on"] for x in pr); sp_d = yn("S&P가 많이 올랐나", "dev5_spx", .8, "5년 평균보다 {:+.0f}%"); nq_d = yn("나스닥이 많이 올랐나", "dev5_nasdaq", .8, "5년 평균보다 {:+.0f}%")
     lu = last_on(["nasdaq", "spx"]); lk = last_on(["kospi"])
-    end = lambda t: (t.date() + datetime.timedelta(days=182)).isoformat() if t is not None else None
+    end = lambda t: (t.date() + datetime.timedelta(days=182)).strftime("%Y년 %m월") if t is not None else None
     if us_s or us_w:
-        msg = ("S&P 많이 오름 + 압력 %d/4" % npr if us_s else "나스닥 많이 오름 + 2년물 급등") + " → 켜짐."
-        if us_s: msg += f" S&P가 {need.get(('spx', .8), 0):+.1f}% 내려가면 많이 오름이 문턱 아래로 가서 꺼져요."
+        msg = "주가가 많이 오른 데다 금리·기름값 부담까지 커서 켜졌어요."
+        if us_s: msg += f" S&P가 {abs(need.get(('spx', .8), 0)):.1f}% 더 떨어지면 꺼져요."
     else:
-        msg = f"S&P 많이 오름이 {sp_d['v']}%로 문턱 80% 아래라 꺼짐. 금리·유가 압력은 {npr}/4로 그대로예요. 주가가 빠져서 꺼진 거지 위험이 끝난 건 아니에요."
-        if npr >= 3: msg += f" S&P가 {need.get(('spx', .8), 0):+.1f}% 오르면 다시 켜져요."
-        if lu is not None: msg += f" 이대로면 조심 구간은 {end(lu)}쯤 끝나요."
-    kd = item("코스피 많이 오름(5년 평균 대비)", "dev5_kospi", .7, "%"); kx = item("한국 수출 증가율", "kr_exp_yoy", .7)
-    km = (f"많이 오름·수출 둘 다 문턱 위라 켜짐. 수출이 {kx['v']}%라 코스피가 {need.get(('kospi', .7), 0):+.1f}% 빠져야 꺼져요." if kw else "많이 오름이나 수출이 문턱 아래라 꺼짐." + (f" 이대로면 조심 구간은 {end(lk)}쯤 끝나요." if lk is not None else ""))
-    detail = {"us": {"name": "미국 경고 (S&P 강한 경고 또는 나스닥 경고)", "on": bool(us_s or us_w), "items": [sp_d, nq_d] + pr, "msg": msg},
-              "kospi": {"name": "코스피 경고", "on": bool(kw), "items": [kd, kx], "msg": km},
-              "turn": {"name": "경기 꺾임", "on": bool(qv["claims"] >= .8 and qv["kr_exp_yoy"] >= .8), "items": [{"k": "실업수당 청구", "v": round(qv["claims"] * 100), "th": 80, "on": bool(qv["claims"] >= .8)}, {"k": "한국 수출 증가율", "v": round(qv["kr_exp_yoy"] * 100), "th": 80, "on": bool(qv["kr_exp_yoy"] >= .8)}], "msg": "고용이 깨지기 시작하는데 수출은 꼭대기면 침체 입구. 켜지면 조심 구간이에요."}}
+        msg = "금리·기름값 부담은 아직 그대로인데, 주가가 먼저 떨어져서 신호만 꺼졌어요. 위험이 사라진 건 아니에요."
+        if npr >= 3: msg += f" S&P가 {abs(need.get(('spx', .8), 0)):.1f}% 오르면 다시 켜져요."
+        if lu is not None: msg += f" 이대로면 {end(lu)}쯤 조심할 때가 끝나요."
+    kd = yn("코스피가 많이 올랐나", "dev5_kospi", .7, "5년 평균보다 {:+.0f}%"); kx = yn("한국 수출이 꼭대기인가", "kr_exp_yoy", .7)
+    km = (f"주가도 많이 올랐고 수출도 꼭대기라 켜졌어요. 코스피가 {abs(need.get(('kospi', .7), 0)):.0f}% 더 떨어져야 꺼져요." if kw else "지금은 꺼져 있어요." + (f" 이대로면 {end(lk)}쯤 조심할 때가 끝나요." if lk is not None else ""))
+    detail = {"us": {"name": "미국 주식 위험 신호", "on": bool(us_s or us_w), "items": [sp_d, nq_d] + pr, "msg": msg},
+              "kospi": {"name": "코스피 위험 신호", "on": bool(kw), "items": [kd, kx], "msg": km},
+              "turn": {"name": "경기 나빠지는 신호", "on": bool(qv["claims"] >= .8 and qv["kr_exp_yoy"] >= .8), "items": [{"k": "실업수당 신청이 늘고 있나", "on": bool(qv["claims"] >= .8)}, {"k": "한국 수출이 꼭대기인가", "on": bool(qv["kr_exp_yoy"] >= .8)}], "msg": "둘 다 '예'면 경기가 꺾이기 시작했다는 뜻이에요."}}
     return {"detail": detail, "reg": reg, "state": state, "us_strong": us_s, "us_warn": us_s or us_w, "kospi_warn": kw, "turn": qv["claims"] >= .8 and qv["kr_exp_yoy"] >= .8, "q": qv}
