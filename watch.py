@@ -131,7 +131,7 @@ def compute():
         rows[aid] = {"now": now, "dip": dip if on else ("걸림" if touch else "아님"), "rsi": round(r), "live": market_open(aid), "est": now != a["now"], "cond": on or touch, "bear3": aid == "nasdaq" and a.get("bear") == 3, "state": lw["state"].get(aid) if lw else None, "mode": mode, "reg": reg, "p": pv, "hi": hi, "L": L, "low": low, "fear": fear, "ent": min(L, pv) if touch and not vix >= 40 else pv}
     bear = max([a.get("bear") or 0 for a in ws["assets"].values()])
     fx = ws.get("fx", {})
-    return {"rows": rows, "vix": round(vix, 1), "fg": None if fg is None else round(fg), "bear": bear, "regime": fx.get("regime"), "gap": fx.get("gap"), "asof": ws["asof"], "q": lw["q"] if lw else None}
+    return {"rows": rows, "vix": round(vix, 1), "fg": None if fg is None else round(fg), "bear": bear, "regime": fx.get("regime"), "gap": fx.get("gap"), "asof": ws["asof"], "q": lw["q"] if lw else None, "detail": lw["detail"] if lw else None}
 
 
 def key_of(c):
@@ -228,7 +228,7 @@ def write_live(c):
         if v["dip"] == "걸림": dot = "📝"; act = "저점 찍음"; why = f"{v['L']:,.0f} 찍고 반등 · 걸어뒀다면 {v['L'] + TAKE * (v['hi'] - v['L']):,.0f}에 전부 팔기"; todo = why
         elif v["dip"] != "아님": dot = "🟢"; act = "저점"; why = todo = plan_txt(aid, v)
         rows[aid] = {"dot": dot, "act": act, "todo": todo, "hold": hold_txt(aid, v), "why": " · ".join(x for x in (f"보유분 {hold_txt(aid, v)}", why, f"RSI {v['rsi']}") if x) + (" · 장중 추정" if v.get("est") else ""), "line": next((x.replace("📝 걸어두기(오늘만) ", "오늘 걸어두기: ") for x in ll if SHORT[aid] in x), ""), "past": past_txt(aid, v)}
-    j = {"at": datetime.datetime.now().strftime("%m/%d %H:%M"), "title": title_of(c), "rows": rows, "limits": ll, "open": (c.get("open_lines") or []) + (c.get("next_lines") or [])}
+    j = {"at": datetime.datetime.now().strftime("%m/%d %H:%M"), "title": title_of(c), "rows": rows, "detail": c.get("detail"), "limits": ll, "open": (c.get("open_lines") or []) + (c.get("next_lines") or [])}
     json.dump(j, open(os.path.join(B, "data", "watch_live.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
 

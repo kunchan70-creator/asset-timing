@@ -54,7 +54,7 @@ def evaluate(prices, neutral=False):
     if neutral: fri, cur = W.index[-1], True
     prev = W.iloc[:-1] if cur else W
     ago = pd.Timestamp((fri.date() - datetime.timedelta(days=364)).isoformat())
-    qv = {}
+    qv = {}; rw = {}; need = {}
     for c in Q.columns: qv[c] = float(Q[c].dropna().iloc[-1]) if Q[c].notna().any() else np.nan
     # 금리: 1년 변화
     for c, n, sym in (("d_y2_12", "f_DGS2", "2YY=F"), ("d_y10_12", "f_DGS10", "^TNX")):
@@ -62,14 +62,14 @@ def evaluate(prices, neutral=False):
         try:
             if neutral: v = base
             else: a, b = _since(sym, s.index[-1]); v = base + a - b
-            qv[c] = _pct(prev[c], v - _at(s, ago))
+            rw[c] = v - _at(s, ago); qv[c] = _pct(prev[c], rw[c])
         except Exception: pass
     # 유가: 1년 변화 %
     try:
         s = _daily("f_DCOILWTICO"); base = float(W["oil"].dropna().iloc[-1])
         if neutral: v = base
         else: a, b = _since("CL=F", s.index[-1]); v = base * a / b
-        y0 = float(W["oil"][W.index <= ago].dropna().iloc[-1]); qv["oil12"] = _pct(prev["oil12"], (v / y0 - 1) * 100)
+        y0 = float(W["oil"][W.index <= ago].dropna().iloc[-1]); rw["oil12"] = (v / y0 - 1) * 100; qv["oil12"] = _pct(prev["oil12"], rw["oil12"])
     except Exception: pass
     # 많이 오름: 5년 평균 대비
     for a, p in prices.items():
@@ -79,7 +79,8 @@ def evaluate(prices, neutral=False):
             pv = px.iloc[:-1] if px.index[-1] >= fri else px
             nowv = float(px.iloc[-1]) * r
             dev = pv / pv.rolling(260).mean()
-            qv["dev5_" + a] = _pct(dev, nowv / float(np.append(pv.values[-259:], nowv).mean()))
+            dv = nowv / float(np.append(pv.values[-259:], nowv).mean()); qv["dev5_" + a] = _pct(dev, dv); rw["dev5_" + a] = (dv - 1) * 100
+            for th in (.7, .8): need[(a, th)] = (float(np.quantile(dev.dropna().values[-1039:], th)) / dv - 1) * 100
         except Exception: pass
     R = json.load(open(os.path.join(B, "data", "rules.json"), encoding="utf-8"))
     def on(r):
@@ -110,4 +111,32 @@ def evaluate(prices, neutral=False):
         warn_ = kw if a == "kospi" else (us_s or us_w)
         rc_ = recent(["kospi"] if a == "kospi" else ["nasdaq", "spx"]); reg[a] = warn_ or bear or rc_
         state[a] = "하락 추세" if bear else "경고 중" if warn_ else "경고 꺼진 6개월" if rc_ else "평시"
-    return {"reg": reg, "state": state, "us_strong": us_s, "us_warn": us_s or us_w, "kospi_warn": kw, "turn": qv["claims"] >= .8 and qv["kr_exp_yoy"] >= .8, "q": qv}
+    # 왜 이 상태인가
+    def item(lab, c, th, unit=""):
+        x = rw.get(c); return {"k": lab + (f" ({x:+.2f}{unit})" if x is not None and unit == "%p" else f" ({x:+.0f}{unit})" if x is not None else ""), "v": round(qv[c] * 100), "th": round(th * 100), "on": bool(qv[c] >= th)}
+    def last_on(lst):
+        h = pd.Series(False, index=Q.index)
+        for r in R:
+            if r.get("status") != "확정" or r["kind"] not in ("관망", "강한관망") or r["asset"] not in lst: continue
+            cnt = sum(((Q[c] >= q) if op == ">=" else (Q[c] <= q)).fillna(False).astype(int) for c, op, q in r["conds"])
+            m = cnt >= r.get("k", len(r["conds"]))
+            if r.get("dev") is not None: m = m & (Q["dev5_" + r["asset"]] >= r["dev"]).fillna(False)
+            h = h | m
+        return h[h].index[-1] if h.any() else None
+    pr = [item("2년물 1년 변화", "d_y2_12", .7, "%p"), item("10년물 1년 변화", "d_y10_12", .8, "%p"), item("유가 1년 변화", "oil12", .8, "%"), item("물가 가속", "d_cpi12", .7)]
+    npr = sum(x["on"] for x in pr); sp_d = item("S&P 많이 오름(5년 평균 대비)", "dev5_spx", .8, "%"); nq_d = item("나스닥 많이 오름(5년 평균 대비)", "dev5_nasdaq", .8, "%")
+    lu = last_on(["nasdaq", "spx"]); lk = last_on(["kospi"])
+    end = lambda t: (t.date() + datetime.timedelta(days=182)).isoformat() if t is not None else None
+    if us_s or us_w:
+        msg = ("S&P 많이 오름 + 압력 %d/4" % npr if us_s else "나스닥 많이 오름 + 2년물 급등") + " → 켜짐."
+        if us_s: msg += f" S&P가 {need.get(('spx', .8), 0):+.1f}% 내려가면 많이 오름이 문턱 아래로 가서 꺼져요."
+    else:
+        msg = f"S&P 많이 오름이 {sp_d['v']}%로 문턱 80% 아래라 꺼짐. 금리·유가 압력은 {npr}/4로 그대로예요. 주가가 빠져서 꺼진 거지 위험이 끝난 건 아니에요."
+        if npr >= 3: msg += f" S&P가 {need.get(('spx', .8), 0):+.1f}% 오르면 다시 켜져요."
+        if lu is not None: msg += f" 이대로면 조심 구간은 {end(lu)}쯤 끝나요."
+    kd = item("코스피 많이 오름(5년 평균 대비)", "dev5_kospi", .7, "%"); kx = item("한국 수출 증가율", "kr_exp_yoy", .7)
+    km = (f"많이 오름·수출 둘 다 문턱 위라 켜짐. 수출이 {kx['v']}%라 코스피가 {need.get(('kospi', .7), 0):+.1f}% 빠져야 꺼져요." if kw else "많이 오름이나 수출이 문턱 아래라 꺼짐." + (f" 이대로면 조심 구간은 {end(lk)}쯤 끝나요." if lk is not None else ""))
+    detail = {"us": {"name": "미국 경고 (S&P 강한 경고 또는 나스닥 경고)", "on": bool(us_s or us_w), "items": [sp_d, nq_d] + pr, "msg": msg},
+              "kospi": {"name": "코스피 경고", "on": bool(kw), "items": [kd, kx], "msg": km},
+              "turn": {"name": "경기 꺾임", "on": bool(qv["claims"] >= .8 and qv["kr_exp_yoy"] >= .8), "items": [{"k": "실업수당 청구", "v": round(qv["claims"] * 100), "th": 80, "on": bool(qv["claims"] >= .8)}, {"k": "한국 수출 증가율", "v": round(qv["kr_exp_yoy"] * 100), "th": 80, "on": bool(qv["kr_exp_yoy"] >= .8)}], "msg": "고용이 깨지기 시작하는데 수출은 꼭대기면 침체 입구. 켜지면 조심 구간이에요."}}
+    return {"detail": detail, "reg": reg, "state": state, "us_strong": us_s, "us_warn": us_s or us_w, "kospi_warn": kw, "turn": qv["claims"] >= .8 and qv["kr_exp_yoy"] >= .8, "q": qv}

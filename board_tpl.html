@@ -89,13 +89,14 @@ canvas{width:100%;height:240px;display:block;cursor:crosshair}
 .hint{display:none}
 .key{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:12px 0 0;font-size:12.5px;line-height:1.45;opacity:.95}.key dt{font-weight:700;white-space:nowrap}.key dd{margin:0;min-width:0}
 @media (max-width:600px){.tr{grid-template-columns:auto 1fr}.tr .tw{grid-column:1/-1;font-size:12px}canvas{height:300px}}
+.wg{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px;margin-top:6px}.wg b{font-size:13.5px}.wr{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:1px 0}.wr span:last-child{white-space:nowrap}.wm{font-size:12.5px;margin-top:4px;opacity:.95}
 .keybox{margin-top:10px;font-size:12.5px}.keybox summary{cursor:pointer;opacity:.85}
 .foot{font-size:12px;color:var(--mute);line-height:1.6}
 __JIPSEM_CSS__
 </style>
 <div class="wrap">
  <header><h1>자산 신호판</h1><p>__ASOF__ 주 기준</p></header>
- <section class="hero" aria-label="지금 상황"><small>지금 할 일</small><p id="why" class="why" style="margin:6px 0 0;font-weight:500"></p><div id="todo" class="todo"></div><details class="keybox"><summary>신호 뜻</summary><dl id="key" class="key"></dl></details></section>
+ <section class="hero" aria-label="지금 상황"><small>지금 할 일</small><p id="why" class="why" style="margin:6px 0 0;font-weight:500"></p><div id="todo" class="todo"></div><details class="keybox" open><summary>왜 이 상태인가</summary><div id="whybox"></div><p style="margin:8px 0 0"><a href="evidence.html" style="color:#fff;font-weight:700;text-decoration:underline">근거 전체 보기 →</a></p></details><details class="keybox"><summary>신호 뜻</summary><dl id="key" class="key"></dl></details></section>
 
  <div id="cards" style="display:grid;gap:12px"></div>
  <p class="foot">과거 자료 기준 · 투자 권유 아님 · 세금·수수료 제외 · 현금 = 달러 3개월 국채(연 __TB3__%)·원화 단기금리</p>
@@ -170,6 +171,8 @@ document.getElementById("todo").innerHTML=(LV?LV.limits.concat(LV.open.length?["
  if(BB.length)K.push(["하락장 경보","거품 + 10개월선 꺾임 + 침체. 셋 다면 반등은 팔 기회"]);
  if(fx.evn)K.push(["환율","5년 평균 +15%↑면 환전 미루기 · 미 금리 0.5%p↑ 높으면 달러 우위"]);
  document.getElementById("key").innerHTML=K.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("");}
+if(LV&&LV.detail){const B0=BB[0]&&BB[0].bear,G=Object.values(LV.detail).concat(B0?[{name:"하락장 경보 (나스닥)",on:B0.n>=3,items:[{k:"거품 (2년 안 상위 10%)",t:B0.bub},{k:"10개월선 아래 + 선 하락",t:B0.trend,x:`선 대비 ${B0.gap>0?"+":""}${B0.gap}% · 기울기 ${B0.slope>0?"+":""}${B0.slope}%`},{k:"침체 (실업 증가)",t:B0.rec}],msg:B0.n>=3?"셋 다 켜짐. 나스닥은 전부 팔고 10개월선 위로 오면 다시 삼.":B0.trend?"":"가격이 선 아래로 가고 선까지 내려가기 시작하면 3/3이에요."}]:[]);
+ document.getElementById("whybox").innerHTML=G.map(g=>`<div class="wg"><b>${g.on?"🔴":"⚪"} ${g.name}: ${g.on?"켜짐":"꺼짐"}</b>`+g.items.map(x=>`<div class="wr"><span>${x.t!==undefined?(x.t?"✅":"⬜"):(x.on?"✅":"⬜")} ${x.k}</span><span>${x.t!==undefined?(x.x||""):`${x.v}% / 문턱 ${x.th}%`}</span></div>`).join("")+(g.msg?`<div class="wm">${g.msg}</div>`:"")+`</div>`).join("")}
 const SEC={"환율":"환율","매수":"저점","관망":"팔 것","조심":"조심 구간","보통":"사서 들고 가기","없음":"신호 없음","참고":"참고"};
 const ORD={"환율":0,"매수":1,"관망":2,"조심":2.5,"보통":3,"없음":4,"참고":5};
 const PILL={"매수":"매수","관망":"관망","관망유지":"관망 유지","강한관망":"강한 관망","보통":"보통"};
