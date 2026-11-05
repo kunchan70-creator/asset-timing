@@ -357,7 +357,7 @@ def main():
     lock = socket.socket(); lock.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
     try: lock.bind(("127.0.0.1", 48765))     # 한 개만 돌게
     except OSError: log("already running, exit"); return
-    log("start"); beat = 0
+    log("start"); beat = 0; disp = 0
     while True:
         try:
             if time.time() - beat > 3600:
@@ -371,6 +371,8 @@ def main():
                 if r.returncode == 0:
                     last["upd"] = lt.strftime("%Y-%m-%d"); json.dump(last, open(LAST, "w", encoding="utf-8"), ensure_ascii=False)
             anyopen = any(market_open(a) for a in SYM)
+            if anyopen and time.time() - disp > 870:      # 깃허브 예약은 몇 시간씩 늦음 → 장중엔 PC 가 페이지 갱신을 직접 요청
+                disp = time.time(); r = subprocess.run(["gh", "workflow", "run", "daily.yml", "-R", "kunchan70-creator/asset-timing", "-f", "mode=quick"], capture_output=True, timeout=60); log(f"page refresh {'ok' if r.returncode == 0 else 'FAIL'}")
             c = compute(); last["notes"] = (last.get("notes") or []) + apply_arrows(c, last); c["notes"] = last["notes"]; k = key_of(c)
             ny = datetime.datetime.now(NY)
             if ny.weekday() < 5 and (ny.hour, ny.minute) >= (9, 0) and (ny.hour, ny.minute) < (9, 30) and last.get("pre") != ny.date().isoformat():
