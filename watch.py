@@ -223,7 +223,7 @@ def write_live(c):
     rows = {}; ll = limit_lines(c)
     for aid, v in c["rows"].items():
         dot, todo = todo_of(aid, v); act = {"🔴": "파세요", "🟠": "새로 사지 마세요" if "새로 사지" in todo else "조심", "⚪": "평소", "🟢": "사세요"}.get(dot, todo); why = todo
-        if v["dip"] == "걸림": dot = "📝"; act = "갔다 옴"; why = todo = f"오늘 {v['L']:,.0f} 아래까지 갔다가 올라왔어요. 샀다면 {v['L'] + TAKE * (v['hi'] - v['L']):,.0f}에 파세요"
+        if v["dip"] == "걸림": dot = "📝"; act = "살 값 찍음"; why = todo = f"오늘 {v['L']:,.0f} 아래까지 갔다가 올라왔어요. 샀다면 {v['L'] + TAKE * (v['hi'] - v['L']):,.0f}에 파세요"
         elif v["dip"] != "아님": dot = "🟢"; act = "사세요"; why = todo = plan_txt(aid, v)
         rows[aid] = {"dot": dot, "act": act, "todo": todo, "hold": hold_txt(aid, v), "why": why if dot == "🔴" else f"가진 건 {hold_txt(aid, v)} · {why}", "line": next((x for x in ll if aid != "nasdaq" and SHORT[aid] in x or aid == "nasdaq" and "QQQ" in x), ""), "past": past_txt(aid, v)}
     j = {"at": datetime.datetime.now().strftime("%m/%d %H:%M"), "title": title_of(c), "rows": rows, "detail": c.get("detail"), "limits": ll, "open": (c.get("open_lines") or []) + (c.get("next_lines") or [])}

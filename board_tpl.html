@@ -1,4 +1,7 @@
+<!doctype html>
+<html lang="ko">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>자산 신호판</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -208,7 +211,7 @@ function spark(d,col){const L=d.p[d.p.length-1][0],q=d.p.filter(x=>x[0]>=L-3);if
   else if(s.n1){nn=s.n1;kk=s.k1}
   big=nn?Math.round(kk/nn*100)+"%":"–";
  }
- if(d.lv&&!d.fxcard){const v=d.lv;act=v.todo;pill={"🔴":"파세요","🟠":"조심","🟢":"사세요","📝":"갔다 옴","⚪":"평소"}[v.dot];pcls={"🔴":"p-강한관망","🟠":"p-관망","🟢":"p-매수","📝":"p-매수","⚪":"p-보통"}[v.dot];col={"🔴":"--red","🟠":"--sell","🟢":"--buy","📝":"--buy","⚪":"--hold"}[v.dot];
+ if(d.lv&&!d.fxcard){const v=d.lv;act=v.todo;pill={"🔴":"파세요","🟠":"조심","🟢":"사세요","📝":"살 값 찍음","⚪":"평소"}[v.dot];pcls={"🔴":"p-강한관망","🟠":"p-관망","🟢":"p-매수","📝":"p-매수","⚪":"p-보통"}[v.dot];col={"🔴":"--red","🟠":"--sell","🟢":"--buy","📝":"--buy","⚪":"--hold"}[v.dot];
   if(v.dot!=="🔴"&&v.dot!=="⚪"){const S=(d.dipstat||{}).fearx;if(S&&S.n&&S.hit!=null){lab="이런 때 사서 팔 가격까지 오른 비율";big=Math.round(S.hit/S.n*100)+"%"}}
   sub=[v.dot==="🔴"?"":"가진 건 "+v.hold,v.line,v.past].filter(Boolean).join("<br>")||(v.dot==="🔴"?sub:d.prod)}
  const el=document.createElement("article");el.className="card";el.id="a_"+d.id;
