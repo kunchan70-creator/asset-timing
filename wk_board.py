@@ -584,12 +584,45 @@ def fx_card(keep):
     ref = [[tt(i), round(float(y))] for i, y in enumerate(line.values) if keep.iloc[i] and not np.isnan(y)]
     avg5 = W["usdkrw"].rolling(260).mean()
     ref2 = [[tt(i), round(float(y))] for i, y in enumerate(avg5.values) if keep.iloc[i] and not np.isnan(y)]
-    return {"id": "usdkrw", "name": "환전 (원 → 달러)", "prod": "원/달러", "unit": "원", "fxcard": True,
+    _e = {"id": "usdkrw", "name": "환전 (원 → 달러)", "prod": "원/달러", "unit": "원", "fxcard": True,
             "rule": "환율이 5년 평균보다 15% 넘게 높을 때", "fxrule2": "신호가 꺼지면 바꿈 (최대 9개월)", "fxok": "그때그때 바꾼 것보다 달러를 더 받으면 맞음",
             "now": now, "since": None, "until": None, "lastbuy": None, "stats": {}, "press": [], "buyrule": None,
             "gmax": round(float(max(gains)), 1) if gains else None, "bulk_on": bulk_now, "bk": bk, "bn": bn, "bulkrule": "미국 주식이 관망 중(나스닥 관망 또는 S&P 강한 관망, 뒤 1년 포함) + 환율이 5년 평균보다 낮을 때 · 앞으로 1년치 환전을 지금 몰아서", "fx": round(f["fx"]), "inv_on": inv["on"], "ink": ik, "inn": in_, "iworst": round(iworst), "invrule": f"5년 평균보다 {round(FXS.INV_DEV*100)}% 넘게 비싸고, 13주 고점에서 {round(FXS.INV_DROP*100)}% 꺾였을 때 · 5년 평균 +{round(FXS.INV_EXIT*100)}% 아래로 오면(최대 9개월) 정리", "fxdev": round(f["dev_now"] * 100, 1), "fxline": round(float(line.dropna().iloc[-1])), "evk": k, "evn": n, "gavg": round(float(np.mean(gains)), 1) if gains else None, "gmin": round(float(min(gains)), 1) if gains else None, "lb": round(float(__import__("evolve").wilson_lb(k, n)) * 100) if n else None,
             "ev": {}, "p": p, "fs": fcode, "ref": ref, "ref2": ref2, "marks": marks, "sell": ranges(on & keep, W.index), "strong": [], "hold": [], "buy": [], "bad": [],
             "sellTxt": "환전 미루기", "known": None, "fxdip": None, "regime": fx_regime(), "ind": ind_r, "asof": fmt(W.index[valid][-1])}
+    fc_full = ["V" if vz[i] else "D" if bool(zone.iloc[i]) else "N" for i in range(len(idx))]
+    fx_daily_view(_e, fc_full)
+    return _e
+
+
+def fx_daily_view(e, fc_full):
+    """11-11 사용자 '환율도 일단위로': 환율 선·기준선·금리를 일봉으로(FRED 일 환율 + 최근은 야후). 신호 상태(주 단위 판정)는 그 날이 속한 주 값을 그대로 씀.
+    카드의 '지금 환율'·5년 평균 대비도 오늘 값. asof(주 기준 날짜)는 그대로 둠 — 머리 문구가 씀."""
+    from pairs import P as PM
+    def load(n):
+        x = pd.read_csv(os.path.join(B, "data", "daily", n + ".csv")); x.index = pd.to_datetime(x["date"]); return x["value"].astype(float)
+    a = load("f_DEXKOUS").dropna(); y = load("y_usdkrw").dropna()
+    fxd = pd.concat([a, y[y.index > a.index[-1]]]); fxd = fxd[fxd > 0]
+    avg = fxd.rolling(1260, min_periods=1000).mean()
+    fxd = fxd[fxd.index >= "1990-01-01"]; avg = avg.reindex(fxd.index)
+    idx = fxd.index; n = len(idx)
+    tt = lambda i: round(idx[i].year + (idx[i].dayofyear - 1) / 365.25, 4)
+    wpos = np.searchsorted(W.index.values, idx.values, side="left").clip(0, len(W) - 1)
+    e["p"] = [[tt(i), float(f"{v:.5g}")] for i, v in enumerate(fxd.values)]
+    e["s"] = "".join(fc_full[k] for k in wpos)
+    line = avg * (1 + FXS_AVOID())
+    e["ref"] = [[tt(i), round(float(v))] for i, v in enumerate(line.values) if not np.isnan(v)]
+    e["ref2"] = [[tt(i), round(float(v))] for i, v in enumerate(avg.values) if not np.isnan(v)]
+    per = pd.PeriodIndex(idx, freq="M")
+    r1 = lambda v: None if v != v else round(float(v), 2)
+    e["ind"] = {"mode": "rates", "us": [r1(v) for v in PM["tb3"].astype(float).reindex(per).values], "kr": [r1(v) for v in PM["kr_y3"].astype(float).reindex(per).values]}
+    e["fx"] = round(float(fxd.iloc[-1])); e["fxline"] = round(float(line.dropna().iloc[-1])); e["fxdev"] = round((float(fxd.iloc[-1]) / float(avg.dropna().iloc[-1]) - 1) * 100, 1)
+    e["dasof"] = fmt(idx[-1])
+
+
+def FXS_AVOID():
+    import fx_signal as FXS
+    return FXS.AVOID
 
 
 def evolog():
