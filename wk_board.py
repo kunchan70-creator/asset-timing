@@ -246,7 +246,7 @@ def main():
     _lf = os.path.join(B, "data", "watch_live.json"); _lv = open(_lf, encoding="utf-8").read() if os.path.exists(_lf) and (datetime.datetime.now().timestamp() - os.path.getmtime(_lf)) < 3 * 86400 else "null"
     tpl = tpl.replace("__LIVE__", _lv)
     html = tpl.replace("__CHART_JS__", open(os.path.join(B, "chart_core.js"), encoding="utf-8").read()).replace("__JIPSEM_CSS__", open(os.path.join(B, "jipsem_style.css"), encoding="utf-8").read()) \
-              .replace("__DATA__", json.dumps(out, ensure_ascii=False, separators=(",", ":"), default=lambda o: o.item() if hasattr(o, "item") else str(o))).replace("__EVOLOG__", json.dumps(evolog(), ensure_ascii=False)).replace("__TB3__", tb3()).replace("__ASOF__", out[0]["asof"])
+              .replace("__DATA__", json.dumps(out, ensure_ascii=False, separators=(",", ":"), default=lambda o: o.item() if hasattr(o, "item") else str(o))).replace("__EVOLOG__", json.dumps(evolog(), ensure_ascii=False)).replace("__TB3__", tb3()).replace("__ASOF__", out[0]["asof"]).replace("__MADE__", datetime.datetime.now().strftime("%m/%d %H:%M"))
     open(os.path.join(B, "board.html"), "w", encoding="utf-8").write(html)
     print("ok", len(html))
 
