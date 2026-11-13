@@ -1,41 +1,41 @@
 {
- "asof": "2026.11.06",
- "made": "2026-11-12 12:19",
+ "asof": "2026.11.13",
+ "made": "2026-11-13 11:49",
  "assets": {
   "nasdaq": {
    "name": "나스닥",
-   "now": "보통",
-   "blocked": false,
+   "now": "강한관망",
+   "blocked": true,
    "nofg": false,
    "bear": 2,
    "turn": {
     "claims": 16,
     "kr": 100,
-    "warn": false
+    "warn": true
    }
   },
   "spx": {
    "name": "S&P500",
-   "now": "보통",
-   "blocked": false,
+   "now": "강한관망",
+   "blocked": true,
    "nofg": false,
    "bear": 2,
    "turn": {
     "claims": 16,
     "kr": 100,
-    "warn": false
+    "warn": true
    }
   },
   "dji": {
    "name": "다우",
-   "now": "보통",
-   "blocked": false,
+   "now": "관망",
+   "blocked": true,
    "nofg": false,
    "bear": null,
    "turn": {
     "claims": 16,
     "kr": 100,
-    "warn": false
+    "warn": true
    }
   },
   "kospi": {
