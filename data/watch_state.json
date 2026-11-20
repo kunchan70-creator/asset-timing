@@ -1,41 +1,41 @@
 {
- "asof": "2026.11.13",
- "made": "2026-11-19 12:50",
+ "asof": "2026.11.20",
+ "made": "2026-11-20 12:44",
  "assets": {
   "nasdaq": {
    "name": "나스닥",
-   "now": "강한관망",
-   "blocked": true,
+   "now": "보통",
+   "blocked": false,
    "nofg": false,
    "bear": 2,
    "turn": {
-    "claims": 16,
+    "claims": 28,
     "kr": 100,
-    "warn": true
+    "warn": false
    }
   },
   "spx": {
    "name": "S&P500",
-   "now": "강한관망",
-   "blocked": true,
+   "now": "보통",
+   "blocked": false,
    "nofg": false,
    "bear": 2,
    "turn": {
-    "claims": 16,
+    "claims": 28,
     "kr": 100,
-    "warn": true
+    "warn": false
    }
   },
   "dji": {
    "name": "다우",
-   "now": "관망",
-   "blocked": true,
+   "now": "보통",
+   "blocked": false,
    "nofg": false,
    "bear": null,
    "turn": {
-    "claims": 16,
+    "claims": 28,
     "kr": 100,
-    "warn": true
+    "warn": false
    }
   },
   "kospi": {
@@ -45,7 +45,7 @@
    "nofg": true,
    "bear": null,
    "turn": {
-    "claims": 16,
+    "claims": 28,
     "kr": 100,
     "warn": true
    }
@@ -53,7 +53,7 @@
  },
  "fx": {
   "now": "보통",
-  "fx": 1331,
+  "fx": 1338,
   "regime": "hi",
   "gap": 0.8
  }
