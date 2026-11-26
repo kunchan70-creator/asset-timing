@@ -1,6 +1,6 @@
 {
  "asof": "2026.11.20",
- "made": "2026-11-25 14:05",
+ "made": "2026-11-26 13:21",
  "assets": {
   "nasdaq": {
    "name": "나스닥",
@@ -9,7 +9,7 @@
    "nofg": false,
    "bear": 2,
    "turn": {
-    "claims": 28,
+    "claims": 27,
     "kr": 100,
     "warn": false
    }
@@ -21,7 +21,7 @@
    "nofg": false,
    "bear": 2,
    "turn": {
-    "claims": 28,
+    "claims": 27,
     "kr": 100,
     "warn": false
    }
@@ -33,7 +33,7 @@
    "nofg": false,
    "bear": null,
    "turn": {
-    "claims": 28,
+    "claims": 27,
     "kr": 100,
     "warn": false
    }
@@ -45,7 +45,7 @@
    "nofg": true,
    "bear": null,
    "turn": {
-    "claims": 28,
+    "claims": 27,
     "kr": 100,
     "warn": true
    }
