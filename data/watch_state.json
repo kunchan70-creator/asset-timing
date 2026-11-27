@@ -1,6 +1,6 @@
 {
- "asof": "2026.11.20",
- "made": "2026-11-26 13:21",
+ "asof": "2026.11.27",
+ "made": "2026-11-27 13:30",
  "assets": {
   "nasdaq": {
    "name": "나스닥",
@@ -9,7 +9,7 @@
    "nofg": false,
    "bear": 2,
    "turn": {
-    "claims": 27,
+    "claims": 20,
     "kr": 100,
     "warn": false
    }
@@ -21,19 +21,19 @@
    "nofg": false,
    "bear": 2,
    "turn": {
-    "claims": 27,
+    "claims": 20,
     "kr": 100,
     "warn": false
    }
   },
   "dji": {
    "name": "다우",
-   "now": "매수",
+   "now": "보통",
    "blocked": false,
    "nofg": false,
    "bear": null,
    "turn": {
-    "claims": 27,
+    "claims": 20,
     "kr": 100,
     "warn": false
    }
@@ -45,7 +45,7 @@
    "nofg": true,
    "bear": null,
    "turn": {
-    "claims": 27,
+    "claims": 20,
     "kr": 100,
     "warn": true
    }
@@ -53,7 +53,7 @@
  },
  "fx": {
   "now": "보통",
-  "fx": 1343,
+  "fx": 1341,
   "regime": "hi",
   "gap": 0.8
  }
